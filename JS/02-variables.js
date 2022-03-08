@@ -9,3 +9,5 @@ console.log (antiguedad);
 console.log (typeof(antiguedad))
 var paisYContinente = pais +' '+continente
 console.log(paisYContinente)
+
+
