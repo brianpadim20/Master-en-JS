@@ -11,4 +11,3 @@ function sumame (numero1, numero2, sumaYMuestra, sumaXDos){
 },dato=>{
     console.log("La suma por dos es: ", dato*2);
 });
-
