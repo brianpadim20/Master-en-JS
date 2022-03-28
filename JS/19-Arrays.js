@@ -47,5 +47,5 @@ document.write ("<ul>")
 lenguajes.forEach((dato,indice, arreglo)=>{
     console.log(arreglo);//Tiene el array original que coge el método for each. (opcional)
     document.write ("<li>"+ indice + "-" + dato +"</li>");
-});git status
+})
 document.write ("</ul>");
