@@ -19,6 +19,11 @@ window.addEventListener('load', ()=>{
         var nombre=document.querySelector("#nombre").value;
         var apellido=document.querySelector("#apellido").value;
         var edad= parseInt(document.querySelector("#edad").value); 
+
+        if(edad==null || edad < 15 ||isNaN(edad)){
+            alert("La edad ingresada no es válida");
+            return false;
+        }
 /*
         VALIDACIÓN POR FUERA DEL FORMULARIO EN HTML
 
