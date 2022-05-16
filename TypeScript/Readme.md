@@ -19,3 +19,5 @@ del editor de código para que se vea TS en un formato resaltado con diferentes 
 - POO, como funciona, clases métodos y propiedades
 - Constructores, interfaces,herencia y demás detalles de POO centrado en JS
 - Decoradores: funcionalidad específica de TS, como aplicarlos a una clase (se usará en angular)
+
+##Para compilar con TS se usa el comando: tsc -w *.ts
