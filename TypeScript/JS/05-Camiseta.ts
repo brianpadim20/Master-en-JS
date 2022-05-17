@@ -39,12 +39,5 @@ class Camiseta{
 
     }
 
-}var camiseta=new Camiseta();
-camiseta.setColor("Rojo");
-
-var playera=new Camiseta();
-playera.setColor("Azul");
-
-console.log(playera);
-console.log(camiseta);
+}
 
