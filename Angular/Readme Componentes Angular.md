@@ -54,3 +54,11 @@ archivo app.module.ts; mediante la siguiente estructura
 
 - usar el selector (etiqueta), en el ejemplo creado, es la etiqeta <videojuego>, cerrando esta misma
 etiqueta
+
+## Como generar un componente e importarlo de manera automática desde Angular cli
+
+Angular cli a parte de poder generar un proyecto de Angular, también tiene varios comandos para generar código, esto se puede notar revisando la documentación de Angular cli, allí se podrán ver comandos para hacer Scaffolding (Scaffold).
+
+- Scaffold es generar código de manera automática.
+
+* Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cywin, puede generar errores o conflictos * 
