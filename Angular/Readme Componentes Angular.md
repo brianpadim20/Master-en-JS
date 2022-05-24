@@ -85,3 +85,5 @@ Uno de los hooks mas más importante es el OnInit(). Esta es una interfaz, se ej
 
 - **OnDestroy():** Este hook sirve para que se ejecute algo antes de eliminar la instancia de un componente
     - Se ejecutará solamente cuando vaya a eliminar un componente
+
+    
