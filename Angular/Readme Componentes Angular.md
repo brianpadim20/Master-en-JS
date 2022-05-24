@@ -55,6 +55,7 @@ archivo app.module.ts; mediante la siguiente estructura
 - usar el selector (etiqueta), en el ejemplo creado, es la etiqeta <videojuego>, cerrando esta misma
 etiqueta
 
+# Recomendado: 
 ## Como generar un componente e importarlo de manera automática desde Angular cli
 
 Angular cli a parte de poder generar un proyecto de Angular, también tiene varios comandos para generar código, esto se puede notar revisando la documentación de Angular cli, allí se podrán ver comandos para hacer Scaffolding (Scaffold).
@@ -62,3 +63,25 @@ Angular cli a parte de poder generar un proyecto de Angular, también tiene vari
 - Scaffold es generar código de manera automática.
 
 **Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cywin, puede generar errores o conflictos** 
+
+- El comando para generar un nuevo componente desde el cmd es: ng generate component [nombre del componente]
+
+Automáticamente genera todo el código, fichero, clase y también una hoja de estilo CSS para ese componente en específico y, a parte actualiza del app module.ts añadiendo el import de ese componente y lo agrega a declarations para tenerlo automáticamente disponible
+
+## Hooks o eventos del ciclo de vida de un componente
+
+Los hooks son eventos que se ejecutan en un momento dado del ciclo de vida de los componentes, son eventos que se ejecutan en un momento dado del ciclo de vida de un componente, es decir, son eventos que se van a lanzar dependiendo del estado en el que esté el componente. Por ejemplo cuando se inicie, cuando haya algún cambio etc.
+
+Uno de los hooks mas más importante es el OnInit(). Esta es una interfaz, se ejecuta para cargar un componente.
+
+**De nuevo se estudiará en el componente de videojuegos para saber como funcionan estos hooks.**
+
+### Ejemplos de hooks en Angular:
+
+- **OnInit():** Se ejecutará cuando se cargue el componente
+
+- **DoCheck():** Este método se ejecuta cada vez que se produce algún cambio en el componente o en la app de Angular, se estará ejecutando frecuentemente, cada vez que suceda algo de esto.
+    - Necesita que se implemente el método ngDoCheck
+
+- **OnDestroy():** Este hook sirve para que se ejecute algo antes de eliminar la instancia de un componente
+    - Se ejecutará solamente cuando vaya a eliminar un componente

@@ -8,6 +8,7 @@ import { VideojuegoComponent } from './VideoJuego/videojuego.component';
 import { zapatosComponent } from './Zapatos/zapatos.component';
 import { bandasComponent } from './Bandas/bandas.component';
 import { generosComponent } from './generos/generos.component';
+import { CursosComponent } from './cursos/cursos.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { generosComponent } from './generos/generos.component';
     VideojuegoComponent,
     zapatosComponent,
     bandasComponent,
-    generosComponent
+    generosComponent,
+    CursosComponent
   ],
   imports: [
     BrowserModule,

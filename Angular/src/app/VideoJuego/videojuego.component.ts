@@ -1,5 +1,5 @@
 import { Template } from "@angular/compiler/src/render3/r3_ast";
-import { Component } from "@angular/core"; /**
+import { Component, OnInit, DoCheck, OnDestroy } from "@angular/core"; /**
 Importar el componente, de donde se va a descargar (en este caso @angular/core)
 */
 
@@ -16,7 +16,7 @@ Importar el componente, de donde se va a descargar (en este caso @angular/core)
     
 })//No cerrar con punto y coma, porque esto es un decorador para una clase
 
-export class VideojuegoComponent{
+export class VideojuegoComponent implements OnInit, DoCheck, OnDestroy{
     //Propiedades
     public titulo: string;
     public listado: string;
@@ -30,6 +30,22 @@ export class VideojuegoComponent{
         this.listado = "Listado de los juegos mas populares";
 
         console.log ("Se ha cargado el componente videojuego.component.ts");
+    }
+
+    ngOnInit() {
+        console.log("OnInit ejecutado");
+
+    }ngDoCheck() {
+        console.log ("DoCheck ejecutado");
+
+    }cambiarTitulo(){
+        this.titulo = "Nuevo Titulo para probar DoCheck";
+
+    }tituloOriginal(){
+        this.titulo = "Componente de videojuegos";
+
+    }ngOnDestroy(): void {
+        console.log("OnDestroy ejecutado");
     }
 }
 
