@@ -61,4 +61,4 @@ Angular cli a parte de poder generar un proyecto de Angular, también tiene vari
 
 - Scaffold es generar código de manera automática.
 
-* Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cywin, puede generar errores o conflictos * 
+**Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cywin, puede generar errores o conflictos** 
