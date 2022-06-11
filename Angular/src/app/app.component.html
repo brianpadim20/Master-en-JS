@@ -16,4 +16,9 @@
     acuerdo a la sentencia que se le esté condicionando-->
     <zapatos></zapatos>
     <bandas></bandas>
+
+    <p>Esta es una implementación de Zapatos con modelo de datos:</p>
+    <ul>
+        <li *ngFor="let zapato of zapatos">{{zapato.nombre}} - <strong>{{zapato.precio}}</strong></li>
+    </ul>
 </div>

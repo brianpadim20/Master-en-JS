@@ -56,7 +56,7 @@ archivo app.module.ts; mediante la siguiente estructura
 etiqueta
 
 # Recomendado: 
-## Como generar un componente e importarlo de manera automática desde Angular cli
+**Como generar un componente e importarlo de manera automática desde Angular cli**
 
 Angular cli a parte de poder generar un proyecto de Angular, también tiene varios comandos para generar código, esto se puede notar revisando la documentación de Angular cli, allí se podrán ver comandos para hacer Scaffolding (Scaffold).
 
@@ -111,3 +111,22 @@ Para usar la variable y el objeto de configuración en el resto de archivos de l
 
     - Para usar todos los elementos que se están exportando desde models, se puede crear un objeto en app.components.ts un objeto cuyo valor sea igual al objeto JSON que se acaba de crear; para este ejemplo: public config; (objeto creado) y en el constructor: this.config = configuracion;
 
+## Modelos de datos
+
+Cuando se tiene un componente, para ejemplo se trabaja con el componente de Zapatos, lo normal es que se trabaje con una entidad de tipo zapato, que sea una clase que tenga varias propiedades que sean los datos que va a tener cada uno de los objetos de Zapato.
+
+Un modelo de una entidad, puede tener las propiedades del objeto de la entidad con la que se trabaja.
+
+**Para crear el modelo de datos:**
+
+- Crear un objeto que sea una estructura básica con todas las propiedades que va a tener cada uno de los objetos de ese tipo de entidad concreta de zapato. Esto con el fin de usarlo como molde para crear nuevos objetos y estar trabajando de manera correcta con estos objetos.
+
+- Dentro de la carpeta models crear un nuevo archivo .ts (para este ejemplo: zapato.ts). Lo normal es que cuando se crea un modelo, tenga un nombre en singular, porque ese modelo va a representar a un solo objeto, no a muchos objetos.
+
+- Crear una clase para la entidad de zapato
+
+    - export para exportar la clase y poder usarla e importarla en otros archivos del proyecto
+
+**ver el ejemplo en models/Zapato.ts**
+
+Una vez se tenga el modelo creado, se usará dentro de una clase de un componente
