@@ -1,6 +1,6 @@
 # Creación de componentes en Angular:
 
-### Ver la carpeta videojuego de este proyecto los pasos para crear un componente en Angular
+**Ver la carpeta videojuego de este proyecto los pasos para crear un componente en Angular**
 
 - Primero ir al directorio de src, y luego de app
 
@@ -60,9 +60,9 @@ etiqueta
 
 Angular cli a parte de poder generar un proyecto de Angular, también tiene varios comandos para generar código, esto se puede notar revisando la documentación de Angular cli, allí se podrán ver comandos para hacer Scaffolding (Scaffold).
 
-- Scaffold es generar código de manera automática.
+    - Scaffold es generar código de manera automática.
 
-**Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cywin, puede generar errores o conflictos** 
+**Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cygwin, puede generar errores o conflictos** 
 
 - El comando para generar un nuevo componente desde el cmd es: ng generate component [nombre del componente]
 
@@ -76,7 +76,7 @@ Uno de los hooks mas más importante es el OnInit(). Esta es una interfaz, se ej
 
 **De nuevo se estudiará en el componente de videojuegos para saber como funcionan estos hooks.**
 
-### Ejemplos de hooks en Angular:
+***Ejemplos de hooks en Angular:***
 
 - **OnInit():** Se ejecutará cuando se cargue el componente
 
@@ -86,4 +86,28 @@ Uno de los hooks mas más importante es el OnInit(). Esta es una interfaz, se ej
 - **OnDestroy():** Este hook sirve para que se ejecute algo antes de eliminar la instancia de un componente
     - Se ejecutará solamente cuando vaya a eliminar un componente
 
-    
+## Importar y exportar clases y modelos
+
+**Para mirar como importar y exportar, se trabajará con el componente de Zapatos de este repositorio**
+
+Aquí se crea una clase y se importará dentro de otra clase y también se creará un modelo de datos
+
+**Modelo de datos:** es una clase con una serie de propiedades que representan una entidad.(Zapatos)
+
+**PASOS:** 
+- Crear una nueva carpeta dentro de app que se llame models, dentro de esta carpeta, se trabajarán con los modelos. Aquí se puede crear un fichero y guardarlo.
+
+- En este fichero (carpeta) se puede crear un archivo.ts en el cual se agregue un objeto JSON.
+
+Para usar la variable y el objeto de configuración en el resto de archivos de la app web:
+
+    - Se puede exportar una variable, una clase o cualquier elemento de TS para usarlo en otro archivo. Esto simplemente poniendo la palabra export antes de la declaración de la variable **vease carpeta models, archivo configuracion.ts**
+
+    - Para usarlo en cualquier otro archivo, abrir app.components.ts y en la cabecera del código poner el import. 
+        - para este ejempo: import { configuracion } from './models/configuracion' 
+      Al ser un objeto, puedo usar las propiedas que se necesiten.
+
+    - en app.components.ts, crear un constructor de la clase que se acaba de crear, así se podrá modificar la información que se desee con los atributos del objeto creado
+
+    - Para usar todos los elementos que se están exportando desde models, se puede crear un objeto en app.components.ts un objeto cuyo valor sea igual al objeto JSON que se acaba de crear; para este ejemplo: public config; (objeto creado) y en el constructor: this.config = configuracion;
+

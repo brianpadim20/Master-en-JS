@@ -1,5 +1,19 @@
-<h1>Bienvenido al curso de Angular</h1> 
+    <div [ngStyle]="{
+        'background':config.fondo,
+        'padding':'20px',
+        'boder':'5px solid black',
+        'boder-color':config.color
 
-<videojuego *ngIf=""> </videojuego>
-<zapatos></zapatos>
-<bandas></bandas>
+    }">
+    <h1>Bienvenido al {{ title }}</h1> 
+
+    <p>{{descripcion}}</p>
+
+    <button (click)="ocultar_videojuegos()">Ocultar</button>
+    <button (click)="mostrar_Videojuegos()">Mostrar</button>
+
+    <videojuego *ngIf="mostrar_videojuegos"></videojuego> <!--ngIf es un condicional, que mostrará una sentencia o no de
+    acuerdo a la sentencia que se le esté condicionando-->
+    <zapatos></zapatos>
+    <bandas></bandas>
+</div>
