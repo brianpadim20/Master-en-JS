@@ -1,5 +1,42 @@
 <h2>{{titulo}}</h2>
+<p>Compra Tennis de las mejores marcas.</p>
+    <ul>
+        <li *ngFor="let marca of Marcas">{{marca}}</li>
+    </ul>
 
 <ul>
-    <li *ngFor="let zapato of zapatos">{{zapato.nombre}} - <strong>{{zapato.precio}}</strong></li>
+    <li *ngFor="let zapato of zapatos">
+        {{zapato.nombre}} - <strong>${{zapato.precio}}</strong>
+        <span 
+            *ngIf="zapato.precio <= 400000"
+            [style.background]="zapato.precio <= 400000 ? 'green': 'transparent'"
+            [style.color]="zapato.precio <= 400000 ? 'white' : 'black'"> 
+            ¡EN OFERTA!
+        </span>
+    </li>
+</ul>
+
+<p>El color de la mayoría de nuestros zapatos es: </p>
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'yellow'">
+        El color predominante <span [ngStyle]="{
+            'background': color
+        }"> el amarillo</span>
+    </li>
+    <li *ngSwitchCase="'red'">
+        El color predominante <span [ngStyle]="{
+            'background': color
+        }">es el rojo</span>
+    </li>
+    <li *ngSwitchCase="'blue'">
+        El color predominante<span [ngStyle]="{
+            'background': color
+        }">es el azul</span> 
+    </li>
+    <li *ngSwitchCase="'black'">
+        El color predominante <span [ngStyle]="{
+            'background': color,
+            'color': 'white'
+        }">es el negro</span>  
+    </li>
 </ul>

@@ -137,5 +137,8 @@ Una vez se tenga el modelo creado, se usará dentro de una clase de un component
 
 Es una funcional que se va a tener en las vistas o en las plantillas. Por ejemplo una directiva sería la etiqueta de un componente, ya que en el html se crea un nuevo elemento que es ese componente, y esto tiene una etiqueta, con lo cual esto es una directiva, también hay directivas para hacer estructuras de control, condicionales y bucles, condiciones con cierto atributo en las etiquetas, para hacer eventos, para data binding, simplemente son atributos o nuevas etiquetas que se tienen en la parte de la vista y en html.
 
-**Directiva condicional: ngIf:** Permite hacer un condicional en la parte de la vista.
+**Directiva condicional: ngIf:** Permite hacer un condicional en la parte de la vista, si cumple una condición específica, entonces que haga ciertas instrucciones que se le de, vease el ejemplo en zapatos.component.html.
 
+**Directiva para recorrer: ngFor:** Sirve para recorrer un array y mostrarlo en la vista. También puede acceder a las propiedades del objeto de interés. Vease ejemplo del componente zapatos
+
+**Directiva switch: ngSwitch:** Es como el switch que siempre se ha trabajado. También se trabajará con el componente de zapatos.

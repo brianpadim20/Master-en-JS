@@ -8,19 +8,34 @@ import { Zapato } from "../Models/Zapato";
 export class zapatosComponent{
     public titulo: string;
     public zapatos: Array<Zapato>;
+    public Marcas: string[];
+    public color: string;
 
     constructor(){
+        this.color = 'black';
+        this.Marcas = new Array();
         this.titulo = "Componente de zapatos";
         this.zapatos=[
-            new Zapato('Nike Airmax', 650000,'Nike', 'Rojo', true),
-            new Zapato('Reebok classic', 250000,'Reebok', 'Blanco', true),
-            new Zapato('Nike SB', 450000,'Nike', 'Negro', false),
-            new Zapato('Adidas Running', 350000,'Adidas', 'Gris', true)
+            new Zapato('Nike Airmax', 650000,'Nike', 'red', true),
+            new Zapato('Reebok classic', 250000,'Reebok', 'yellow', true),
+            new Zapato('Nike SB', 450000,'Nike', 'black', false),
+            new Zapato('Adidas Running', 350000,'Adidas', 'blue', true)
         ]
         
         }ngOnInit(){
         console.log(this.zapatos)
+        
 
+    }getMarcas(){
+        this.zapatos.forEach((zapato, index)=>{
+            if(this.Marcas.indexOf(zapato.marca)<0){
+                this.Marcas.push(zapato.marca);
+                console.log(index);
+            }
+            
+            
+        });
+        console.log(this.Marcas )
     }
 
 }
