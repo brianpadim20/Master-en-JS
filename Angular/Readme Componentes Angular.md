@@ -142,3 +142,24 @@ Es una funcional que se va a tener en las vistas o en las plantillas. Por ejempl
 **Directiva para recorrer: ngFor:** Sirve para recorrer un array y mostrarlo en la vista. También puede acceder a las propiedades del objeto de interés. Vease ejemplo del componente zapatos
 
 **Directiva switch: ngSwitch:** Es como el switch que siempre se ha trabajado. También se trabajará con el componente de zapatos.
+
+## Enlace de datos (two way data binding) en Angular
+
+Para explicar este tema se trabajará agregando marcas en el componente de Zapatos.
+
+Para poder usar el two way data binding y las directivas que se usarán como lo son el ng model se hace lo siguiente: 
+
+- Importar el módulo de formularios en Angular en app.module.ts
+    - Para hacer esto, primero importar: **import { FormsModule } from '@angular/forms';**
+    - En el apartado que dice imports, que es el array dentro del ngModule, que permite cargar módulos internos de Angular, módulos externos creados propios, o módulos externos que se hayan instalado en el proyecto. Para este caso:
+        imports: [
+        BrowserModule,
+        AppRoutingModule
+        **FormsModule**
+        ],
+       
+
+- crear una etiqueta de tipo input, poner el atributo [(ngModel)], importante usar el corchete y las llaves para este atributo. Este atributo es una directiva que con el two way data binding, permitirá modificar una propiedad que se tendrá en el modelo de datos, que en este caso es la clase del componente, permitirá modificar una propiedad que se tenga en una clase de una manera instantánea y reactiva, y que los cambios se vean reflejados de manera automática tanto en la vista como en la parte de los datos en la clase del componente. 
+
+    - En este atributo, se puede poner cualquiera de los elementos que componen el objeto sobre el cual se está trabajando. por ejemplo: <input type "text"[(ngmodel)]="miMarca"/>
+

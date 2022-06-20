@@ -10,9 +10,11 @@ export class zapatosComponent{
     public zapatos: Array<Zapato>;
     public Marcas: string[];
     public color: string;
+    public miMarca: string;
 
     constructor(){
-        this.color = 'black';
+        this.miMarca = 'Fila';
+        this.color = '';
         this.Marcas = new Array();
         this.titulo = "Componente de zapatos";
         this.zapatos=[
@@ -36,6 +38,14 @@ export class zapatosComponent{
             
         });
         console.log(this.Marcas )
+    }
+
+    getMarca(){
+        alert(this.miMarca);
+    }
+
+    addMarca(){
+        this.Marcas.push(this.miMarca);
     }
 
 }
