@@ -163,3 +163,17 @@ Para poder usar el two way data binding y las directivas que se usarán como lo 
 
     - En este atributo, se puede poner cualquiera de los elementos que componen el objeto sobre el cual se está trabajando. por ejemplo: <input type "text"[(ngmodel)]="miMarca"/>
 
+# Eventos
+## Evento click
+
+Es simplemente cuando se crea un botón o algún otro elemento en el que se pueda interactuar con el mouse, por ejemplo <button (click)= "Evento a hacer cuando haga click">Nombre para el boton </button>
+
+## Evento blur
+
+Es un evento que dice cuando se sale de un campo de input.
+
+## Evento Keyup
+
+Cada vez que se levanta una tecla este evento va a capturarla y si está asociada a algún evento, este se ejecutará automáticamente.
+
+Ejemplo:

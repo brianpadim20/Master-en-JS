@@ -2,7 +2,12 @@
 
 <p>Añadir marca</p>
 <p>
-<input type="text"[(ngModel)]="miMarca"/>
+    <input type="text"[(ngModel)]="miMarca" (keyup.enter)="mostrarPalabra()"/>
+<!--
+
+    <input type="text"[(ngModel)]="miMarca" (blur)="onBlur()"/> 
+
+-->
 <button (click)="getMarca()">Mostrar marca</button>
 <button (click)="addMarca()">Añadir marca</button>
 </p>
@@ -23,6 +28,7 @@
             [style.color]="zapato.precio <= 400000 ? 'white' : 'black'"> 
             ¡EN OFERTA!
         </span>
+
     </li>
 </ul>
 

@@ -46,6 +46,14 @@ export class zapatosComponent{
 
     addMarca(){
         this.Marcas.push(this.miMarca);
+
+    }
+
+    onBlur(){
+        console.log("Has salido del input");
+
+    }mostrarPalabra(){
+        alert(this.miMarca); 
     }
 
 }
