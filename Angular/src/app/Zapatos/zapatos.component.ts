@@ -30,18 +30,19 @@ export class zapatosComponent{
 
     }getMarcas(){
         this.zapatos.forEach((zapato, index)=>{
-            if(this.Marcas.indexOf(zapato.marca)<0){
+            if(this.Marcas.indexOf(zapato.marca) < 0){
                 this.Marcas.push(zapato.marca);
-                console.log(index);
+
             }
-            
-            
+
         });
-        console.log(this.Marcas )
+        console.log(this.Marcas)
     }
+
 
     getMarca(){
         alert(this.miMarca);
+
     }
 
     addMarca(){
