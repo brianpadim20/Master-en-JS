@@ -257,3 +257,26 @@ Hay dos formas de usarlo:
     - **En forma de atributo:** usando class. en cualquier atributo (etiqueta) de html; se le asignará una clase a dicho atributo si cumple una condición específica o no (vease en zapatos, la etqieuta strong, class.altoPrecio como ejemplo), y se podrá modificar a conveniencia usando CSS.
     - **Directiva ngClass:** El atributo ngClass para poder hacer varias condiciones y poder poner varias clases de un golpe si se cumple una condición. **SIEMPRE SE UTILIZA CON LOS CORCHETES**... Esta directiva se puede usar creando objetos tipo JSON, como se ve en el ejemplo con ngClass de Zapatos en zapatos.component.html
 
+# Páginas y rutas en Angular
+
+## Counfigurar el routing en Angular
+
+Con esto se puede hacer que un componente no sea solamente un trozo de la página que haga una funcionalidad pequeña, sino que se puede hacer que un componente sea una página de la web.
+
+Para configurar el sistema de rutas de Angular
+- Asegurarse que en el index.html se tenga la etiqueta <base href="/"> ya que si no se tiene puesto, el router no va a funcionar, así que si no existe esta etiqueta, hay que agregarla.
+
+- Crear el fichero app routing en la carpeta de app (abrir la carpeta app, crear el fichero app.routing.ts), ya que dentro de este archivo va a ir toda la configuración de rutas de la app de Angular, aquí se configura el router y, a parte se le dará de alta a las nuevas rutas (URL) que se vaya teniendo la aplicación.
+
+    - Para configurar este fichero se hace lo siguiente (tal cual se ve en app.routing.ts):
+        - Importar los módulos del router de Angular 
+        - Importar módulos de rutas y clases 
+        - Importar los componentes
+        - Crear un array de configuración de las rutas (Aquí es donde se le da de alta a las nuevas rutas y donde se van a configurar)
+            - Dentro del array se crearán objetos JSON, y dentro de estos objetos se indica el path y el component
+        - Exportar el módulo
+        - Importar esta configuración en app.module.ts (import { routing, appRoutingProviders } from './app.routing';)
+            - El routing, como es un módulo, se debe cargar en los imports
+            - El appRoutingProviders se carga en el array de providers.
+
+Para que toda esta configuración funcione, se debe crear una etiqueta en el app.component.html, la cual es <router-outlet></router-outlet>

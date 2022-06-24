@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { zapatosComponent } from './Zapatos/zapatos.component';
 import { bandasComponent } from './Bandas/bandas.component';
 import { generosComponent } from './generos/generos.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,18 @@ import { CursosComponent } from './cursos/cursos.component';
     zapatosComponent,
     bandasComponent,
     generosComponent,
-    CursosComponent
+    CursosComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    routing
   ],
-  providers: [],
+  providers: [
+    appRoutingProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

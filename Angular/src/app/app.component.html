@@ -8,14 +8,16 @@
     <h1>Bienvenido al {{ title }}</h1> 
 
     <p>{{descripcion}}</p>
-
+<!--
     <button (click)="ocultar_videojuegos()">Ocultar</button>
     <button (click)="mostrar_Videojuegos()">Mostrar</button>
 
     <videojuego *ngIf="mostrar_videojuegos"></videojuego> <!--ngIf es un condicional, que mostrará una sentencia o no de
     acuerdo a la sentencia que se le esté condicionando-->
-    
+
+    <!--
     <bandas></bandas>
     <zapatos></zapatos>
-
+    -->
+    <router-outlet></router-outlet>
 </div>
