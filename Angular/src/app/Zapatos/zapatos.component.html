@@ -21,7 +21,15 @@
 
 <ul>
     <li *ngFor="let zapato of zapatos">
-        {{zapato.nombre}} - <strong>${{zapato.precio}}</strong>
+        {{zapato.nombre}} - 
+        <strong [class.altoPrecio]="zapato.precio >=400000"
+            [ngClass]="{
+            'fondoRojo': zapato.precio > 400000,
+            'subrayado': zapato.marca == 'Reebok'
+        }"
+            >
+            ${{zapato.precio}}
+        </strong>
         <span 
             *ngIf="zapato.precio <= 400000"
             [style.background]="zapato.precio <= 400000 ? 'green': 'transparent'"

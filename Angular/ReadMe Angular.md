@@ -112,14 +112,11 @@ dentro de Angular.
 .html
 
 ## ¿Cómo cargar el componente nuevo en el proyecto de Angular?
-
 - Para que el componente nuevo sea agregado en la app que se está creando, se debe cargar en el 
 archivo app.module.ts; mediante la siguiente estructura
-
    - import { nombre del componente } from 'ruta donde se tenga guardado el componente creado';
     Se cierra con punto y coma (;), el .ts no es necesario ponerlo, pues lo detecta automáticamente
     el framework
-
     - Luego se debe cargar dentro de la red de declarations, esto solamente poniendo coma(,)
     en el primer término de las declarations, luego enter, y pone el nombre que se le dio al 
     componente 
@@ -135,7 +132,6 @@ etiqueta
 **Como generar un componente e importarlo de manera automática desde Angular cli**
 
 Angular cli a parte de poder generar un proyecto de Angular, también tiene varios comandos para generar código, esto se puede notar revisando la documentación de Angular cli, allí se podrán ver comandos para hacer Scaffolding (Scaffold).
-
     - Scaffold es generar código de manera automática.
 
 **Importante: Generar estos comandos en la consola del sistema operativo, pues en una emulada, como el caso de cygwin, puede generar errores o conflictos** 
@@ -178,14 +174,11 @@ Aquí se crea una clase y se importará dentro de otra clase y también se crear
 Para usar la variable y el objeto de configuración en el resto de archivos de la app web:
 
    - Se puede exportar una variable, una clase o cualquier elemento de TS para usarlo en otro archivo. Esto simplemente poniendo la palabra export antes de la declaración de la variable **vease carpeta models, archivo configuracion.ts**
-
-    - Para usarlo en cualquier otro archivo, abrir app.components.ts y en la cabecera del código poner el import. 
+        - Para usarlo en cualquier otro archivo, abrir app.components.ts y en la cabecera del código poner el import. 
         - para este ejempo: import { configuracion } from './models/configuracion' 
-      Al ser un objeto, puedo usar las propiedas que se necesiten.
-
-    - en app.components.ts, crear un constructor de la clase que se acaba de crear, así se podrá modificar la información que se desee con los atributos del objeto creado
-
-    - Para usar todos los elementos que se están exportando desde models, se puede crear un objeto en app.components.ts un objeto cuyo valor sea igual al objeto JSON que se acaba de crear; para este ejemplo: public config; (objeto creado) y en el constructor: this.config = configuracion;
+        Al ser un objeto, puedo usar las propiedas que se necesiten.
+        - en app.components.ts, crear un constructor de la clase que se acaba de crear, así se podrá modificar la información que se desee con los atributos del objeto creado
+        - Para usar todos los elementos que se están exportando desde models, se puede crear un objeto en app.components.ts un objeto cuyo valor sea igual al objeto JSON que se acaba de crear; para este ejemplo: public config; (objeto creado) y en el constructor: this.config = configuracion;
 
 ## Modelos de datos
 
@@ -261,4 +254,6 @@ Es otra directiva y, atributo también, que permite asignar a un elemento una cl
 Para esto, se toma como ejemplo el listado de productos.
 
 Hay dos formas de usarlo:
-    - **En forma de atributo:** usando class.
+    - **En forma de atributo:** usando class. en cualquier atributo (etiqueta) de html; se le asignará una clase a dicho atributo si cumple una condición específica o no (vease en zapatos, la etqieuta strong, class.altoPrecio como ejemplo), y se podrá modificar a conveniencia usando CSS.
+    - **Directiva ngClass:** El atributo ngClass para poder hacer varias condiciones y poder poner varias clases de un golpe si se cumple una condición. **SIEMPRE SE UTILIZA CON LOS CORCHETES**... Esta directiva se puede usar creando objetos tipo JSON, como se ve en el ejemplo con ngClass de Zapatos en zapatos.component.html
+
