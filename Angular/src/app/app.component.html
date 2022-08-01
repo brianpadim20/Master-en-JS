@@ -5,9 +5,26 @@
         'boder-color':config.color
 
     }">
-    <h1>Bienvenido al {{ title }}</h1> 
+    <h1>Bienvenido a {{ title }}</h1> 
 
     <p>{{descripcion}}</p>
+
+    <nav>
+        <a [routerLink]="['/Home']"[routerLinkActive]="['active']">Home</a>
+        &nbsp; <!--Esto es una separación para los links-->
+        <a [routerLink]="['/zapatos']"[routerLinkActive]="['active']">zapatos</a>
+        &nbsp;
+        <a [routerLink]="['/videoJuego']"[routerLinkActive]="['active']">Video juegos</a>
+        &nbsp;
+        <a [routerLink]="['/bandas']"[routerLinkActive]="['active']">Bandas</a>
+        &nbsp;
+        <a [routerLink]="['/generos']"[routerLinkActive]="['active']">Generos musicales</a>
+        &nbsp;
+        <a [routerLink]="['/cursos']"[routerLinkActive]="['active']">Cursos</a>
+        &nbsp;
+        
+    </nav>
+    <hr>
 <!--
     <button (click)="ocultar_videojuegos()">Ocultar</button>
     <button (click)="mostrar_Videojuegos()">Mostrar</button>

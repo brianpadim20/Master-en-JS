@@ -12,7 +12,8 @@ import { HomeComponent } from "./home/home.component";
 
 // Array de rutas
 const appRoutes: Routes = [
-    {path:'', component: HomeComponent}, //Ruta inicial vacía, es la que se carga por default cuando se ingresa a la URL
+    {path: '', component: HomeComponent},
+    {path: 'home', component: HomeComponent}, //Ruta inicial vacía, es la que se carga por default cuando se ingresa a la URL
     {path: 'zapatos', component: zapatosComponent},
     {path: 'bandas', component: bandasComponent},
     {path: 'generos', component: generosComponent},

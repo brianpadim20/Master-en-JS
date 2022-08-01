@@ -280,3 +280,23 @@ Para configurar el sistema de rutas de Angular
             - El appRoutingProviders se carga en el array de providers.
 
 Para que toda esta configuración funcione, se debe crear una etiqueta en el app.component.html, la cual es <router-outlet></router-outlet>
+
+# Creación del menú de navegación:
+
+- En app.component.html, crear con una etiqueta <nav></nav>
+- Dentro de estas etiquetas crear enlaces (etiqueta <a>)
+- A esta etiqueta agregarle el complement [routerLink]="['Dirección de enlace']"
+
+## Resaltar la página actual del menú
+
+- Esto se hace con la directiva [routerLinkActive] = "['active']", la cual se pone al lado de [routerLink] (Tal como se ve en app.component.html)
+
+## Pasar parámetros por las URLs.
+
+Pasar parámetros, quiere decir, pasar valores por la URL.
+
+Para esto se hace:
+- Abrir archivo app.routing.ts, y en el componente que se desee trabajar (ejemplo componente de cursos), hacer la siguiente funcionalidad: {path: 'cursos/:nombre/:apellidos', component: CursosComponent}
+- Si se quiere que algún parámetro sea opcional, se le crea una ruta nueva con estos valores, es decir: 
+{path: 'cursos', component: CursosComponent}
+{path: 'cursos/:nombre/:apellidos', component: CursosComponent}
