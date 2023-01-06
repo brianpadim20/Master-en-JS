@@ -17,6 +17,6 @@ switch(edad){
         console.log("Eres un anciano.");
         break;
     default:
-        console.log("Tu edad es neura");
+        console.log("Tu edad es neutra");
         break
 }
