@@ -30,4 +30,80 @@ Para la última versión de Angular se hacen los siguientes pasos:
 - Para arrancar la app en angular se tira el comando: ng serve (recomendado), también npm start
 	-Importante estar dentro del directorio de Angular que se desee ejecutar.
 
-# Componentes de Angular
+#### Elementos que componen una aplicación de Angular:
+
+Una app de angunar está formada básicamente por componentes, plantillas, decoradores y meta datos, servicios, provider, directivas y módulos
+
+- **Componente**: Es una parte o un elemento que compone la app web de Angular, va a controlar un trozo de pantalla o de la vista de la aplicación, todo lo que se puede ver en pantalla dentro de un proyecto de Angular es controlado y gestionado por este tipo de elementos, la lógica de un componente dentro de una clase de Angular es que da soporte a una vista interactuando con ella através de una serie de propiedades y métodos que hay dentro de Framework.
+
+También se encarga de servir como mediador entre la vista y la lógica de programación que estará en la parte de la clase del componente donde se incluirá el modelo de datos, interacción y lógica que vaya a tener la aplicación. 
+
+En general, un componente es una especie de controlador y toda la aplicación estará formada por pequeñas partes o elementos que serán los componentes.
+
+- **Plantillas**: Son las vistas de los componentes, son ficheros HTML que tienen una sintaxis especial de Angular y trabajan con data binding, directivas y con una serie de elementos y carácterísticas.
+
+- **Decoradores y metadatos**: Con los decoradores se configuran dinámicamente los atributos, los metadatos que va a tener la clase del componente de Angular.
+
+Los metadatos dentro de un decorador en una clase de Angular van a describir una serie de relaciones que van a tener los     componentes o las clases.
+
+- **Servicios**: Clases con un objetivo claro: facilitar la reutilización del código, interactura con un servicio RES de una entidad concreta, son elementos fundamentales dentro de un proyecto de Angular y mediante la inyección de dependencia se va a poder estar usando dentro de unos componentes y la app en general.
+
+A un servicio también se le puede llamar **Proevider**, que son servicios que proveen datos o funcionalidades mediante sus métodos, existen varios providers propios de Angular o también se pueden crear.
+
+- **Directivas**: Son funcionalidades aplicables al DOM y a los elementos HTML que hay en las plantillas de un componente, al final, todo se traduce en una directiva, que es una etiqueta.
+
+Son atributos de HTML, puede servir para controlar que un DIV se muestre o no, o recurrer un array en la vista
+
+# Componentes
+#### ¿Qué es un componente?
+
+Un componente no es mas que un trozo de la pantalla de la app.
+
+#### Componentes de Angular
+
+Ir en al directorio src, y al directorio app, aparece por defecto el componente app.component.ts, está formado por una serie de imports que son módulos u objetos que se tienen que importar para poder usarlo.
+
+el from que aparece en el import está guardado en el archivo package.json
+
+lo que aparece con @component es un decorador.
+
+Con selector se puede ver en que etiqueta se estará cargando este componente.
+Template url indica cual es la vista del componente, que sería el archivo html que aparece por defecto (app.component.html). Allí es donde está toda la información.
+
+StyleUrls: es para darle el estilo que se desee para esta página
+
+Export class se usa para usar esta clase en otros archivos y se ponen las funcionalidades que tendrá la clase y los valores que uno desee que aparezcan en la aplicación
+
+Para definir el módulo, se usa el archivo app.module.ts; aquí se importan los objetos que se encargar de hacer esto (browserModule y ngmodule), se importa el componente y se usa @ngModule, que es el decorador que permite configurar el módulo, se indican las declarations que sirven para cargar componentes, pipes, directivas, imports que sirve pra cargar modulos de Angular, módulos externos o módulos creados, providers sirve para cargar servicios y bootstrap que es el modulo principal a cargar, dentro de las llaves se puede indicar cual es componente a cargar de primero y por último se exporta el módulo.
+
+## Cómo crear un componente:
+
+Hay varias opciones: Usar consola, definir una carpeta de components y crear allí todos los componentes, otra carpeta de views donde se tengan las plantillas del componente y así sucesivamente y la que se va a usar, es creando una carpeta por componente dentro de la carpeta de app
+
+Pasos:
+
+- Dentro de la carpeta app, crear una carpeta con el nombre del componente; para este ejemplo será la carpeta videojuego
+
+- Dentro de la carpeta creada, crear un nuevo archivo que tendra por nombre: [nombre de la carpeta].component.ts
+EJ: videojuego.component.ts (importante poner el .ts porque es la extensión typeScript que se utiliza para definir todos los archivos JS dentro de Angular)
+
+- Dentro de la carpeta creada, crear también la vista: que será: [mismo nombre del componente].component.html, EJ:
+videojuego.component.html
+
+- Dentro de la clase componente (archivo.ts)
+	- **Importar el componente**: import {component} from '@angular/core' (no preocuparse por el error, con el export se soluciona)
+	- **Definir el decorador**: @component({}) para definir un componente **No cerrar con ;**
+	- **Definir el selector (dentro de las llaves)**: va dentro de comillas simples, allí se pone el nombre de la etiqueta que se le dará, en este caso videojuego así: selector: 'videoJuego'. para la plantilla no usar ; sino ,
+	- **Definir una plantilla**: En el archivo .html del componente crear la plantilla a usar y dentro del componente.ts usar la palbra templateUrl: 'ruta de la plantilla' (si está en el directorio actual se pone 
+	./nombre del archivo)
+	- **Exportar la clase**: export class [nombre del componente]Component{}
+
+- **Cargar el componente**: Para darle de alta al componente; se debe dar de alta en app.module.ts de la siguiente manera:
+	- **Hacer un import del componente creado**: palabra import {nombre del componente} from 'ruta' 
+	EJ: import {videoJuegoComponent} from './videojuego/videojuego.component';
+	- Cargarlo en las declarations: separar por una coma, poner el nombre dentro del array declarations; vease con videojuego
+	- para cargar el componente en la página web se debe usar su selector
+
+### Porpiedades de los componentes
+Dentro de la clase del componente.ts (donde está el export) se pueden definir una serie de propiedades públicas
+y se puede pasar el valor que se guarde en las propiedades a la vista, lo mas normal es asignarlo en el constructor y mediante doble llave {{}} se puede mostrar en el componente como se ve en el ejemplo de videojuegos, esto se llama interpolación (muestro el valor de una propiedad)
