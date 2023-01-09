@@ -1,5 +1,12 @@
 <div>
   <h1>Bienvenidos al  {{title}}</h1>
   <p>Esto se creó para aprender Angular</p>
-  <videoJuego></videoJuego>
+  <button (click)="ocultarVideojuegos()" *ngIf="mostrarVideoJuegos" >Ocultar videojuegos</button>
+  <button (click)="mostrarVideojuegos()"*ngIf="!mostrarVideoJuegos">Mostrar videojuegos</button>
+  
+
+  <videoJuego *ngIf="mostrarVideoJuegos"></videoJuego>
+
+  <zapatos></zapatos>
+  <cursos></cursos>
 </div>

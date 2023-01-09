@@ -1,5 +1,4 @@
 # Curso de Angular
-
 # Instalar Angular:
 
 Para la última versión de Angular se hacen los siguientes pasos: 
@@ -29,6 +28,12 @@ Para la última versión de Angular se hacen los siguientes pasos:
 	
 - Para arrancar la app en angular se tira el comando: ng serve (recomendado), también npm start
 	-Importante estar dentro del directorio de Angular que se desee ejecutar.
+
+## Eventos útiles:
+
+<button (click)>Nombre del botón</button> => (Click) sirve para agregar un evento click, es decir que cuando se haga click en el botón, llame a alguna funcionalidad o componente
+
+
 
 #### Elementos que componen una aplicación de Angular:
 
@@ -107,3 +112,21 @@ videojuego.component.html
 ### Porpiedades de los componentes
 Dentro de la clase del componente.ts (donde está el export) se pueden definir una serie de propiedades públicas
 y se puede pasar el valor que se guarde en las propiedades a la vista, lo mas normal es asignarlo en el constructor y mediante doble llave {{}} se puede mostrar en el componente como se ve en el ejemplo de videojuegos, esto se llama interpolación (muestro el valor de una propiedad)
+
+### Generar componentes con la consola
+
+**Siempre** usar la consola del sistema operativo (CMD), escribir ng generate component [nombre]
+
+Para el ejemplo: ng generate component cursos
+
+Crea el componente, lo agrega a declaraciones y queda listo para ser implementado
+
+### Hooks/Eventos ciclo de vida de los componentes
+
+- **OnInit()**: Permite usar el método ngOnInit, que es el método que se ejecuta al cargar un componente.
+
+Para el OnInit se usará el componente videojuego y se demostrará como usarlo.
+
+- **DoCheck()**: Se ejecuta cada vez que se produce un cambio en un componente o en una app de Angular, es un método que se estará ejecutando frecuentemente una vez suceda esto
+
+- **OnDestroy**: Sirve para que se ejecute algo antes de eliminar la instancia del componente; es decir, se ejecuta cuando se vaya a eliminar un componente
