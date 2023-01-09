@@ -121,7 +121,7 @@ Para el ejemplo: ng generate component cursos
 
 Crea el componente, lo agrega a declaraciones y queda listo para ser implementado
 
-### Hooks/Eventos ciclo de vida de los componentes
+### Hooks/Eventos ciclo de vida de los componentes (Se trabajó sobre el componente de videojuegos)
 
 - **OnInit()**: Permite usar el método ngOnInit, que es el método que se ejecuta al cargar un componente.
 
@@ -130,3 +130,12 @@ Para el OnInit se usará el componente videojuego y se demostrará como usarlo.
 - **DoCheck()**: Se ejecuta cada vez que se produce un cambio en un componente o en una app de Angular, es un método que se estará ejecutando frecuentemente una vez suceda esto
 
 - **OnDestroy**: Sirve para que se ejecute algo antes de eliminar la instancia del componente; es decir, se ejecuta cuando se vaya a eliminar un componente
+
+### Importar y exportar (Se trabajó sobre el componente de Zapatos)
+
+#### Cómo crear una clase e importarla dentro de otra clase
+
+- Dentro de la carpeta app, crear una que se llame models
+- En esta carpeta crear un archivo llamado configuracion.ts
+- En el archivo crear un objeto Json, antes del nombre poner la palabra reservada export, y allí, poner las características que se requieran para la aplicación
+- En app.component.ts importar la variable creada
