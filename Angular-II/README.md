@@ -131,11 +131,12 @@ Para el OnInit se usará el componente videojuego y se demostrará como usarlo.
 
 - **OnDestroy**: Sirve para que se ejecute algo antes de eliminar la instancia del componente; es decir, se ejecuta cuando se vaya a eliminar un componente
 
-### Importar y exportar (Se trabajó sobre el componente de Zapatos)
+### Importar y exportar
 
-#### Cómo crear una clase e importarla dentro de otra clase
+#### Cómo crear una clase e importarla dentro de otra clase (se puede ver en app.component.ts lo que se trabajó aquí)
 
 - Dentro de la carpeta app, crear una que se llame models
 - En esta carpeta crear un archivo llamado configuracion.ts
 - En el archivo crear un objeto Json, antes del nombre poner la palabra reservada export, y allí, poner las características que se requieran para la aplicación
 - En app.component.ts importar la variable creada
+- Allí mismo crear un constructor e implementar las características de la clase creada 

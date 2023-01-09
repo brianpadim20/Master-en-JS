@@ -8,9 +8,16 @@ import { configuracion } from './models/configuracion';
 })
 export class AppComponent {
   title = 'Curso Angular-II';
-  public mostrarVideoJuegos: boolean = true;
-
   
+  public config;
+  public mostrarVideoJuegos: boolean = true;
+  public descripcion: string;
+
+  constructor(){
+    this.title=configuracion.titulo;
+    this.descripcion = configuracion.descripcion;
+    this.config = configuracion; 
+  }
 
   ocultarVideojuegos(){
     this.mostrarVideoJuegos=false;
