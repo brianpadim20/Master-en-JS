@@ -10,21 +10,24 @@ import { zapato } from "../models/zapato";//se pone dos puntos para indicar que 
     public zapatos: Array<zapato>;
     public marcas : string[];
     public color:string;
+    public miMarca:string;
 
     constructor(){
+        this.miMarca="";
         this.color = 'blue';
         this.marcas = new Array();
         this.zapatos = [
             new zapato('Reebok classic',850000,'Reebok', 'Negro',true),
             new zapato('Nike SB',450000,'Nike', 'Blanco',false),
-            new zapato('Adidas Yezzy',650000,'adidas', 'Gris',true),
+            new zapato('Adidas Yezzy',650000,'Adidas', 'Gris',true),
             new zapato('Nike airmax',950000,'Nike', 'Rojo',true),
-            new zapato('Adidas running',350000,'Adidas', 'Azul',false)
+            new zapato('Adidas running',350000,'Adidas', 'Azul',false),
+            new zapato('Vans on the road',325000,'Vans', 'Negro',true)
         ];
 
     }ngOnInit(){
         console.log(this.zapatos);
-        this.getMarcas
+        this.getMarcas();
         
     }getMarcas(){
         this.zapatos.forEach((zapato,index)=>{
@@ -35,6 +38,15 @@ import { zapato } from "../models/zapato";//se pone dos puntos para indicar que 
 
         });
         console.log(this.marcas);
+
+    }getMarca(){
+        alert(this.miMarca);
+
+    }addMarca(){
+        if(this.marcas.indexOf(this.miMarca) < 0){
+            this.marcas.push(this.miMarca);
+
+        }
     }
 
 }

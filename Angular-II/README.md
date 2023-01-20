@@ -141,7 +141,7 @@ Para el OnInit se usará el componente videojuego y se demostrará como usarlo.
 - En app.component.ts importar la variable creada
 - Allí mismo crear un constructor e implementar las características de la clase creada 
 
-#### Modelos en Angular (Zapatos.component)
+#### Modelos en Angular (componente zapatos)
 
 Se crea un objeto con el cual tener un molde y crear varios objetos de ese tipo.
 
@@ -161,6 +161,8 @@ Funciona como un if normal, se pone dentro de la etiqueta que se desea obtener e
 
 Funciona como un for normal, se pone dentro de la etiqueta donde se desea incluír el array recorrido, generalmente se pone en una lista
 
+**IMPORTANTE!!!!!!** poner la función que recorre el for en el archivo.ts dentro del ngOnInit, sino no aparecerá
+
 - **Directiva ngSwitch**: Esta directiva se usa de manera diferente a ngIf y a ngFor, pues esta va en corchetes ([ngSwitch]="propiedad de la clase de componente"); lo que hace esta directiva es que va a evaluar una propiedad en la clase del componente; posteriormente se hace una lista con las condiciones o casos
 
 **Ejemplo en zapatos:** 
@@ -172,3 +174,16 @@ Funciona como un for normal, se pone dentro de la etiqueta donde se desea inclu�
 - **Etiqueta de atributo style**: Sirve para agregar estilos a un fragmento de código html, se declara con corchetes : [style.(atributo que se desee poner, ej background, color, etc] = "condición ? 'atributo en caso que cumpla' : 'atributo en caso que no cumpla'"
 
 Hay que tener cuidado con las aperturas y cierres de las etiquetas.
+
+#### Enlace de datos - data binding en Angular (componente zapatos)
+
+- Primero que todo, se debe importar y cargar el módulo de formularios en Angular
+	- Ir a app.module.ts
+	- import {{ FormsModule }} from '@angular/forms'; 
+	- cargarlo en los imports, que es el array dentro del ngModule que permite cargar módulos internos de Angular, módulos externos creados por uno mismo o módulos externos que se hayan instalado en el proyecto
+- Generalmente se trabaja con una etiqueta de imput
+- Se trabaja con la directiva [(ngModel)]="variable del componente a trabajar"
+Ejemplo: <input type="text" [(ngModel)]="miMarca">
+<p>{{miMarca}}</p> **Nota** Este párrafo es para mostrar lo que se está guardando en el input
+
+- Donde se está mostrando el componente, aparecerá un cuadro de dialogo donde permite escribir un texto y aparece inmediatamente en la página, esto es porque se trabaja a nivel bidireccional, tanto a la clase de componente como en la vista, es decir, que si se muestra ese valor, o si se agrega un valor a la propiedad, se mostrará en el input y en la vista porque se está imprimiendo 

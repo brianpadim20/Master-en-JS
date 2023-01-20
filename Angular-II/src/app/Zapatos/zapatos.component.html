@@ -2,8 +2,17 @@
 
 <p>Compra los tenis de las mejores marcas</p>
 
+<p>Añadir zapato</p>
+<p>
+<input type="text" [(ngModel)]="miMarca">
+<button (click)="getMarca()">Mostrar marca</button>
+<button (click)="addMarca()">Añadir marca</button>
+</p>
+
+<p><strong>{{miMarca}}</strong></p>
+
 <ul>
-    <li *ngFor="let i of marcas">{{i}}</li>
+    <li *ngFor="let j of marcas; let indice = index">{{indice + ' - ' + j}}</li>
 </ul>
 
 <ul>
@@ -31,6 +40,9 @@
 </ul>
 
 <p>El color de la mayoría de nuestros zapatos es: </p>
+
+<input type="text" [(ngModel)]="color">
+
 <ul [ngSwitch]="color">
     <li *ngSwitchCase="'yellow'">
         El color predominante es <span [ngStyle]="{
