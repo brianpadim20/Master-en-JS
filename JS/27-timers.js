@@ -39,7 +39,7 @@ function intervalo(){
 //Set interval se ejecutará indefinidamente
 
 
-/*
+
 var tiempoDos = setTimeout(() => {
     console.log("Set interval ejecutado"); 
     var titulo = document.querySelector("h1"); 

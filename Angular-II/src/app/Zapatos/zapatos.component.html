@@ -1,8 +1,61 @@
 <h2>{{titulo}}</h2>
 
+<p>Compra los tenis de las mejores marcas</p>
+
 <ul>
-    <li>Nike</li>
-    <li>Adidas</li>
-    <li>Reebok</li>
-    <li>Under Armour</li>
+    <li *ngFor="let i of marcas">{{i}}</li>
+</ul>
+
+<ul>
+    <li *ngFor="let i of zapatos">
+        <span [style.color]="i.stock == false ? 'red':'black'">
+        {{i.nombre}} - <strong>${{i.precio}}</strong>
+        </span>
+
+        <span *ngIf="i.precio <=650000" 
+        [style.color]="i.precio <=650000 ? 'green': 'transparent'">
+            - ¡En oferta!
+        </span>
+        
+        <span *ngIf="i.precio>650000"
+        [style.color]="i.precio>650000 ? 'red':'transparent'">
+        - No está en oferta
+        </span>
+
+        <span *ngIf="i.stock == false"
+        [style.color]="i.stock == false ? 'red':'black'">
+            - No hay stock disponible en el momento
+        </span>
+        
+    </li>
+</ul>
+
+<p>El color de la mayoría de nuestros zapatos es: </p>
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'yellow'">
+        El color predominante es <span [ngStyle]="{
+            'background':color,
+            'color': 'red'
+        }">amarillo.</span>
+    </li>
+
+    <li *ngSwitchCase="'red'">
+        El color predominante es <span [ngStyle]="{
+            'background':color
+        }">rojo.</span>.
+    </li>
+
+    <li *ngSwitchCase="'blue'">
+        El color predominante es <span [ngStyle]="{
+            'background':color,
+            'color': 'white'
+        }">azul.</span>.
+    </li>
+
+    <li *ngSwitchCase="'orange'">
+        El color predominante es <span [ngStyle]="{
+            'background':color
+        }">naraja.</span>.
+    </li>
+
 </ul>

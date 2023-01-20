@@ -135,8 +135,40 @@ Para el OnInit se usará el componente videojuego y se demostrará como usarlo.
 
 #### Cómo crear una clase e importarla dentro de otra clase (se puede ver en app.component.ts lo que se trabajó aquí)
 
-- Dentro de la carpeta app, crear una que se llame models
+- Dentro de la carpeta app, crear       una que se llame models
 - En esta carpeta crear un archivo llamado configuracion.ts
 - En el archivo crear un objeto Json, antes del nombre poner la palabra reservada export, y allí, poner las características que se requieran para la aplicación
 - En app.component.ts importar la variable creada
 - Allí mismo crear un constructor e implementar las características de la clase creada 
+
+#### Modelos en Angular (Zapatos.component)
+
+Se crea un objeto con el cual tener un molde y crear varios objetos de ese tipo.
+
+Por lo general su nombre es en singular porque representará a un objeto que se usará como molde para crear otros objetos.
+
+Acá se implementa el OnInit, antes de creado, este no estaba
+
+#### Directivas
+
+- **Directiva *ngIf**: Estas directivas se tienen que declarar con un asterísco: *ngIf
+
+Directiva estructural que permite hacer un condicional en la parte de la vista. 
+
+Funciona como un if normal, se pone dentro de la etiqueta que se desea obtener el dato y si cumple la condición mostrará el valor
+
+- **Directiva *ngFor: Directiva estructural que permite recorrer un array creado en el componente.ts para mostrarlo en la página.
+
+Funciona como un for normal, se pone dentro de la etiqueta donde se desea incluír el array recorrido, generalmente se pone en una lista
+
+- **Directiva ngSwitch**: Esta directiva se usa de manera diferente a ngIf y a ngFor, pues esta va en corchetes ([ngSwitch]="propiedad de la clase de componente"); lo que hace esta directiva es que va a evaluar una propiedad en la clase del componente; posteriormente se hace una lista con las condiciones o casos
+
+**Ejemplo en zapatos:** 
+
+<ul [ngSwitch]="color">
+	<li *ngSwitchcase="'caso'"></li> **NOTA** Importante tenerlo entre comillas dobles y dentro de estas unas comillas simples
+</ul>
+
+- **Etiqueta de atributo style**: Sirve para agregar estilos a un fragmento de código html, se declara con corchetes : [style.(atributo que se desee poner, ej background, color, etc] = "condición ? 'atributo en caso que cumpla' : 'atributo en caso que no cumpla'"
+
+Hay que tener cuidado con las aperturas y cierres de las etiquetas.
