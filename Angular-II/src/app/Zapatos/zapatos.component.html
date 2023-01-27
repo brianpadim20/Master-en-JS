@@ -21,7 +21,17 @@
 <ul>
     <li *ngFor="let i of zapatos">
         <span [style.color]="i.stock == false ? 'red':'black'">
-        {{i.nombre}} - <strong>${{i.precio}}</strong>
+        
+            {{i.nombre}} - 
+        
+        <strong 
+        [ngClass]="{
+            'colorRojo': i.precio>650000,
+            'subrayado': i.marca=='Nike'
+        }"
+        >
+            ${{i.precio}}
+        </strong>
         </span>
 
         <span *ngIf="i.precio <=650000" 
@@ -33,7 +43,7 @@
         [style.color]="i.precio>650000 ? 'red':'transparent'">
         - No está en oferta
         </span>
-
+        
         <span *ngIf="i.stock == false"
         [style.color]="i.stock == false ? 'red':'black'">
             - No hay stock disponible en el momento

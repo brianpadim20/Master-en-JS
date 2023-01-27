@@ -198,3 +198,21 @@ Como ejemplo, se va a crear un botón para eliminar una marca del listado de mar
 
 - Evento KeyUp: Se trabajará sobre un input, aquí también se trabaja sobre el componente zapatos
 	- Este evento se activa cada vez que se levanta una tecla, por ejemplo, capturando la tecla enter sería algo así: (keyup.enter)="método creado en la clase del componente.ts";
+
+#### Directiva ngClass en atributos (Componente Zapatos)
+
+ngClass permite asignarle a un elemento una clase cuando se cumpla una condición
+
+En el componente zapatos se ve un ejemplo en la directiva *ngFor para listar el nombre del zapato y el precio.
+
+Se hace [class.nombre de la clase] y en el archivo .css se agrega el estilo del nombre de la clase que se le dará este estilo.
+
+Otra forma de usarla es: 
+
+[ngClass] = " [array de atributos] " Ejemplo
+
+[ngClass]="['fondoRojo','subrayado']"
+
+#### Agregar estilos .CSS
+- En la carpeta assets crear el archivo styles.css, allí agregar los estilos
+- Agregar el link de la carpeta en el archivo index.html
