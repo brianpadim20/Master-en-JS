@@ -47,6 +47,21 @@ import { zapato } from "../models/zapato";//se pone dos puntos para indicar que 
             this.marcas.push(this.miMarca);
 
         }
+
+    //Función para el evento click Evento click 
+    }borrarMarca(index:any){//Si sale Parameter 'index' implicitly has an 'any' type, solo poner :any y se 
+        //soluciona
+        //delete this.marcas[indice];
+        this.marcas.splice(index, 1);/** .splice pide a partir de qué indice voy a borrar y a partir
+        de ese índice, cuantos elementos borrar, si se pone mas de uno, borrará más de un elemento a
+        partir del índice indicado */
+
+    }onBlur(){
+        console.log("Has salido del input");
+
+    }mostrarPalabra(){
+        alert(this.miMarca);
+        
     }
 
 }

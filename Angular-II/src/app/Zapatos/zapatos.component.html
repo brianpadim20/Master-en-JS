@@ -4,7 +4,8 @@
 
 <p>Añadir zapato</p>
 <p>
-<input type="text" [(ngModel)]="miMarca">
+<input type="text" [(ngModel)]="miMarca" (blur)="onBlur()" (keyup.enter)="addMarca()"
+(keyup.enter)="mostrarPalabra()">
 <button (click)="getMarca()">Mostrar marca</button>
 <button (click)="addMarca()">Añadir marca</button>
 </p>
@@ -12,7 +13,9 @@
 <p><strong>{{miMarca}}</strong></p>
 
 <ul>
-    <li *ngFor="let j of marcas; let indice = index">{{indice + ' - ' + j}}</li>
+    <li *ngFor="let j of marcas; let indice = index">{{indice + ' - ' + j}}
+        <button (click)="borrarMarca(indice)">Borrar</button>
+    </li>
 </ul>
 
 <ul>

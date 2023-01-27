@@ -29,12 +29,6 @@ Para la última versión de Angular se hacen los siguientes pasos:
 - Para arrancar la app en angular se tira el comando: ng serve (recomendado), también npm start
 	-Importante estar dentro del directorio de Angular que se desee ejecutar.
 
-## Eventos útiles:
-
-<button (click)>Nombre del botón</button> => (Click) sirve para agregar un evento click, es decir que cuando se haga click en el botón, llame a alguna funcionalidad o componente
-
-
-
 #### Elementos que componen una aplicación de Angular:
 
 Una app de angunar está formada básicamente por componentes, plantillas, decoradores y meta datos, servicios, provider, directivas y módulos
@@ -167,9 +161,9 @@ Funciona como un for normal, se pone dentro de la etiqueta donde se desea inclu�
 
 **Ejemplo en zapatos:** 
 
-<ul [ngSwitch]="color">
-	<li *ngSwitchcase="'caso'"></li> **NOTA** Importante tenerlo entre comillas dobles y dentro de estas unas comillas simples
-</ul>
+< ul [ngSwitch]="color">
+	< li *ngSwitchcase="'caso'">< /li> **NOTA** Importante tenerlo entre comillas dobles y dentro de estas unas comillas simples
+< /ul>
 
 - **Etiqueta de atributo style**: Sirve para agregar estilos a un fragmento de código html, se declara con corchetes : [style.(atributo que se desee poner, ej background, color, etc] = "condición ? 'atributo en caso que cumpla' : 'atributo en caso que no cumpla'"
 
@@ -184,6 +178,23 @@ Hay que tener cuidado con las aperturas y cierres de las etiquetas.
 - Generalmente se trabaja con una etiqueta de imput
 - Se trabaja con la directiva [(ngModel)]="variable del componente a trabajar"
 Ejemplo: <input type="text" [(ngModel)]="miMarca">
-<p>{{miMarca}}</p> **Nota** Este párrafo es para mostrar lo que se está guardando en el input
+< p >{{miMarca}}< /p > **Nota** Este párrafo es para mostrar lo que se está guardando en el input
 
 - Donde se está mostrando el componente, aparecerá un cuadro de dialogo donde permite escribir un texto y aparece inmediatamente en la página, esto es porque se trabaja a nivel bidireccional, tanto a la clase de componente como en la vista, es decir, que si se muestra ese valor, o si se agrega un valor a la propiedad, se mostrará en el input y en la vista porque se está imprimiendo 
+
+#### Eventos en Angular
+
+##### Evento click (componente zapatos)
+
+Como ejemplo, se va a crear un botón para eliminar una marca del listado de marcas
+
+- Crear la función que se desee realizar con el evento click en el componente.ts
+- Agregar el botón o el link donde se le dará el evento de click < button (click)= "nombre de la funcion(parametro (opcional))>nombre del botón < /button >
+
+##### Eventos Blur y KeyUp
+
+- Evento Blur: Se trabajará sobre un input, aquí también se trabaja sobre el componente zapatos
+	- En el input que se tiene, de tipo texto, entre paréntesis irá (blur)="método creado en la clase del componente.ts"
+
+- Evento KeyUp: Se trabajará sobre un input, aquí también se trabaja sobre el componente zapatos
+	- Este evento se activa cada vez que se levanta una tecla, por ejemplo, capturando la tecla enter sería algo así: (keyup.enter)="método creado en la clase del componente.ts";
