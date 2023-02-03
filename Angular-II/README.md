@@ -316,7 +316,8 @@ Para las ilustraciones se trabajará sobre el componente de cursos
 
 - En el archivo.html del componente que se desea agregar la ruta, se agrega un evento click con la dirección del componente al cual se desee navegar 
 - en el archivo.ts se crea una función y allí agrega un this._router.navigate(['/nombre del componente']); ejemplo:
-	- redirigirzapatos(){
+	 //ejemplo de redireccionamiento por botón
+	 redirigirzapatos(){
     	this._router.navigate(['/zapatos']);
   	  }
 - También se puede hacer por medio de peticiones AJAX, por formularios o similares, ejemplo:
