@@ -115,6 +115,14 @@ Para el ejemplo: ng generate component cursos
 
 Crea el componente, lo agrega a declaraciones y queda listo para ser implementado
 
+### Agregar hoja de estilo .CSS a un componente
+- Se pueden agregar directamente en el archivo de estilos.css que viene por defecto en la aplicación de Angular, o hacer los siguientes pasos: 
+	- En la carpeta assets, crear el archivo styles.css, cargarlo en el idex.html
+	- **En caso que no funcione, hacer los siguientes pasos:
+		- Abrir el archivo angular.json
+		- Buscar donde diga styles, allí agregar "src/assets/styles.css"
+		- Cortar la ejecución de compilación, y ejecutarla de nuevo
+
 ### Hooks/Eventos ciclo de vida de los componentes (Se trabajó sobre el componente de videojuegos)
 
 - **OnInit()**: Permite usar el método ngOnInit, que es el método que se ejecuta al cargar un componente.
@@ -216,3 +224,112 @@ Otra forma de usarla es:
 #### Agregar estilos .CSS
 - En la carpeta assets crear el archivo styles.css, allí agregar los estilos
 - Agregar el link de la carpeta en el archivo index.html
+
+### Páginas y rutas en Angular
+
+#### Configuración del Routing
+
+- Asegurarse que en el index.html esté el < base href ="/">, debajo de la etiqueta de title, pues si esto no está puesto, el router no va a funcionar
+- crear el fichero app.routing.ts en la carpeta de app, allí irá toda la configuración de rutas en la app de Angular, es decir, que aquí se configuran las nuevas URL de la web
+- En app.routing.ts importar los módulos del router
+	- import { ModuleWithProviders } from "@angular/core";
+	- import { Routes,RouterModule } from '@angular/router';
+- Importar los componentes creados para ponerle las rutas
+- Crear un array de configuración de las rutas; aquí es donde se crean todas las rutas y se configuran
+	- Crear una constante, llamada app routes de tipo routes
+		- EJ: const appRoutes: Routes = []
+	- Dentro de este array, agregar objetos de tipo JSon
+		- Crear una ruta inicial, que es vacía, es la que se carga por default
+			- {path: '', component: HomeComponent},
+		- Crear las rutas para cada componente dentro del array creado
+			- {path: 'home', component: HomeComponent},
+			  {path:'zapatos', component: zapatosComponent},
+			  {path:'videouegos', component: videoJuegoComponent},
+			  {path:'cursos', component: CursosComponent},
+			  {path:'**', component:HomeComponent}
+	- Exportar el módulo del router
+		- export const appRoutingProviders:any[] = []; es el servicio del router, necesita exportarse y luego importarse para que funcionen los servicios de rutas a nivel interno
+		- eexport const routing:ModuleWithProviders< any> =RouterModule.forRoot(appRoutes); carga toda la configuración de la ruta y le da de alta en el routing y hará que la configuración del router funcione
+	- Importar las rutas en el app.module.ts
+		- import { routing, appRoutingProviders } from './app.routing';
+	- Cargar los objetos en el @ngModule del app.module.ts
+		- El routing, al ser un módulo se tiene que cargar en los imports
+		- Providers, al ser un servicio, y si quiero utilizar el router, se carga en providers
+	- Una vez hecho todo esto, ya estará compilando correctamente, pero para que todo funcione se agrega una directiva
+		- En el app.component.html, en lucar de cargar un componente estático, es decir, de manera fija, se pone la etiqueta < router-outlet>< /router-outlet>, que es la etiqueta del sistema de rutas, y dentro de esta etiqueta, se va a cargar el componente que se le indique a la ruta actual
+
+#### Menú de navegación instantáneo
+
+- En app.component.html, agregar un menú, con una etiqueta < nav>
+- Dentro de la etiqueta < nav>, agregar diferentes etiquetas < a> con la directiva [routerLink], y dentro de esta directiva, agregar la ruta a la que se desea ir entre corchetes y comillas individuales así:
+	- < a [routerLink]= "['/home']">
+	- < a [routerLink]= "['/zapatos']">
+- Se puede poner una separación a los links con un &nbsp; entre cada etiqueta < a>
+
+#### Resaltar página actual en el menú de navegación
+
+- Se aplica con una directiva llamada [routerLinkActive]="['active']" al lado de la ruta que se pone en cada etiqueta < a>
+- Dentro de las comillas, se les pueden agregar una o varias clases de CSS al elemento del menú
+- Dentro de la carpeta assets, en el archivo css
+
+#### Parámetros por las URL
+
+Pasar parámetros por la URL es lo mismo que pasar valores por la URL, para hacer la configuración correcta se debe hacer lo siguiente:
+
+- Abrir el archivo app.routing.ts
+- En el componente deseado hacer la siguiente funcionalidad:
+	- Por ejemplo en el componente de cursos, agregar un parámetro, por ejemplo nombre
+		- {path:'cursos/:nombre/', component: CursosComponent},
+	- Si se quiere que un parámetro sea opcional, se crea un nuevo path idéntico al existente con parámetro y se le agrega el parámetro opcional que se desee crear:
+		- {path:'cursos/:nombre/', component: CursosComponent}, 
+		  {path:'cursos/:nombre/:apellidos', component: CursosComponent},
+	- Abrir la clase.ts del componente sobre el cual se pasarán parámetros, en este caso, cursos.component.ts también su vista, es decir, cursos.component.html
+	- Si se abre la ruta a la que se le ponen los parámetros, no abrirá porque no existe, entonces si deseo que la ruta exista también, se tiene que crear primero y ya se tendría el parámetro nombre como uno opcional, sino se tendrá que poner un parámetro
+	- Para recoger los parámetros se tendrán que cargar varios componentes del router
+	- Dentro del archivo.ts del componente que se desee trabajar se importa lo siguiente:
+		- import { Router, ActivatedRoute, Params } from '@angular/router';
+		- Poner todos esos parámetros en el constructor:
+			- constructor(
+			  private _route: ActivatedRoute,
+			  private _router: Router
+			  ){}
+		- Si quiero acceder a las propiedades o los parámetros que digan por la URL, en el ngOnInit hacer:
+			- ngOnInit(){
+				this._route.params.subscribe((params:Params)=>{
+				this.nombre=params['nombre'];
+				console.log(params);
+				console.log(this.nombre);
+				})//Recoge el parámetro por la URL
+
+			}
+			- si el dato que se quiere recoger es un tipo numérico; se pone un + antes de params
+				- this.nombre=+params['followers'];
+			- Para mostrar los datos recogidos desde la URL se hace lo siguiente: 
+				< h3 *ngIf="nombre">Bienvenido {{nombre}}< /h3>
+				< h3 *ngIf="followers">Tus seguidores son: {{followers}}< /h3>
+
+#### Redirecciones Router Navigate
+
+Una redirección es cuando programáticamente se redirige al usuario a otra página de la web
+
+Para las ilustraciones se trabajará sobre el componente de cursos
+
+- En el archivo.html del componente que se desea agregar la ruta, se agrega un evento click con la dirección del componente al cual se desee navegar 
+- en el archivo.ts se crea una función y allí agrega un this._router.navigate(['/nombre del componente']); ejemplo:
+	- redirigirzapatos(){
+    	this._router.navigate(['/zapatos']);
+  	  }
+- También se puede hacer por medio de peticiones AJAX, por formularios o similares, ejemplo:
+	- ngOnInit(){
+    	this._route.params.subscribe((params:Params)=>{
+			this.nombre=params['nombre'];
+			this.followers= +params['followers'];
+			console.log(params);
+			console.log(this.nombre);
+			
+			//Ejemplo de redireccionamiento 
+			if(this.nombre=="ninguno"){
+				this._router.navigate(['/home']);
+			}
+
+    })
