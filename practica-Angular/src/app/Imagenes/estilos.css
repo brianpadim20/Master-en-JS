@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'sans-serif';
-
+    
 }.contenedor{
     overflow: hidden;
     width: 100%;
@@ -86,11 +87,11 @@
 
 }.contenedor .menu a:active{
     color: #727a76;
-
+    
 }.contenedor .menucarrito{
     float: right;
     margin-right: 150px;
-
+    
 }.contenedor .imagen{
     display: flex;
     justify-content: center;
@@ -153,7 +154,7 @@
     border-radius: 15px;
     margin-bottom: 15px;
     height: 200px;
-
+    float: inline-end;
 
 }.contenedor .pedirDomi h3{
     background-color: #e2e2e2;
@@ -164,7 +165,7 @@
     border-left: 60px;
     height: 220;
     padding: 0 1rem;
-
+    float: inline-end;
 
 }.contenedor .restaurantes{
     float: left;
@@ -182,7 +183,7 @@
     border-radius: 15px;
     margin-bottom: 15px;
     height: 200px;
-
+    float: inline-end;
 
 }.contenedor .restaurantes h3{
     background-color: #e2e2e2;
@@ -193,7 +194,7 @@
     border-left: 60px;
     height: 220;
     padding: 0 1rem;
-
+    float: inline-end;
 
 }.contenedor .servicios h1{
     text-align: center;
@@ -215,8 +216,8 @@
     padding: 10px 0;
     background: transparent;
     border: none;
-    border-bottom: 1px solid
-
+    border-bottom: 1px solid 
+    
 }.contenedor .formlogin{
     margin: 50px auto;
     width: 400px;

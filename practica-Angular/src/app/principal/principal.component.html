@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%@page contentType="text/html;charset=UTF-8" language="java" import="objetos.login" %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dronmicilios</title>
+    <link rel="stylesheet" href="../../styles.css">
+    
+</head>
+<body>
+
+<div class="contenedor">
+    <div class="intro">
+        <!--<a href="#"><img src="../Imagenes/Logotipo 500x500 px (1).jpeg" alt="Dronmicilios.com" height="75px" width="100px"
+        align="left"></a>-->
+        <h2>Bienvenido a Dronmicilios.com</h2>
+    </div>
+    <h2 style="float: right">Bienvenido <%=usuario.getUsuario()%></h2><br>
+    <a href="CerrarSesion">Cerrar Sesión</a><br><br>
+
+    </div>
+    
+    <!--
+    <div class="imagen">
+        <a href="#"><img src="CSS/Logotipo 500x500 px (2).jpeg" alt="Logo Dronmicilios.com"></a>
+    </div>
+    -->
+
+    <div class="menu">
+        <hr>
+        <nav>
+            <ul>
+                <a href="#"><li>Promociones</li></a>
+                <a href="#"><li>Nuevos restaurantes</li></a>
+                <a href="#"><li>Restaurantes</li></a>
+                <a href="#"><li>Comidas rápidas</li></a>
+                <a href="#"><li>Licores</li></a>
+            </ul>
+        </nav>
+        <hr>
+    </div>
+
+    <div class="servicios">
+        <h1>Unete a <strong>Dronmicilios</strong></h1>
+        <div class="registrocomercio">
+            <a href="registroNegocio.jsp">
+                <!--<img src="CSS/registro-comercio.webp" alt="registro">-->
+            </a>
+            <h3>Registra tu negocio</h3>
+            <p>Descubre los beneficios que traerá para tu negocio hacer parte de Dronmiclios</p>
+        </div>
+<!--
+        <div class="pedirDomi">
+            <a href="#">
+                <img src="CSS/domicilio.jpg" alt="Domicilio">
+            </a>
+            <h3>Nuestros servicios</h3>
+            <p>Conoce más acerca de los servicios que Dronmicilios.com tiene para ti</p>
+        </div>
+
+        
+        <div class="restaurantes">
+            <a href="#">
+                <img src="CSS/restaurantes.jpg" alt="Restaurantes">
+            </a>
+            <h3>Restaurantes</h3>
+            <p>Descubre los restaurantes que están asociados con Dronmicilios.com</p>
+        </div>
+        -->
+    </div>
+
+<hr>
+</body>
+
+</html>
