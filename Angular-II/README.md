@@ -334,3 +334,18 @@ Para las ilustraciones se trabajará sobre el componente de cursos
 			}
 
     })
+
+### Directiva NgTemplate 
+
+#### NgTemplate if y else en las vistas
+
+Se trabajará en el componente home para dar ilustración de como se hace
+
+- Se pone un *ngIf; con la condición que se quiera para la página
+- Para poner el else, primero se debe crear una etiqueta < ng-template #nombre de la variable> y poner las condiciones para cuando la variable no se cumpla.
+- una vez creada esta variable en el ng-template; ir al *ngIf; dentro de las comillas, separar por un ";" y poner el nombre de la variable en el ng-template
+
+#### NgTemplate Then - if else
+
+Then permite tener una template que sea no identificado y otra template que sea identificado.
+
