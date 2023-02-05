@@ -27,7 +27,7 @@ Para la última versión de Angular se hacen los siguientes pasos:
 	- Una vez descargado todo esto, estaría listo el proyecto de Angular y se podría empezar a programar sobre él.
 	
 - Para arrancar la app en angular se tira el comando: ng serve (recomendado), también npm start
-	-Importante estar dentro del directorio de Angular que se desee ejecutar.
+	- Importante estar dentro del directorio de Angular que se desee ejecutar.
 
 #### Elementos que componen una aplicación de Angular:
 
@@ -89,7 +89,7 @@ EJ: videojuego.component.ts (importante poner el .ts porque es la extensión typ
 - Dentro de la carpeta creada, crear también la vista: que será: [mismo nombre del componente].component.html, EJ:
 videojuego.component.html
 
-- Dentro de la clase componente (archivo.ts)
+- Dentro de la clase componente creada (archivo.ts)
 	- **Importar el componente**: import {component} from '@angular/core' (no preocuparse por el error, con el export se soluciona)
 	- **Definir el decorador**: @component({}) para definir un componente **No cerrar con ;**
 	- **Definir el selector (dentro de las llaves)**: va dentro de comillas simples, allí se pone el nombre de la etiqueta que se le dará, en este caso videojuego así: selector: 'videoJuego'. para la plantilla no usar ; sino ,
@@ -349,3 +349,33 @@ Se trabajará en el componente home para dar ilustración de como se hace
 
 Then permite tener una template que sea no identificado y otra template que sea identificado.
 
+### Servicios, HTTP y AJAX en Angular
+
+#### Crear servicios 
+
+La explicación gráfica se encuentra en el componente de zapatos
+
+Son clases cuyo objetivo principal es atraer un poco o separar un poco la lógica principal de la aplicación.
+
+Está enfocada a tener los métodos y la funcionalidad que interactúa directamente con los servicios RES o con un servidor externo.
+
+**Pasos para crear un servicio:**
+
+- Crear una carpeta dentro de la carpeta app llamada service
+- Dentro de esta carpeta crear un archivo.ts llamado nombreComponente.service.ts (nombre del componente en singular). EJEMPLO:
+	zapato.service.ts
+- Lo primero que tiene que tener un servicio es el objeto inyectable; para esto se hace un import de la clase inyectable; esto va a permitir inyectar el componente como dependencia en otras clases y en otros componentes
+	import { Injectable } from "@angular/core";
+- En archivo importado es un decorador, entonces debe usarse así:
+	@ injectable()
+- Exportar el servicio Ejemplo:
+	export zapatoService{Métodos que se deseen}
+- Una vez creado el servicio se debe usar dentro del componente
+	- Importarlo en el componente.ts
+	- Inyectar el servicio como un provider (como un servicio del componente)
+		- En el apartado donde dice @component({providers:[servicios que desee cargar y usar en el componente, en este ejemplo, el único servicio que se tiene es ZapatoService]})
+	- Inyectarlo como dependencia dentro de una propiedad, es decir en el constructor agregar 
+	private _servicioSerivce: (es normal que tenga un guión bajo adelante)
+- Si aparece un error que no existe este componente,
+- Crear una variable igual al servicio.función a usar en el servicio
+- Utilizar la variable con el servicio en el onInit

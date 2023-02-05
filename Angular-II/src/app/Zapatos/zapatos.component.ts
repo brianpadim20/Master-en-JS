@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { zapato } from "../models/zapato";//se pone dos puntos para indicar que es en la carpeta anterior
+import { zapatoService } from "../service/zapato.service";
 
 @Component({
     selector: 'zapatos',
-    templateUrl: './zapatos.component.html'
+    templateUrl: './zapatos.component.html',
+    providers:[zapatoService]
     
 })export class zapatosComponent implements OnInit{
     public titulo:string = "Componente de Zapatos";
@@ -12,11 +14,12 @@ import { zapato } from "../models/zapato";//se pone dos puntos para indicar que 
     public color:string;
     public miMarca:string;
 
-    constructor(){
+    constructor(private _zapatoService: zapatoService){
+        this.zapatos=this._zapatoService.getZapatos();
         this.miMarca="";
         this.color = 'blue';
         this.marcas = new Array();
-        this.zapatos = [
+        /*this.zapatos = [
             new zapato('Reebok classic',850000,'Reebok', 'Negro',true),
             new zapato('Nike SB',450000,'Nike', 'Blanco',false),
             new zapato('Adidas Yezzy',650000,'Adidas', 'Gris',true),
@@ -24,13 +27,20 @@ import { zapato } from "../models/zapato";//se pone dos puntos para indicar que 
             new zapato('Adidas running',350000,'Adidas', 'Azul',false),
             new zapato('Vans on the road',325000,'Vans', 'Negro',true)
         ];
+        
+        Este objeto se comenta porque se importó desde el servicio de Zapatos
+
+        */
 
     }ngOnInit(){
-        console.log(this.zapatos);
+        //console.log(this.zapatos);
         this.getMarcas();
+        this.zapatos;
+        console.log(this._zapatoService.getTexto());
+
         
     }getMarcas(){
-        this.zapatos.forEach((zapato,index)=>{
+        this.zapatos.forEach((zapato)=>{
             if(this.marcas.indexOf(zapato.marca) < 0){
                 this.marcas.push(zapato.marca);
 

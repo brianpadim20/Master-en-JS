@@ -13,7 +13,7 @@
 <p><strong>{{miMarca}}</strong></p>
 
 <ul>
-    <li *ngFor="let j of marcas; let indice = index">{{indice + ' - ' + j}}
+    <li *ngFor="let j of marcas; let indice = index">{{indice+1 + ' - ' + j}}
         <button (click)="borrarMarca(indice)">Borrar</button>
     </li>
 </ul>
