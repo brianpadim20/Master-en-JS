@@ -379,3 +379,103 @@ Está enfocada a tener los métodos y la funcionalidad que interactúa directame
 - Si aparece un error que no existe este componente,
 - Crear una variable igual al servicio.función a usar en el servicio
 - Utilizar la variable con el servicio en el onInit
+
+#### Servicios con peticiones AJAX a un API rest externa
+
+Se tiene un módulo que permite hacer peticiones HTTP llamado HTTP Client Module
+
+Para ver comofunciona, se creará un nuevo componente, con una nueva página para ahí hacer las peticiones AJAX y sacar el resultado de esas peticiones para hacer unas pruebas.
+
+- En caso de querer hacerlo en un nuevo componente:
+	- Crear el componente
+	- Agregar al routing
+	- Agregar el link al app.component.html
+- Crear un nuevo servicio para trabajar con http client y hacer peticiones AJAX
+- Ir al app.module.ts e importar el módulo httpclient para poder trabajar con las peticiones AJAX, si no se hace esto, no funcionará ningúno de los pasos que siguen a continuación
+	- import { HttpClientModule } from '@angular/common/http';
+- Cargar el módulo importado en imports
+	- @NgModule([
+		...
+		imports:
+		...,
+		HttpClientModule],
+- Crear un nuevo servicio en la carpeta de services llamado peticiones.service.ts
+	- importar el injectable
+		import { Injectable } from "@angular/core";
+	- Importar HTTP Client y HTTP headers, módulos que permiten hacer peticiones AJAX a uns ervicio externo o a una URL externa y modificar las cabeceras de las peticiones
+		import { HttpClient, HttpHeaders } from "@angular/common/http";
+	- Importar el observable, porque con este se estará recogiendo la información que devuelve el API Rest cuando se haga la petición
+		import { Observable } from "rxjs";
+	- Opcional importar algún modelo o archivo
+- Utilizar el decorador @Injectable() sobre la clase a exportar
+- Export class PeticionesService{}
+- Dentro de peticionesService crear el constructor e inyectar el servicio http
+	- constructor(public _http: HttpClient), ya puedo usar el servicio de http para hacer peticiones AJAX
+- Hacer peticiones AJAX a un servidor o a un backend en la nube, o a un servicio externo
+	- Se usará una API Rest de prueba que hay en internet llamada resreq.in (se puede buscar en google)
+	- Para este ejemplo, se hará una petición a una URL que devuelva un usuario y poder mostrar ese usuario
+	- Utilizar esta URL en el servicio
+		- Crear una propiedad (arriba del constructor) public url:string
+		- Darle valor dentro del constructor, esta será la propiedad 
+		- Crear un método que va a ser getUser, porque se sacará un usuario de la API
+		- Usar HTTP Client para hacer la petición
+		- Hacer un return de this._http.get(this.url+'método que quiero usar'). Con esto, ya se realiza una petición AJAX por HTTP.
+
+		Ejemplo:
+
+			import { Injectable } from "@angular/core";
+			import { HttpClient, HttpHeaders } from "@angular/common/http";
+			import { Observable } from "rxjs";
+
+			@Injectable()
+
+			export class PeticionesService{
+				public url:string;
+
+				constructor(public _http: HttpClient){
+					this.url="https://reqres.in";
+
+				}getUser():Observable<any>{
+					return this._http.get(this.url+'/api/users/2');
+
+				}
+
+			}
+
+- Utilizar ese código en el componente para conseguir los datos finalmente.
+- Cargar el servicio dentro del componente creado (externo para este ejemplo)
+	- importar el servicio en el componente
+	- en @component agregar un nuevo objeto, llamado providers, en corchetes agregar el nombre del servicio importado Tal y como se vio en el curso de creación de servicios
+	- Inyectarlo dentro de una propiedad en el constructor
+	- Usarlo en el ngOnInit(){}
+		- this._peticionesService.getUser().subscribe(getUser es el método creado en el servicio, subscribe es el método que tiene el obsevable para subscribirme y recoger el resultado que devuelve)
+		- Subscribe tiene dos funciones de callback:
+			- La primera recoge el resultado
+			- La segunda el posible error; Ejemplo:
+				ngOnInit(){
+					this._PeticionesService.getUser().subscribe(
+					result=>{
+						console.log(result);
+
+					},
+					error=>{
+						console.log(<any>error);
+
+					}
+
+					);
+
+				}
+		- Ahora viendo que todo funciona, se puede crear una propiedad y darle el valor de result
+
+#### Efecto de carga
+
+- En el component.html hacer un div con un ngIf
+	- < div *ngIf="!user">Cargando...< /div>
+
+### Pipes o filtros
+
+Un Pipe es una pequeña funcionalidad que se puede usar en la vista para hacer pequeñas tareas en la vista; ej convertir texto de mayúscula a minúscula, dar formato a la fecha, etc, se pueden ver en la documentación de Angular (Angular pipes en google)
+
+También se pueden crear pipes personalizados
+
