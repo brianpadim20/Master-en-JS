@@ -548,4 +548,3 @@ export class calculadoraPipe implements PipeTransform{
 
 ## En caso de error rxjs compat:
 - Cortar la compilación y aplicar el comando: npm install --save rxjs-compat y se soluciona el error
-
