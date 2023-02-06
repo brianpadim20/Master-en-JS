@@ -7,11 +7,13 @@ import { Component,OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit{
   public identificado:boolean;
+  public fecha:any;
 
   constructor(){
     this.identificado=false;
 
   }ngOnInit(){
+    this.fecha = new Date();
       
   }setIdentificado(){
     this.identificado=true;

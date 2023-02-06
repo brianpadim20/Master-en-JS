@@ -1,5 +1,10 @@
 <h2>Página principal</h2>
 
+<p>Fecha normal: {{fecha|date:'fullDate'}}</p><br>
+<p>Fecha con Pipe uppercase: {{fecha|date:'fullDate'|uppercase}}</p>
+<p>Ejemplo de hola mundo escrito en mayúsculas, usando pipe lowercase: <strong>
+    {{'HOLA MUNDO USANDO PIPES' | lowercase}}</strong></p><br>
+
 <!--Ejemplo con ng if y else-->
 <div *ngIf="identificado; then siIdentificado else noIdentificado">
     <!--Si la variable identificado está en true; entonces para a siIdentificado

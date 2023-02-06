@@ -1,15 +1,25 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';//Servicios
 
+//Para poner la app en español:
+
+import  localeEs  from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs,'es');
+
+//Componentes creados e importados
 import { AppComponent } from './app.component';
 import { videoJuegoComponent } from './videojuego/videojuego.component';
 import { zapatosComponent } from './Zapatos/zapatos.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { HomeComponent } from './home/home.component';
 import { ExternoComponent } from './externo/externo.component';
+
+//Pipes Creadas e importadas
+import { calculadoraPipe } from './pipes/calculadora.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +28,8 @@ import { ExternoComponent } from './externo/externo.component';
     zapatosComponent,
     CursosComponent,
     HomeComponent,
-    ExternoComponent
+    ExternoComponent,
+    calculadoraPipe
   ],
   imports: [
     BrowserModule,
@@ -27,7 +38,8 @@ import { ExternoComponent } from './externo/externo.component';
     HttpClientModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    {provide:LOCALE_ID, useValue:'es'}//Para poner la aplicación en español
   ],
   bootstrap: [AppComponent],
 })

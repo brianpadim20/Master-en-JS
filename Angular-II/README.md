@@ -479,3 +479,73 @@ Un Pipe es una pequeña funcionalidad que se puede usar en la vista para hacer p
 
 También se pueden crear pipes personalizados
 
+#### Pipes de fechas
+
+Se trabajará en el componente externo
+
+- Crear una propiedad pública llamada fecha
+- Darle un valor en el OnInit; ej:
+	fecha = new Date();
+	- Así mostrará la fecha en un formato que viene por defecto
+- Para dar formato se utiliza la Pipe de fecha en la vista (archivo .component.html); donde se mostrará la fecha; se utiliza el símbolo "|" posteriormente se pone date: y los parámetros; los parámetros se ponen en comillas sencillas y son:
+	- 'fullDate'
+	- darle formato personalizado; ej 'dd/mm/yy'
+	EJEMPLO: 
+		{{fecha | date:'fullDate'}}
+	
+#### Pipes de transformación de textos
+
+En el componente home se mostrará esta pipe
+
+Se utiliza la pipe uppercase o lowercase; así transforma el texto en mayúscula
+
+#### Pipes personalizadas
+
+La Pipe creada se utilizará en externoComponent
+
+Los pipes personalizados, no son mas que clases a las que se les meterán una clase de decoradores y componentes de Angular para convertilos en una Pipe
+
+- Crear una carpeta que se llame Pipes
+- Dentro de esta carpeta crear el archivo.pipe.ts
+- Importar los componentes de las pipes
+	- import { Pipe, PipeTransform } from "@angular/core";
+- Utilizar el decorador Pipe para crear la pipe, en los metadatos del decorador, se le debe indicar el nombre
+	@pipe({name:calculadora})
+- Export class nombre_del_Pipe implements PipeTransform
+	export class calculadoraPipe implements PipeTransform{}
+- Cuando se implementa PipeTransform, se debe usar el método transform de manera obligatoria dentro del Pipe, y se le van a pasar los siguientes parámetros: dato | segudo dato: valor
+- Crear la plantilla con el modelo de JavaScript, es decir, con las comillas invertidas ``
+	Ejemplo:
+
+	import { Pipe, PipeTransform } from "@angular/core";
+
+@Pipe({name:'calculadora'})
+
+export class calculadoraPipe implements PipeTransform{
+
+    //dato | calculadora:otroDato
+    // Parámetro uno        Parámetro dos
+    transform(value:any, value_two:any) {
+        let operaciones = `
+            suma: ${value+value_two} -
+            resta: ${value-value_two} -
+            multiplicación: ${value*value_two} -
+            división: ${value/value_two}
+
+        `;
+
+        return operaciones;
+        
+    }
+
+}
+
+- Para poderla usar, se debe cargar en el app.module.ts 
+	- Import { nombre de la pipe } from './directorio/nombre.pipe';
+	- Al ser una directiva, se debe cargar en declarations
+
+- Ir al componente.html sobre el cual se va a trabajar (en este caso externo), de forma que se le dará un valor y llamar a la pipe creada
+
+## En caso de error rxjs compat:
+- Cortar la compilación y aplicar el comando: npm install --save rxjs-compat y se soluciona el error
+
