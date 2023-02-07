@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+
+<h2>Contacto</h2>
+
+<form #formContacto="ngForm"(ngSubmit)="onSubmit(formContacto)"><!--El onSumbit es una funcion creada en 
+                                                    contacto.component.ts-->
+    <label for="nombre">Nombre</label><br>
+    <input type="text" name="nombre" #nombre="ngModel"[(ngModel)]="usuario.nombre"required="true">
+
+    <!--pattern es para que ponga solamente letras de la a la z en minúscula en mayúsculas y que
+    se pueda repetir un número indefinido de veces-->
+
+    <span *ngIf="nombre.touched && !nombre.valid">
+        No sea tarado, debe poner su nombre
+    </span><br>
+    
+    <label for="apellidos">Apellidos</label><br>
+    <input type="text" name="Apellidos" #apellidos="ngModel"[(ngModel)]="usuario.apellidos"required="true">
+    <span *ngIf="apellidos.touched && !apellidos.valid">
+        No sea tarado, debe poner sus apellidos
+    </span><br>
+    
+    <label for="email">Correo</label><br>
+    <input type="email" name="email" #email="ngModel"[(ngModel)]="usuario.email" required="true">
+    <span *ngIf="email.touched && !email.valid">
+        No sea tarado, debe poner su correo
+    </span><br>
+    
+    
+    <label for="mensaje">Mensaje</label><br>
+    <textarea name="mensaje" #mensaje="ngModel"[(ngModel)]="usuario.mensaje" required="true"></textarea>
+    <span *ngIf="mensaje.touched && !mensaje.valid">
+        No sea tarado, debe poner su mensaje
+    </span><br>
+    <input type="submit" value="Enviar" [disabled]="!formContacto.form.valid"> 
+</form>

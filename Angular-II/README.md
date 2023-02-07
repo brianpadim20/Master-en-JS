@@ -548,3 +548,48 @@ export class calculadoraPipe implements PipeTransform{
 
 ## En caso de error rxjs compat:
 - Cortar la compilación y aplicar el comando: npm install --save rxjs-compat y se soluciona el error
+
+### Formularios en Angular
+
+- Crear el componente del formulario
+- Agregarlo en una ruta nueva
+- Crear un modelo de datos para estar modificando con el formulario
+	- Carpeta de models
+	- Crear el archivo.ts
+	- Agregar la clase y el objeto con los datos que se van a modificar y exportarlo
+	Ejemplo: 
+	Export class usuario{
+		constructor(
+			public nombre:String,
+			public apellidos:String,
+			public email:String,
+			public mensaje: String
+			/**Con estos datos se pueden crear objetos de usuario y modificarlo */
+
+			){}
+
+		}
+
+- Abrir el componente.ts y componente.html
+- Importar el modelo en el nuevo componente, como se ve en el componente de contacto
+- Crear el formulario que pueda modificar el objeto de contacto de usuario
+- Convertir el formulario de HTML normal a uno de Angular
+	- Poner un nombre, para eso, en la etiqueta de apertura del formulario se usa: #nombre="ngForm", así se convierte un formulario normal en uno de Angular; Ejemplo:
+		< form #formContacto="ngForm"(ngSubmit)="crear evento onSubit()">...< /form>
+- Hacer que cada uno de los campos del formulario sea un campo del formulario de Angular:
+	- poner a los inputs un nombre dentro del formulario de Angular, este nombre es igual a "ngModel" y se agrega la directiva [(ngModel)]="objeto con el que se trabaja.valor a modificar
+
+		Ej: < input type="text" name="nombre" #nombre="ngModel"[(ngModel)]="usuario.nombre">
+
+#### Validar formulario
+
+Se usan las reglas de validación de HTML5; es decir que si en un campo se pone requiered, lo va a validar
+Además se puede poner un span así:
+	<span *ngIf="apellidos.touched && !apellidos.valid">
+        El campo apellidos es obligatorio
+    </span><br>
+Para que el formulario no guarde los datos cuando son inválidos, se pone la siguiente condición en el submit:
+	<input type="submit" value="Enviar"[disabled]="!formContacto.form.valid"> 
+
+#### Vaciar el formulario una vez enviados los datos:
+Se hace enviando la variable del formulario en el onSumbit, esto automáticamente le llegará a la función del componente, y en el componente, ponerle un parámetro a la función y hacer un parámetro.reset

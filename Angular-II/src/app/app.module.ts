@@ -17,6 +17,7 @@ import { zapatosComponent } from './Zapatos/zapatos.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { HomeComponent } from './home/home.component';
 import { ExternoComponent } from './externo/externo.component';
+import { ContactoComponent } from './contacto/contacto.component';
 
 //Pipes Creadas e importadas
 import { calculadoraPipe } from './pipes/calculadora.pipe';
@@ -29,7 +30,8 @@ import { calculadoraPipe } from './pipes/calculadora.pipe';
     CursosComponent,
     HomeComponent,
     ExternoComponent,
-    calculadoraPipe
+    calculadoraPipe,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
