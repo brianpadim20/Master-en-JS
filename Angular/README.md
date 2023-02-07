@@ -593,3 +593,38 @@ Para que el formulario no guarde los datos cuando son inválidos, se pone la sig
 
 #### Vaciar el formulario una vez enviados los datos:
 Se hace enviando la variable del formulario en el onSumbit, esto automáticamente le llegará a la función del componente, y en el componente, ponerle un parámetro a la función y hacer un parámetro.reset
+
+## Ejercicio con formularios, AJAX y HTTP
+
+Entrar en https://reqres.in; hacer una práctica con el método HTTP Post, y se va a crear un formulario que permita añadir un nuevo usuario en requres; utilizando la api haciendo la petición por post
+
+Se hará en el componente externo, se creará un formulario ahí, y también se estará modificando el servicio.
+
+- Modificar el servicio de peticiones.service, añadiendo un método nuevo, este método se llamará addUser
+	Este addUser recibe el parámetro (usuario); va a devolver un Observable, de tipo < any>{}
+- Para hacer una petición AJAX usando Post:
+	- A este servicio se le mandan datos en un JSON String; para crear un JSON String:
+		Crear una variable JSON; y para pasar un objeto de JavaScript puro a un JSON String, es decir a un string que adentro tiene un JSON; se usa el objeto JSON.Stringify(); pasando como parámetro el user
+		
+		let params=JSON.stringify(user);
+
+	- Indicarle las cabeceras:
+		Crear una variable headers = new HttpHeaders; que es el objeto que permite crear cabeceras y se utiliza el método set() y se pasan los parámetros 'content-type', 'application/json'
+
+		let headers = new HttpHeaders().set('Content-type','application/json');
+
+	- Enviar la petición por post, esto con:
+		return this._http.post(this.url (para usar la URL de la API)+'api/users'(users es el parámetro que sale en la api de prueba), como segundo parámetro los parámetros a guardar, objeto JSON, en este caso params y los headers, estos últimos, entre llaves; pues es un objeto JSON con la propiedad headers)
+
+		return this._http.post(this.url+'api/users', params, {headers:headers});
+
+- En el componente de externo,html crear un nuevo formulario y en el componente externo.ts crear un objeto ficticio para estar rellenandolo
+	- En externo.ts, crear una propiedad que se llame new_user
+	- En peticionesService, darle valores o rellenarla, de acuerdo a los datos que se piden en la API, en este caso name y job, se le mandan en formato JSON
+		this.new_user={
+		"name": "",
+		"job": ""
+		}
+	- En externo.html crear un formulario nuevo
+		< form #new_user="ngForm"(ngSubmit)="onSubmit(new_user)"> *campo </ form>
+	- Crear los campos	
