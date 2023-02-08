@@ -627,4 +627,8 @@ Se hará en el componente externo, se creará un formulario ahí, y también se 
 		}
 	- En externo.html crear un formulario nuevo
 		< form #new_user="ngForm"(ngSubmit)="onSubmit(new_user)"> *campo </ form>
-	- Crear los campos	
+	- Crear los campos y pasarlos a formato de Agular, como se vio en el curso de crear formularios 
+	- Crear el ngOnsubmit, con parámetro form, para que una vez guardada la información, borre los datos del formulario
+	- Mostrar el contenido del formulario en la página web
+		- Crear una propiedad llamada usuario guardado
+		- Crear un div con un *ngIf que solamente se muestre
