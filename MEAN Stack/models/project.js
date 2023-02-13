@@ -6,8 +6,10 @@ var ProjectSchema = Schema({
     name: String,
     description: String,
     category: String,
-    langs: [String],
-    year: Number
+    //langs: [String], // Para que no sea muy complicado, se deja como string simplemente
+    langs: String,
+    year: Number,
+    imgage: String
 
 });
 

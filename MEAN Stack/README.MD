@@ -90,7 +90,7 @@ Pasos para crear:
 
 - Ir a la consola sobre la cual se esté trabajando y lanzar el comando npm init; para iniciar un proyecto de nodejs y crear el fichero package.json, donde va la configuración del proyecto, las dependencias del proyecto etc
     - Pide el nombre del proyecto
-    - Version 1
+    - Version 1.0.0
     - Descripción: Agregar una descripción
     - Entry point: punto de inicio del programa; se llamará index.js
     - Test command: nada, solo se le da enter
@@ -175,7 +175,7 @@ pasos:
     var express = require('express');
     var bodyParser = require('body-parser');
 
-- Crear los middlewares:
+- Crear los middlewares (configuración necesaria):
     - app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
     - app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
 
@@ -308,3 +308,46 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
             var project_routes = require('./routes/project');
 
         - Cargar las rutas en un middleware (sobre escribir esa ruta) para que la cargue dentro de la app (todas las rutas tendrán por delante un segmento llamado api)
+
+## Método para guardar nuevos documentos en la base de datos
+
+- Importar el modelo en el archivo controllers; project.js
+    En la parte inicial del archivo, crear una variable llamada project requiriendo modelo
+        var Project = require('../models/project');
+
+- Dentro de la variable controller, agregar un nuevo método llamado saveproject; el cual tendrá una función anónima recibiendo parámetros de request y response
+
+- Dentro de saveProject crear una variable con el mismo nombre (project) igual a new project (crea un objeto de proyecto)
+    var project = new Project(); //nuevo objeto de tipo Project
+
+- Probar que haya cargado de manera exitosa mediante un return
+    return res.status(200).send({
+        message: "Método save project"
+    })
+
+    - Crear una ruta (en el archivo de rutas)
+        - router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
+    
+    - Ir a postman, hacer una petición por POST
+        http://localhost:3700/api/save-project
+
+- Hacer las acciones:
+    - Crear una variable llamada params = req.body
+
+    - Agregar a cada valor del modelo params.valor
+
+        project.name=params.name;
+        project.description=params.description;
+        project.category=params.category;
+        project.langs=params.langs;
+        project.year=params.year;
+
+    
+    
+    - Verificar, agregando estos parametros en postman en la opción body/x-www.form-urlencoded; Postman agrega automáticamente un id
+
+- Guardar este objeto en la base de datos
+    - project (objeto que acaba de crear).save()
+        - El método save tiene una función de callback dentro que recibe un error o un project stored
+
+    
