@@ -205,3 +205,106 @@ pasos:
                     })
                 });
 
+## Como usar el cliente RESTful
+
+#### Métodos HTTP con los que se va a trabajar
+- POST: Para guardar nuevos recursos dentro de un API o en el backend
+- GET: Consultar detalle de algo, es decir sacar una información
+- PUT: Para actualizar
+- DELETE: Para borrar recursos de la base de datos y del backend
+
+El cliente RESTful mas conocido y de los mejores se llama postman; para descargarlo solamente se busca en google postman y se busca la opción que vaya a descargas
+
+Para usar postman, una vez descargado:
+
+- click en el símbolo de +
+- Puedo copiar la URL que creé, se pega en postman y se puede elegir el método HTTP que se desee
+    - Con la ruta de test creada, solamente recibe peticiones por get, se le da enter o click en send y devuelve el formato JSON el resultado de esa petición
+
+
+## Creación de modelos de la base de datos o entidades del backend
+
+Para este proyecto de portafolio, en la base de datos se creó una colección llamada proyectos; pues ahora se creará una entidad llamada proyecto
+
+- Crear una carpeta nueva llamada models, donde se crearán todos los modelos
+
+- Agregar un archivo.js con el nombre conveniente
+
+- Importar mongoose
+    const mongoose = require ('mongoose');
+
+- Definir un esquema de un modelo; para ello se carga el objeto de esquema
+    const Schema = mongoose.Schema;
+
+- Crear el esquema de project, el cual es el molde sobre el cual se trabajará para crear nuevos registros en la base de datos; se utiliza el objeto Schema y se le pasa como parámetro un objeto JSON con las propiedades que debe tener un proyecto
+    var ProjectSchema = Schema({
+        name: String,
+        description: String,
+        category: String,
+        langs: [String],
+        year: Number
+
+    })
+
+- exportar el módulo y poder importarlo en otros ficheros, para poder usarlos fuera de este fichero, igualarlo a mongoose.model para coger el esquema y utilizarlo como modelo, a esto se le pasan dos parámetros 'project' (En singular porque mongoose lo que hace es pluralizar y lo pone en minúsculas) y el otro es la variable creada, en este caso, ProjectSchema
+    module.exports = mongoose.model('Project', ProjectSchema);
+
+## Modelo vista controlador - MVC
+
+Métodos y rutas que tendrá la aplicación web a nivel de backend
+
+El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
+
+### Controladores y rutas en node
+
+- Crear una carpeta dentro del backend llamada controller
+
+- Crear un archivo.js con el nombre del controlador, para este caso será project.js
+
+- Quitar las rutas de prueba creadas anteriormente
+
+- Crear una variable llamada controller, dentro de esta variable habrán varios objetos JSON que en su interior contengan una función con los datos req y res necesarios:
+
+    var controller = {
+        home: function(req, res){
+            return res.status(200).send({
+                message: 'Soy home'
+
+            });
+
+        },
+        test: function(req, res){
+            return res.status(200).send({
+                message: 'Soy el método o acción test del controlador del project'
+            })
+        }
+
+    }
+
+- Exportar el módulo con un module.exports = variable a exportar, en este caso, controller
+    module.exports=controller;
+
+- Crear una ruta
+    - Crear un fichero de rutas por cada uno de los controladores (crear una nueva carpeta llamada routes)
+    - Dentro de esta carpeta crear un fichero con el mismo nombre del controlador.js, fichero configurador de las rutas del controlador en cuestión, en este caso project
+    - En este archivo, importar el módulo de express
+        var express = require('express');
+
+    - Importar el controlador creado
+        var projectController = require('../controllers/project');
+    
+    - Cargar el servicio de rutas para poder acceder a ellas
+        var router=express.Router();
+    
+    - Crear una ruta dependiendo del método que se necesite, EJEMPLO:
+        router.get('/home', projectController.home);//home es el método creado en el controlador project
+        router.post('/test', projectController.test);//test es el método creado en el controlador project
+
+    - Exportar el módulo con el método router, así se puede exportar la variable router con toda la configuración de rutas
+        module.exports = router;
+
+    - Cargar esta configuración de rutas en el app.js
+        - Cargar el archivo de rutas en el apartado que se tiene para él
+            var project_routes = require('./routes/project');
+
+        - Cargar las rutas en un middleware (sobre escribir esa ruta) para que la cargue dentro de la app (todas las rutas tendrán por delante un segmento llamado api)
