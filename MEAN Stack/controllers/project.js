@@ -23,7 +23,8 @@ var controller = {
             
         });
     },
-
+    
+    //Guardar una nueva colección en la base de datos
     saveProject: function(req, res){
         var project = new Project(); //nuevo objeto de tipo Project
 
@@ -54,6 +55,7 @@ var controller = {
 
     },
 
+    //Obtener un proyecto de la base de datos
     getProject: function(req,res){
         var projectId = req.params.id;
 
@@ -70,6 +72,18 @@ var controller = {
             return res.status(200).send({project})
 
         }); //Un find con mongoose, simplemente es buscar una cosa de la base de datos
+
+    },
+    
+    // Obtener la lista completa de la base de datos
+    getProjects: function(req,res){
+        Project.find({}).sort('year'). exec((err, projects)=>{
+            if (err) return res.status(500).send({message:'Error al cargar los datos'});
+            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
+            return res.status(200).send({projects});
+
+        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
+        una entidad o colección*/
 
     }
 

@@ -387,3 +387,33 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
 ## Devolver el listado de proyectos
 
+- En controllers crear un método llamado getprojects, en este método, crear una función que reciba como parámetros una request y una response
+    getProjects: function(req,res){}
+
+- Utilizar la variable creada Project, con su funcionalidad find({}) sin pasarle parámetros en las llaves y a su vez también la funcionalidad .exec, exec tiene una función de callback con los siguientes códigos:
+
+    Project.find({}).exec((err, projects)=>{
+            if (err) return res.status(500).send({message:'Error al cargar los datos'});
+            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
+            return res.status(200).send({projects});
+
+        });
+
+- Crear la ruta
+    router.get('/projects', projectController.getProjects);
+
+- Si se quiere ordenar, en la variable inicial de project, solamente poner Project.find({}).sort('year').exec(()=>{});
+
+**EJEMPLO DEL CÓDIGO**
+
+getProjects: function(req,res){
+        Project.find({}).sort('year').exec((err, projects)=>{
+            if (err) return res.status(500).send({message:'Error al cargar los datos'});
+            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
+            return res.status(200).send({projects});
+
+        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
+        una entidad o colección*/
+
+    }
+
