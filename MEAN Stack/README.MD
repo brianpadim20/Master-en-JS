@@ -350,4 +350,40 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
     - project (objeto que acaba de crear).save()
         - El método save tiene una función de callback dentro que recibe un error o un project stored
 
-    
+## Listar proyectos del portafolio
+
+- En el archivo de controlador crear un método llamado getProject, dicho método recibe una request y una response
+    getProject: function(req,res)
+
+- Recoger valor que llega por la url creando una variable llamada projectid de la request, esto igualando a req.params.id, para especificar que busca por el id
+    var projectId = req.params.id;
+
+- Posteriormente con la variable asignada al projecto, para este ejemplo, Project, utilizar el método .findByID, pasando como parámetros projectID y una función de callback con dos parámetros: error y project; dentro de la función de callback agregar los casos donde se encuentre un error, donde no se encuentre el proyecto o donde el proyecto cargue con éxito
+
+    Project.findById(projectId,(err, project)=>{
+            if (err) return res.status(500).send({message:'Error al devolver los datos'});
+            if (!project) return res.status(404).send({message: 'El proyecto no existe'});
+            return res.status(200).send({project})
+
+        });
+----------------------------------------------------------------------------------------------------------------
+**Ej de esta parte del código:**
+
+    getProject: function(req,res){
+        var projectId = req.params.id;
+
+        Project.findById(projectId,(err, project)=>{
+            if (err) return res.status(500).send({message:'Error al devolver los datos'});
+            if (!project) return res.status(404).send({message: 'El proyecto no existe'});
+            return res.status(200).send({project})
+
+        }); //Un find con mongoose, simplemente es buscar una cosa de la base de datos
+
+    }
+----------------------------------------------------------------------------------------------------------------
+
+- Crear la ruta
+    router.get('/project/:id?', projectController.getProject);
+
+## Devolver el listado de proyectos
+

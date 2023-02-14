@@ -13,6 +13,9 @@ var router=express.Router();
 router.get('/home', projectController.home);//home es el método creado en el controlador project
 router.post('/test', projectController.test);//test es el método creado en el controlador project
 router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
+router.get('/project/:id?', projectController.getProject); /*Se le pasa parámetro por la url que sea 
+obligatorio (/:id), si se quiere que el parámetro sea opcional, se le pone un signo de iterrogación al 
+final (/id?), si queda vacío, se toma como null */
 
 //Exportar la ruta; así se puede usar la variable router, con toda la configuración de rutas fuera de aquí
 module.exports = router;
