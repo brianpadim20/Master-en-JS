@@ -77,13 +77,27 @@ var controller = {
     
     // Obtener la lista completa de la base de datos
     getProjects: function(req,res){
-        Project.find({}).sort('year'). exec((err, projects)=>{
+        Project.find({}).sort('year').exec((err, projects)=>{
             if (err) return res.status(500).send({message:'Error al cargar los datos'});
             if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
             return res.status(200).send({projects});
 
         });/*Find lo que hace es sacar todos los documentos que hay dentro de 
         una entidad o colección*/
+
+    },
+
+    //Actualizar un proyecto
+    updateProject:function(req,res){
+        var projectID = req.params.id;
+        var update = req.body; //objeto completo con los datos actualizados del proyecto
+
+        Project.findByIdAndUpdate(projectID, update, {new:true} ,(err, projectUpdated)=>{
+            if (err) return res.status(500).send({message:'Error al actualizar el proyecto'});
+            if (!projectUpdated) return res.status(404).send({message:'No existe el proyecto solicitado'});
+            return res.status(200).send({project:projectUpdated});
+
+        });
 
     }
 

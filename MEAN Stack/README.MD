@@ -417,3 +417,20 @@ getProjects: function(req,res){
 
     }
 
+## Actualizar datos
+
+- Crear un método llamado updateProject, tendrá una función que va a recibir una request y una response
+- Se debe recoger un parámetro por la URL para indicarle que objeto se quiere editar
+    - Crear una variable llamada projectID = req.params.id para capturar ese valor que lleva por la URL
+        var projectID = req.params.id;
+
+    - Crear una variable para actualizar, en este caso, se llama update
+        var update = req.body; //objeto completo con los datos actualizados del proyecto
+    
+    - Usar el modelo Project con el método findbyIdAndUpdate; si le paso un objeto, pues actualiza el documento que tenga en la base de datos con el objeto que se le haya pasado.
+        Como parámetro se le pasa la variable anteriormente creada como projectID para que el método sepa que documento de la base de datos tiene que actualizar y luego el objeto update para sustituir los datos que vaya en el objeto por los nuevos, como tercer parámetro se le pasa una función de callback (error y projectUpdated)
+
+        Dentro de la función de callback comprobar lo anterior
+
+- Crear una ruta nueva
+    

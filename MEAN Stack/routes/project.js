@@ -16,7 +16,9 @@ router.post('/save-project', projectController.saveProject);//Carga el método s
 router.get('/project/:id?', projectController.getProject); /*Se le pasa parámetro por la url que sea 
 obligatorio (/:id), si se quiere que el parámetro sea opcional, se le pone un signo de iterrogación al 
 final (/id?), si queda vacío, se toma como null */
-router.get('/projects', projectController.getProjects);
+router.get('/projects', projectController.getProjects);//Lista de proyectos de la base de datos
+router.put('/project/:id', projectController.updateProject);//Actualizar un proyecto
+
 
 //Exportar la ruta; así se puede usar la variable router, con toda la configuración de rutas fuera de aquí
 module.exports = router;
