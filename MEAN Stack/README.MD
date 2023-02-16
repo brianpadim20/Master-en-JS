@@ -433,4 +433,19 @@ getProjects: function(req,res){
         Dentro de la función de callback comprobar lo anterior
 
 - Crear una ruta nueva
-    
+
+
+**EJEMPLO DEL CÓDIGO**
+
+        updateProject:function(req,res){
+        var projectID = req.params.id;
+        var update = req.body; //objeto completo con los datos actualizados del proyecto
+
+        Project.findByIdAndUpdate(projectID, update, {new:true} ,(err, projectUpdated)=>{
+            if (err) return res.status(500).send({message:'Error al actualizar el proyecto'});
+            if (!projectUpdated) return res.status(404).send({message:'No existe el proyecto solicitado'});
+            return res.status(200).send({project:projectUpdated});
+
+        });
+
+    }
