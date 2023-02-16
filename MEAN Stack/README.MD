@@ -406,16 +406,16 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
 **EJEMPLO DEL CÓDIGO**
 
-getProjects: function(req,res){
-        Project.find({}).sort('year').exec((err, projects)=>{
-            if (err) return res.status(500).send({message:'Error al cargar los datos'});
-            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
-            return res.status(200).send({projects});
+    getProjects: function(req,res){
+            Project.find({}).sort('year').exec((err, projects)=>{
+                if (err) return res.status(500).send({message:'Error al cargar los datos'});
+                if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
+                return res.status(200).send({projects});
 
-        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
-        una entidad o colección*/
+            });/*Find lo que hace es sacar todos los documentos que hay dentro de 
+            una entidad o colección*/
 
-    }
+        }
 
 ## Actualizar datos
 
@@ -433,11 +433,11 @@ getProjects: function(req,res){
         Dentro de la función de callback comprobar lo anterior
 
 - Crear una ruta nueva
-
+    router.put('/project/:id', projectController.updateProject);
 
 **EJEMPLO DEL CÓDIGO**
 
-        updateProject:function(req,res){
+    updateProject:function(req,res){
         var projectID = req.params.id;
         var update = req.body; //objeto completo con los datos actualizados del proyecto
 
@@ -449,3 +449,33 @@ getProjects: function(req,res){
         });
 
     }
+
+## Borrar proyectos de la base de datos desde el backend
+
+- Crear un método que se llame deleteProject; una función que reciba un parámetro request y otro response
+
+- Recoger por la url el id del proyecto a borrar
+    - crear una variable llamada projectID = req.params.id
+    - Utilizar el modelo project, y utilizar el método findByIdAndDelete, se le pasan dos parámetros:
+        - El primero es la variable antes creada (projectID)
+        - El segundo es una función de callback que recibe como parámetros el error o el projectDeleted
+            Project.findByIdAndDelet(projectID, (err,projectDeleted)=>{
+            if (err) return res.status(500).send({message:'Error al eliminar el proyecto'});
+            if (!projectDeleted) res.status(404).send({message:'No se puede eliminar ese proyecto'});
+            return res.status(200).send({project:projectDeleted}));
+- Crear la ruta
+    router.delete('/project/:id', projectController.deleteProject);
+
+**EJEMPLO DEL CÓDIGO**
+
+    deleteProject: function(req,res){
+        var projectID = req.params.id;
+        Project.findByIdAndRemove(projectID, (err,projectRemoved)=>{
+            if (err) return res.status(500).send({message:'Error al eliminar el proyecto'});
+            if (!projectRemoved) res.status(404).send({message:'No se puede eliminar ese proyecto'});
+            return res.status(200).send({project:projectRemoved});
+
+        });
+
+    }
+

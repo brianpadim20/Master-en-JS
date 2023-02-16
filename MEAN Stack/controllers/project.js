@@ -99,6 +99,18 @@ var controller = {
 
         });
 
+    },
+
+    //Eliminar un proyecto
+    deleteProject: function(req,res){
+        var projectID = req.params.id;
+        Project.findByIdAndRemove(projectID, (err,projectRemoved)=>{
+            if (err) return res.status(500).send({message:'Error al eliminar el proyecto'});
+            if (!projectRemoved) res.status(404).send({message:'No se puede eliminar ese proyecto'});
+            return res.status(200).send({project:projectRemoved});
+
+        });
+
     }
 
 };

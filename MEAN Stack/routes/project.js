@@ -10,14 +10,29 @@ var projectController = require('../controllers/project');
 var router=express.Router();
 
 //crear una ruta por get, en este caso será la ruta home
-router.get('/home', projectController.home);//home es el método creado en el controlador project
-router.post('/test', projectController.test);//test es el método creado en el controlador project
-router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
+//home es el método creado en el controlador project
+router.get('/home', projectController.home);
+
+//test es el método creado en el controlador project
+router.post('/test', projectController.test);
+
+//Carga el método save project en esta ruta (guardar un nuevo proyecto)
+router.post('/save-project', projectController.saveProject);
+
+//Obtener un proyecto desde la base de datos
 router.get('/project/:id?', projectController.getProject); /*Se le pasa parámetro por la url que sea 
 obligatorio (/:id), si se quiere que el parámetro sea opcional, se le pone un signo de iterrogación al 
 final (/id?), si queda vacío, se toma como null */
-router.get('/projects', projectController.getProjects);//Lista de proyectos de la base de datos
-router.put('/project/:id', projectController.updateProject);//Actualizar un proyecto
+
+//Lista de proyectos de la base de datos
+router.get('/projects', projectController.getProjects);
+
+//Actualizar un proyecto 
+router.put('/project/:id', projectController.updateProject);/**En este caso, el id no es opcional
+puesto que se necesita un ID para actualizar un proyecto */
+
+//Elimina un proyecto
+router.delete('/project/:id', projectController.deleteProject);
 
 
 //Exportar la ruta; así se puede usar la variable router, con toda la configuración de rutas fuera de aquí
