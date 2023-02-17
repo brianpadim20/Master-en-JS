@@ -3,6 +3,8 @@
 //importar el modelo projecs
 var Project = require('../models/project');
 
+//Importar la librería fs (para eliminar imagenes en caso que no cumplan con la condición
+var fs = require('fs');
 /**
  * la función recibe una request y una response (req, res), req es para recibir los datos que
  * se envíen por post y res es para retornar una respuestastatus 200 (bien recibido) enviando 
@@ -110,6 +112,41 @@ var controller = {
             return res.status(200).send({project:projectRemoved});
 
         });
+
+    },
+
+    uploadImage: function(req,res){
+        //Recoger id del proyecto sobre el cual se guardará la imagen
+        var projectId = req.params.id;
+        var failName = 'Imagen no subida...';
+
+        if (req.files){//En caso que exista este elemento con los archivos que se vayan subiendo, que haga:
+            var filePath = req.files.image.path;
+            var fileSplit = filePath.split('\\');
+            var fileName = fileSplit[1];
+            var extSplit = fileName.split('\.');
+            var fileExt = extSplit[1];
+
+            if(fileExt=='png' || fileExt == 'jpg' || fileExt=='jpeg' || 'gif'){
+                Project.findByIdAndUpdate(projectId, {image:fileName},{new:true}, (err,projectUpdated)=>{
+                    if (err) return res.status(500).send({message:'La imagen no se ha subido'});
+    
+                    if (!projectUpdated) return res.status(404).send({message:'La imagen no existe'});
+                    
+                    return res.status(200).send({project:projectUpdated});
+    
+                });
+            }else{
+                fs.unlink(filePath, (err)=>{
+                    return res.status(200).send({message:'La extensión no es válida'});
+                });
+
+            }         
+
+        }else{
+            return res.status(200).send({message:failName});
+        
+        }
 
     }
 

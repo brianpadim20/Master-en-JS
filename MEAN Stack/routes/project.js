@@ -9,6 +9,10 @@ var projectController = require('../controllers/project');
 //Cargar el router o servicio de rutas para acceder a ellas
 var router=express.Router();
 
+//Configuración del middleware para el connect-multiparty
+var multipart=require('connect-multiparty');
+var multipartMiddleware = multipart({ uploadDir:'./uploads'});
+
 //crear una ruta por get, en este caso será la ruta home
 //home es el método creado en el controlador project
 router.get('/home', projectController.home);
@@ -33,6 +37,9 @@ puesto que se necesita un ID para actualizar un proyecto */
 
 //Elimina un proyecto
 router.delete('/project/:id', projectController.deleteProject);
+
+//Subir imagenes (con el middleware configurado)
+router.post('/upload-image/:id', multipartMiddleware, projectController.uploadImage);
 
 
 //Exportar la ruta; así se puede usar la variable router, con toda la configuración de rutas fuera de aquí

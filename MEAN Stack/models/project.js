@@ -9,7 +9,7 @@ var ProjectSchema = Schema({
     //langs: [String], // Para que no sea muy complicado, se deja como string simplemente
     langs: String,
     year: Number,
-    imgage: String
+    image: String
 
 });
 
