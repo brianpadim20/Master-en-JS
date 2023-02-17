@@ -563,3 +563,62 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
     - Importar una librería llamada fs
         var fs = require('fs');
+    - Una vez importada dicha librería hacer lo siguiente:
+        fs.unlink(filePath, (err)=>{
+                return res.status(200).send({message:'La extensión no es válida'});
+            });
+
+**EJEMPLO DEL CÓDIGO**
+
+uploadImage: function(req,res){
+        //Recoger id del proyecto sobre el cual se guardará la imagen
+        var projectId = req.params.id;
+        var failName = 'Imagen no subida...';
+
+        if (req.files){//En caso que exista este elemento con los archivos que se vayan subiendo, que haga:
+            var filePath = req.files.image.path;
+            var fileSplit = filePath.split('\\');
+            var fileName = fileSplit[1];
+            var extSplit = fileName.split('\.');
+            var fileExt = extSplit[1];
+
+            if(fileExt=='png' || fileExt == 'jpg' || fileExt=='jpeg' || 'gif'){
+                Project.findByIdAndUpdate(projectId, {image:fileName},{new:true}, (err,projectUpdated)=>{
+                    if (err) return res.status(500).send({message:'La imagen no se ha subido'});
+    
+                    if (!projectUpdated) return res.status(404).send({message:'La imagen no existe'});
+                    
+                    return res.status(200).send({project:projectUpdated});
+    
+                });
+            }else{
+                fs.unlink(filePath, (err)=>{
+                    return res.status(200).send({message:'La extensión no es válida'});
+                });
+
+            }         
+
+        }else{
+            return res.status(200).send({message:failName});
+        
+        }
+    
+    }
+
+## Configuración de CORS en nodejs
+
+Permite acceso cruzado entre dominios y evita fallos a la hora de trabajar la parte de frontend con la parte del backend
+
+- Abrir el app.js
+- En la parte que se comentó en la creación de este repositorio de CORS
+- Pegar el siguiente código:
+    // Configurar cabeceras y cors
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+        res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+        next();
+    });
+
+- Siempre se ejecuta esto antes de cada petición, va a configurar las cabeceras y pasará a la ejecución de las rutas y el método o la acción correspondiente, así se permite el acceso de un dominio a otro y no habrá problema para desarrollar la aplicación en el frontend
