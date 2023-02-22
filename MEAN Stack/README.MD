@@ -179,6 +179,7 @@ pasos:
 - Crear una variable para express y otra para body parser:
 
     var express = require('express');
+    
     var bodyParser = require('body-parser');
 
 - Crear los middlewares (configuración necesaria):
