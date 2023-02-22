@@ -255,6 +255,7 @@ Para este proyecto de portafolio, en la base de datos se creó una colección ll
     const Schema = mongoose.Schema;
 
 - Crear el esquema de project, el cual es el molde sobre el cual se trabajará para crear nuevos registros en la base de datos; se utiliza el objeto Schema y se le pasa como parámetro un objeto JSON con las propiedades que debe tener un proyecto
+    
     var ProjectSchema = Schema({
         name: String,
         description: String,
@@ -264,9 +265,10 @@ Para este proyecto de portafolio, en la base de datos se creó una colección ll
 
     })
 
-- exportar el módulo y poder importarlo en otros ficheros, para poder usarlos fuera de este fichero, igualarlo a mongoose.model para coger el esquema y utilizarlo como modelo, a esto se le pasan dos parámetros 'project' (En singular porque mongoose lo que hace es pluralizar y lo pone en minúsculas) y el otro es la variable creada, en este caso, ProjectSchema
+- exportar el módulo
     module.exports = mongoose.model('Project', ProjectSchema);
 
+    **NOTA**: Project se pone en singular porque mongoose lo que hace es poner todo en minúscula y pluraliza la variable, así, en la base de datos quedaría una colección llamada projects, la cual es la que se creó y guarda los documentos en esa colección directamente
 ## Modelo vista controlador - MVC
 
 Métodos y rutas que tendrá la aplicación web a nivel de backend
@@ -274,6 +276,14 @@ Métodos y rutas que tendrá la aplicación web a nivel de backend
 El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
 ### Controladores y rutas en node
+
+- Importar el modelo del proyecto: 
+
+    var Project = require('../models/project');
+
+- Opcional (si se trabaja con imagenes, para eliminarlas si no cumple con las condiciones dadas) importar la librería fs 
+
+    var fs = require('fs');
 
 - Crear una carpeta dentro del backend llamada controller
 
@@ -283,6 +293,8 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
 - Crear una variable llamada controller, dentro de esta variable habrán varios objetos JSON que en su interior contengan una función con los datos req y res necesarios:
 
+**EJEMPLO:**
+---
     var controller = {
         home: function(req, res){
             return res.status(200).send({
@@ -298,7 +310,7 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
         }
 
     }
-
+---
 - Exportar el módulo con un module.exports = variable a exportar, en este caso, controller
     module.exports=controller;
 
