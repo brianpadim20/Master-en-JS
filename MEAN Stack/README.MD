@@ -148,6 +148,10 @@ Utilizar robomongo (studio 3t); pasos para crear la base de datos:
     var mongoose = requiere('mongoose');
 - Para la conexión a la base de datos, se debe usar el código mongoose.promise, indicándole que esto es una promesa y se iguala a global.promise
     mongoose.promise = global.promise;
+- Para evitar que salga error al momento de la conexión, se pone el siguiente codigo:
+
+    mongoose.set("strictQuery", false);
+
 - Ahora se hace la conexión a la base de datos
     - mongoose.connect('url de la base de datos');
         - La url de una base de datos es: 'mongodb://127.0.0.1:puerto de mongo db (por defecto es 27017)/nombre de la base de datos
@@ -155,6 +159,7 @@ Utilizar robomongo (studio 3t); pasos para crear la base de datos:
         - En caso que haya un error, se puede capturar también
 
         **EJEMPLO:**
+
             mongoose.connect('mongodb://127.0.0.1:27017/projects', {useNewUrlParser: true, useUnifiedTopology:true})
             .then(()=>{
                 console.log("Conexión a la base de datos establecida exitosamente...");
