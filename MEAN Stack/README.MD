@@ -182,6 +182,8 @@ pasos:
 
     var bodyParser = require('body-parser');
 
+    var app = express();
+
 - Crear los middlewares (configuración necesaria):
 
     app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
@@ -200,6 +202,12 @@ pasos:
 
 - Dentro de la conexión a la base de datos (en el then), allí crear el servidor
     - Usar el objeto app con el método listen
+
+        //Creación del servidor
+        app.listen(port, ()=>{
+            console.log("Servidor corriendo correctamente en la URL: localhost:3700");
+        });
+
     - Si se lanza el backend con npm start, todo debe funcionar correctamente
         - Agregar una ruta de pruebas
             - ir a app.js
