@@ -335,10 +335,13 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
         module.exports = router;
 
     - Cargar esta configuración de rutas en el app.js
-        - Cargar el archivo de rutas en el apartado que se tiene para él
+        - Cargar el archivo de rutas en el apartado que se tiene para él (archivos de rutas)
+
             var project_routes = require('./routes/project');
 
-        - Cargar las rutas en un middleware (sobre escribir esa ruta) para que la cargue dentro de la app (todas las rutas tendrán por delante un segmento llamado api)
+        - Cargar las rutas el apartado que se tiene para rutas en el app.js, utilizando la constante creada anteriormente: 
+            
+            app.use('/api', project_routes)//project_routes es la variable creada donde se cargó el archivo de las rutas
 
 ## Método para guardar nuevos documentos en la base de datos
 
