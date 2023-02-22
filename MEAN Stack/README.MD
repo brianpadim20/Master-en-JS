@@ -177,17 +177,20 @@ pasos:
 - crear un archivo llamado app.js, donde se guardará toda la configuración de express y de las peticiones body parcell
 
 - Crear una variable para express y otra para body parser:
+
     var express = require('express');
     var bodyParser = require('body-parser');
 
 - Crear los middlewares (configuración necesaria):
-    - app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
-    - app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
+
+    app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
+    app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
 
 - Exportar el módulo:
     module.exports = app;
 
 - Ir al index.js, crear una variable que se llame app, donde se carga el archivo app.js, indicando la ruta donde está
+
     var app = require('./app');
 
 - Crear una variable llamada port, donde se le indica el puerto del servidor, para este ejemplo se usa el 3700
