@@ -179,12 +179,14 @@ pasos:
 - Crear una variable para express y otra para body parser:
 
     var express = require('express');
-    
+
     var bodyParser = require('body-parser');
 
 - Crear los middlewares (configuración necesaria):
 
     app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
+
+    
     app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
 
 - Exportar el módulo:
