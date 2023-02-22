@@ -310,7 +310,8 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
         }
 
     }
----
+
+
 - Exportar el módulo con un module.exports = variable a exportar, en este caso, controller
     module.exports=controller;
 
