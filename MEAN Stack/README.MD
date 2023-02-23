@@ -423,23 +423,12 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 
         }); //Un find con mongoose, simplemente es buscar una cosa de la base de datos
 
-    },
-    
-    // Obtener la lista completa de la base de datos
-    getProjects: function(req,res){
-        Project.find({}).sort('year').exec((err, projects)=>{
-            if (err) return res.status(500).send({message:'Error al cargar los datos'});
-            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
-            return res.status(200).send({projects});
-
-        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
-        una entidad o colección*/
-
     }
-----------------------------------------------------------------------------------------------------------------
 
 - Crear la ruta
     router.get('/project/:id?', projectController.getProject);
+
+- En postman, abrir la url que se creó y el id del proyecto; ejemplo: localhost:3700/api/proyecto/63f6d0468cb657b25e854a41 y verificar si sí aparece
 
 ## Devolver el listado de proyectos
 
