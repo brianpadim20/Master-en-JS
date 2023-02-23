@@ -436,7 +436,7 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 
     // Obtener la lista completa de la base de datos
     getProjects: function(req,res){
-        
+
         /*Se usa .find({}) para obtener la lista completa .sort('year') para ordenar la lista por año 
         (se puede usar -year para cambiar el orden la lista) y .exec para la función de callback*/
 
@@ -449,6 +449,12 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
         una entidad o colección*/
 
     }
+
+- Crear la ruta
+
+    router.get('/projects', projectController.getProjects);
+
+- Buscar en postman por método get con la url creada; ejemplo: localhost:3700/api/projects
 
 ## Actualizar datos
 
