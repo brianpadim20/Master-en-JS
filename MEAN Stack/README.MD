@@ -190,7 +190,8 @@ pasos:
 ---
 
     app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
-
+    
+---
 - Exportar el módulo:
     module.exports = app;
 
@@ -344,52 +345,17 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
             app.use('/api', project_routes)//project_routes es la variable creada donde se cargó el archivo de las rutas
 
 ## Método para guardar nuevos documentos en la base de datos
-
-- Importar el modelo en el archivo controllers; project.js
-    En la parte inicial del archivo, crear una variable llamada project requiriendo modelo
-        var Project = require('../models/project');
-
-- Dentro de la variable controller, agregar un nuevo método llamado saveproject; el cual tendrá una función anónima recibiendo parámetros de request y response
-
-- Dentro de saveProject crear una variable con el mismo nombre (project) igual a new project (crea un objeto de proyecto)
-    var project = new Project(); //nuevo objeto de tipo Project
-
-- Probar que haya cargado de manera exitosa mediante un return
-    return res.status(200).send({
-        message: "Método save project"
-    })
-
-    - Crear una ruta (en el archivo de rutas)
-        - router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
-    
-    - Ir a postman, hacer una petición por POST
-        http://localhost:3700/api/save-project
-
-- Hacer las acciones:
-    - Crear una variable llamada params = req.body
-
-    - Agregar a cada valor del modelo params.valor
-
-        project.name=params.name;
-        project.description=params.description;
-        project.category=params.category;
-        project.langs=params.langs;
-        project.year=params.year;
-    
-    - Verificar, agregando estos parametros en postman en la opción body/x-www.form-urlencoded; Postman agrega automáticamente un id
-
-- Guardar este objeto en la base de datos
-    - project (objeto que acaba de crear).save()
-        - El método save tiene una función de callback dentro que recibe un error o un project stored
-
 **Ejemplo:**
 ---
+    
+    //Crear un objeto dentro del JSON controller relacionado al guardado de proyectos:
 
     saveProject: function(req, res){
         var project = new Project(); //nuevo objeto de tipo Project
 
         var params = req.body;
-
+        
+        //Parámetros de la base de datos
         project.name=params.name;
         project.description=params.description;
         project.category=params.category;
@@ -397,6 +363,7 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
         project.year=params.year;
         project.image=null; // Se añade mas tarde
 
+        //Guardar el proyecto en la base de datos, recibe parámetos de error y de proyecto guardado
         project.save((err, projectStored)=>{
             //Si arroja un error:
             if (err) return res.status(500).send({message:'Error al guardar datos'});/**status 500 error */
@@ -414,6 +381,16 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
         
 
     }
+
+- Crear una ruta (en el archivo de rutas)
+---
+    router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
+
+- Ir a postman, hacer una petición por POST:
+
+    http://localhost:3700/api/save-project
+
+    - Verificar, agregando estos parametros en postman en la opción body/x-www.form-urlencoded; Postman agrega automáticamente un id
 
 ## Listar proyectos del portafolio
 
