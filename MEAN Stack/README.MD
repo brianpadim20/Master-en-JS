@@ -432,35 +432,23 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 
 ## Devolver el listado de proyectos
 
-- En controllers crear un método llamado getprojects, en este método, crear una función que reciba como parámetros una request y una response
-    getProjects: function(req,res){}
+**EJEMPLO**
 
-- Utilizar la variable creada Project, con su funcionalidad find({}) sin pasarle parámetros en las llaves y a su vez también la funcionalidad .exec, exec tiene una función de callback con los siguientes códigos:
+    // Obtener la lista completa de la base de datos
+    getProjects: function(req,res){
+        
+        /*Se usa .find({}) para obtener la lista completa .sort('year') para ordenar la lista por año 
+        (se puede usar -year para cambiar el orden la lista) y .exec para la función de callback*/
 
-    Project.find({}).exec((err, projects)=>{
+        Project.find({}).sort('year').exec((err, projects)=>{
             if (err) return res.status(500).send({message:'Error al cargar los datos'});
             if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
             return res.status(200).send({projects});
 
-        });
+        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
+        una entidad o colección*/
 
-- Crear la ruta
-    router.get('/projects', projectController.getProjects);
-
-- Si se quiere ordenar, en la variable inicial de project, solamente poner Project.find({}).sort('year').exec(()=>{});
-
-**EJEMPLO DEL CÓDIGO**
-
-    getProjects: function(req,res){
-            Project.find({}).sort('year').exec((err, projects)=>{
-                if (err) return res.status(500).send({message:'Error al cargar los datos'});
-                if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
-                return res.status(200).send({projects});
-
-            });/*Find lo que hace es sacar todos los documentos que hay dentro de 
-            una entidad o colección*/
-
-        }
+    }
 
 ## Actualizar datos
 
