@@ -385,7 +385,7 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 **Ejemplo:**
 ---
 
-saveProject: function(req, res){
+    saveProject: function(req, res){
         var project = new Project(); //nuevo objeto de tipo Project
 
         var params = req.body;
