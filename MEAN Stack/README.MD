@@ -345,6 +345,9 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
             app.use('/api', project_routes)//project_routes es la variable creada donde se cargó el archivo de las rutas
 
 ## Método para guardar nuevos documentos en la base de datos
+
+Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una colección de la base de datos
+
 **Ejemplo:**
 ---
     
@@ -383,7 +386,7 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
     }
 
 - Crear una ruta (en el archivo de rutas)
----
+
     router.post('/save-project', projectController.saveProject);//Carga el método save project en esta ruta
 
 - Ir a postman, hacer una petición por POST:
@@ -392,34 +395,45 @@ El MVC se encarga de separar la lógica de negocio de la interfaz de usuario.
 
     - Verificar, agregando estos parametros en postman en la opción body/x-www.form-urlencoded; Postman agrega automáticamente un id
 
-## Listar proyectos del portafolio
+## Obtener un proyecto de la base de datos por su id
 
-- En el archivo de controlador crear un método llamado getProject, dicho método recibe una request y una response
-    getProject: function(req,res)
+Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una colección de la base de datos
 
-- Recoger valor que llega por la url creando una variable llamada projectid de la request, esto igualando a req.params.id, para especificar que busca por el id
-    var projectId = req.params.id;
+**EJEMPLO**
 
-- Posteriormente con la variable asignada al projecto, para este ejemplo, Project, utilizar el método .findByID, pasando como parámetros projectID y una función de callback con dos parámetros: error y project; dentro de la función de callback agregar los casos donde se encuentre un error, donde no se encuentre el proyecto o donde el proyecto cargue con éxito
-
-    Project.findById(projectId,(err, project)=>{
-            if (err) return res.status(500).send({message:'Error al devolver los datos'});
-            if (!project) return res.status(404).send({message: 'El proyecto no existe'});
-            return res.status(200).send({project})
-
-        });
-----------------------------------------------------------------------------------------------------------------
-**Ej de esta parte del código:**
-
+    //Crear método llamado getProject, recibiendo como parámetros request y reponse
     getProject: function(req,res){
+
+        //Recoger el valor del id del proyecto que llega por la url
         var projectId = req.params.id;
 
+        //-----------------------------------------------------
+        //Si se pone en la dirección opcional se hace este paso: 
+
+        if (projectId==null) return res.status(404).send({message: 'El proyecto no existe'});
+
+        //-----------------------------------------------------
+
+        //Buscar el proyecto mediante el id ingresado por la url
+        
         Project.findById(projectId,(err, project)=>{
             if (err) return res.status(500).send({message:'Error al devolver los datos'});
             if (!project) return res.status(404).send({message: 'El proyecto no existe'});
             return res.status(200).send({project})
 
         }); //Un find con mongoose, simplemente es buscar una cosa de la base de datos
+
+    },
+    
+    // Obtener la lista completa de la base de datos
+    getProjects: function(req,res){
+        Project.find({}).sort('year').exec((err, projects)=>{
+            if (err) return res.status(500).send({message:'Error al cargar los datos'});
+            if (!projects) return res.status(404).send({message: 'No hay proyectos a mostrar'});
+            return res.status(200).send({projects});
+
+        });/*Find lo que hace es sacar todos los documentos que hay dentro de 
+        una entidad o colección*/
 
     }
 ----------------------------------------------------------------------------------------------------------------
