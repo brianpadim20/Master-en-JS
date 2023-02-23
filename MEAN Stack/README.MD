@@ -458,28 +458,21 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 
 ## Actualizar datos
 
-- Crear un método llamado updateProject, tendrá una función que va a recibir una request y una response
-- Se debe recoger un parámetro por la URL para indicarle que objeto se quiere editar
-    - Crear una variable llamada projectID = req.params.id para capturar ese valor que lleva por la URL
-        var projectID = req.params.id;
-
-    - Crear una variable para actualizar, en este caso, se llama update
-        var update = req.body; //objeto completo con los datos actualizados del proyecto
-    
-    - Usar el modelo Project con el método findbyIdAndUpdate; si le paso un objeto, pues actualiza el documento que tenga en la base de datos con el objeto que se le haya pasado.
-        Como parámetro se le pasa la variable anteriormente creada como projectID para que el método sepa que documento de la base de datos tiene que actualizar y luego el objeto update para sustituir los datos que vaya en el objeto por los nuevos, como tercer parámetro se le pasa una función de callback (error y projectUpdated)
-
-        Dentro de la función de callback comprobar lo anterior
-
 - Crear una ruta nueva
     router.put('/project/:id', projectController.updateProject);
 
-**EJEMPLO DEL CÓDIGO**
+**EJEMPLO**
+
+    //Actualizar un proyecto
 
     updateProject:function(req,res){
+        //Recoger por la url el id del documento a actualizar
         var projectID = req.params.id;
+
+        //Objeto completo con los datos del proyecto a actualizar
         var update = req.body; //objeto completo con los datos actualizados del proyecto
 
+        //Buscar el proyecto por el id del proyecto y actualizarlo
         Project.findByIdAndUpdate(projectID, update, {new:true} ,(err, projectUpdated)=>{
             if (err) return res.status(500).send({message:'Error al actualizar el proyecto'});
             if (!projectUpdated) return res.status(404).send({message:'No existe el proyecto solicitado'});
@@ -488,6 +481,12 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
         });
 
     }
+
+Usar el modelo Project con el método findbyIdAndUpdate; si le paso un objeto, pues actualiza el documento que tenga en la base de datos con el objeto que se le haya pasado. Como parámetro se le pasa la variable anteriormente creada como projectID para que el método sepa que documento de la base de datos tiene que actualizar y luego el objeto update para sustituir los datos que vaya en el objeto por los nuevos, como tercer parámetro se le pasa una función de callback (error y projectUpdated)
+
+Crear una ruta nueva
+
+    router.put('/project/:id', projectController.updateProject);
 
 ## Borrar proyectos de la base de datos desde el backend
 
