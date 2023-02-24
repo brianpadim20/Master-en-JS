@@ -514,7 +514,8 @@ Para ver como eliminar un registro de la base de datos; se explicará con el sig
 
     router.delete('/delete/:id', projectController.deleteProject);
 
-- Eliminar en postman por método delete con la url creada; ejemplo: localhost:3700/api/projects
+- Eliminar en postman por método delete con la url creada; ejemplo: localhost:3700/api/delete/id
+- Verificar que se haya eliminado de la base de datos
 ## Subir imagenes
 
 - Crear un método llamado uploadImage, el cual será una función que recibe una request y una response.
