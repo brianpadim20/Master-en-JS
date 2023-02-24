@@ -432,6 +432,9 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 
 ## Devolver el listado de proyectos
 
+Para ver como devolver un listado de registros de la base de datos; se explicará con el siguiente código:
+
+
 **EJEMPLO**
 
     // Obtener la lista completa de la base de datos
@@ -457,9 +460,7 @@ Mediante el siguiente ejemplo se muestra como guardar un nuevo documento en una 
 - Buscar en postman por método get con la url creada; ejemplo: localhost:3700/api/projects
 
 ## Actualizar datos
-
-- Crear una ruta nueva
-    router.put('/project/:id', projectController.updateProject);
+Para ver como actualizar un registro de la base de datos; se explicará con el siguiente código:
 
 **EJEMPLO**
 
@@ -490,24 +491,16 @@ Crear una ruta nueva
 
 ## Borrar proyectos de la base de datos desde el backend
 
-- Crear un método que se llame deleteProject; una función que reciba un parámetro request y otro response
+Para ver como eliminar un registro de la base de datos; se explicará con el siguiente código:
 
-- Recoger por la url el id del proyecto a borrar
-    - crear una variable llamada projectID = req.params.id
-    - Utilizar el modelo project, y utilizar el método findByIdAndDelete, se le pasan dos parámetros:
-        - El primero es la variable antes creada (projectID)
-        - El segundo es una función de callback que recibe como parámetros el error o el projectDeleted
-            Project.findByIdAndDelet(projectID, (err,projectDeleted)=>{
-            if (err) return res.status(500).send({message:'Error al eliminar el proyecto'});
-            if (!projectDeleted) res.status(404).send({message:'No se puede eliminar ese proyecto'});
-            return res.status(200).send({project:projectDeleted}));
-- Crear la ruta
-    router.delete('/project/:id', projectController.deleteProject);
-
-**EJEMPLO DEL CÓDIGO**
+**EJEMPLO**
 
     deleteProject: function(req,res){
+
+        //Se recoge mediante la url el registro que se quiere eliminar
         var projectID = req.params.id;
+
+        //Se utilizar el findByIdAndRemove, pasando como parámetros el id creado anteriormente, y una función de callback
         Project.findByIdAndRemove(projectID, (err,projectRemoved)=>{
             if (err) return res.status(500).send({message:'Error al eliminar el proyecto'});
             if (!projectRemoved) res.status(404).send({message:'No se puede eliminar ese proyecto'});
@@ -517,6 +510,11 @@ Crear una ruta nueva
 
     }
 
+- Crear la ruta
+
+    router.delete('/delete/:id', projectController.deleteProject);
+
+- Eliminar en postman por método delete con la url creada; ejemplo: localhost:3700/api/projects
 ## Subir imagenes
 
 - Crear un método llamado uploadImage, el cual será una función que recibe una request y una response.
