@@ -121,13 +121,14 @@ Instalar paquetes necesarios para desarrollar el backend con js; la instalación
 
 ## Creación de la base de datos
 
-Utilizar robomongo (studio 3t); pasos para crear la base de datos:
+Utilizando Mongodb compass; seguir estos pasos para crear la base de datos:
 
 - Abrir mongodb compass
 - Donde dice databases dar click en el símbolo de más (+)
 - Agregar el nombre de la base de datos y de la primera colección (tabla)
 - Si se le quieren agregar datos, click en add data, insert document y agregar la información en un objeto JSON (arrojará automáticamente un id con la información agregada)
     EJEMPLO:
+
         {
             "name": "Blog",
             "description": "Blog personal",
@@ -139,6 +140,7 @@ Utilizar robomongo (studio 3t); pasos para crear la base de datos:
             ],
             "year": 2023.0
         }
+        
 - Si se quiere ver la información en formato JSON, se le da click en el símbolo "{}"
 
 ## Conectar mongodb con nodejs y con el proyecto
@@ -518,107 +520,40 @@ Para ver como eliminar un registro de la base de datos; se explicará con el sig
 - Verificar que se haya eliminado de la base de datos
 ## Subir imagenes
 
-- Crear un método llamado uploadImage, el cual será una función que recibe una request y una response.
-    uploagImage: function(req,res){}
+Para ver como agregar una imagen en la base de datos; se explicará con el siguiente código:
 
-- Recoger el id del proyecto sobre el cual se va a guardar esta imagen además de una variable con el nombre del archivo, que tenga por defecto un string "imagen no cargada"
-    var projectId=req.params.id;
-    var fileName= 'Imagen no cargada';
+- Importar una librería llamada fs
 
-- En caso de que exista el request que se le envía a este método, que retorne los archivos
-    if(req.files){//En caso que exista la request que se le envía a este método:
-            
-            return res.status(200).send({files:req.files}); 
-
-        }
-
-- en caso de un error; hacer un else que retorne el mensaje de que no se cargó la imagen
-    else{
-            return res.status(200).send({message: fileName}); (Tener en cuenta que fileName es una variable que tiene por valor: 'Imagen no cargada')
-        }
-
-- Configurar el connect multiparty
-    - Ir al fichero de las rutas, configurar un middleware (que es un método que se ejecute antes de que se ejecute el método o la acción del controlador)
-        - Crear una variable que se llame multipart; la cual importe el connect multi party
-            var multipart = require('connect-multiparty');
-
-        - Crear una variable para indicar donde se guardarán los archivos y las imagenes subidas a la base de datos
-            var multipartMiddleware = multipart({ uploadDir: './uploads'});
-        
-    - Crear la carpeta uploads dentro de donde se está haciendo el backend
-
-- Crear la ruta, aplicando el middleware configurado del connect multiparty, pasandolo como segundo parámetro
-    router.post('/upload-image/:id', multipartMiddleware,projectController.uploagImage);
-
-- Ir a postman y hacer los siguientes pasos:
-    - Abrir alguno de los documentos guardados en la base de datos (copiar su id)
-    - Pegar la ruta con el id copiado en postman (con método post)
-    - Seleccionar la pestaña body el radio button form data
-    - Donde dice key escribir el nombre, en este caso image
-    - Donde dice text, seleccionar el desplegable y seleccionar file, darle click en select file y selecciona un archivo y ejecutar la acción dando click en send 
-
-- Sacar diferentes valores para guardar esa imagen en la base de datos, esto dentro del if anteriormente creado
-
-    - Crear una variable llamda filePath = req.file.image.path
-
-    - Crear una variable llamada fileSplit para tomar el nombre del archivo guardado en el disco, pasando como parámetro el separador que aparece en la parte path del archivo subido, en windows aparece por doble barra invertida
-        var fileSplit = filePath.split('\\');
-
-    - Crear otra variable llamada fileName, la cual guardará el valor de la posición 1 de fileSplit, que es el nombre del archivo subido
-        var fileName = fileSplit[1];
+    var fs = require('fs');
     
-    - Hacer un findByIdAndUpdate y pasarle solamente la propiedad image para que la guarde y guardar el return de exito dentro de este, de la siguiente manera:
-
-        Project.findByIdAndUpdate(projectId, {image:fileName},{new:true}, (err,projectUpdated)=>{
-                if (err) return res.status(500).send({message:'La imagen no se ha subido'});
-
-                if (!projectUpdated) return res.status(404).send({message:'La imagen no existe'});
-                
-                return res.status(200).send({project:projectUpdated, name:fileName});
-
-            });
-
-    - Eliminar el return res.status(200).send({files: req.files, name:fileName}); ya que se actualizará dentro de findByIdAndUpdate()
-
-- Sacar la extensión del archivo:
-    - Crear una variable que se llame extSplit = fileName.Split('\.') para cortar por el punto del archivo, ahora se tiene un array con dos elementos: antes del punto y después del punto, después del punto es la extensión y el índice #1 del array
-
-    - Crear una variable para la extensión, llamada fileExt igualada al índice # 1 de extSplit
-
-    - Crear un if para validar que se subió una imagen y guardar todo lo del findByIdAndUpdate dentro de este if
-
-        if(fileExt=='png' || fileExt == 'jpg' || fileExt=='jpeg' || 'gif'){
-            Project.findByIdAndUpdate(projectId, {image:fileName},{new:true}, (err,projectUpdated)=>{
-                if (err) return res.status(500).send({message:'La imagen no se ha subido'});
-
-                if (!projectUpdated) return res.status(404).send({message:'La imagen no existe'});
-                
-                return res.status(200).send({project:projectUpdated});
-
-            });
-        } 
-
-    - Importar una librería llamada fs
-        var fs = require('fs');
-    - Una vez importada dicha librería hacer lo siguiente:
-        fs.unlink(filePath, (err)=>{
-                return res.status(200).send({message:'La extensión no es válida'});
-            });
-
 **EJEMPLO DEL CÓDIGO**
 
 uploadImage: function(req,res){
+
         //Recoger id del proyecto sobre el cual se guardará la imagen
         var projectId = req.params.id;
-        var failName = 'Imagen no subida...';
 
-        if (req.files){//En caso que exista este elemento con los archivos que se vayan subiendo, que haga:
+        //Variable por defecto en caso que no suba la imagen
+        var failName = 'Imagen no subida...';
+        
+        //En caso que exista este elemento con los archivos que se vayan subiendo, que haga:
+        if (req.files){
+            //Sacar diferentes valores para guardar esa imagen en la base de datos
             var filePath = req.files.image.path;
+
+            //omar el nombre del archivo guardado en el disco, pasando como parámetro el separador que aparece en la parte path del archivo subido, en windows aparece por doble barra invertida
             var fileSplit = filePath.split('\\');
+
+            //guardará el valor de la posición 1 de fileSplit, que es el nombre del archivo subido
             var fileName = fileSplit[1];
+
+            //Sacar separar la extensión de la imagen
             var extSplit = fileName.split('\.');
+
+            //Guardar la extensión de la imagen
             var fileExt = extSplit[1];
 
+            //validar que se subió una imagen y guardar todo lo del findByIdAndUpdate dentro de este if
             if(fileExt=='png' || fileExt == 'jpg' || fileExt=='jpeg' || 'gif'){
                 Project.findByIdAndUpdate(projectId, {image:fileName},{new:true}, (err,projectUpdated)=>{
                     if (err) return res.status(500).send({message:'La imagen no se ha subido'});
@@ -635,12 +570,32 @@ uploadImage: function(req,res){
 
             }         
 
-        }else{
-            return res.status(200).send({message:failName});
-        
         }
     
     }
+
+-  Configurar el connect multiparty
+    - Ir al fichero de las rutas, configurar un middleware (que es un método que se ejecute antes de que se ejecute el método o la acción del controlador)
+        - Crear una variable que se llame multipart; la cual importe el connect multi party
+            var multipart = require('connect-multiparty');
+
+        - Crear una variable para indicar donde se guardarán los archivos y las imagenes subidas a la base de datos
+            var multipartMiddleware = multipart({ uploadDir: './uploads'});
+        
+    - Crear la carpeta uploads dentro de donde se está haciendo el backend
+
+- Crear la ruta, aplicando el middleware configurado del connect multiparty, pasandolo como segundo parámetro
+
+    router.post('/upload-image/:id', multipartMiddleware,projectController.uploagImage);
+
+- Ir a postman y hacer los siguientes pasos:
+    - Abrir alguno de los documentos guardados en la base de datos (copiar su id)
+    - Pegar la ruta con el id copiado en postman (con método post)
+    - Seleccionar la pestaña body el radio button form data
+    - Donde dice key escribir el nombre, en este caso image
+    - Donde dice text, seleccionar el desplegable y seleccionar file, darle click en select file y selecciona un archivo y ejecutar la acción dando click en send
+
+
 
 ## Configuración de CORS en nodejs
 

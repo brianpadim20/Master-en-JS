@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "practica-Angular": {
+    "portafolio-masterJS": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/practica-angular",
+            "outputPath": "dist/portafolio-master-js",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "practica-Angular:build:production"
+              "browserTarget": "portafolio-masterJS:build:production"
             },
             "development": {
-              "browserTarget": "practica-Angular:build:development"
+              "browserTarget": "portafolio-masterJS:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "practica-Angular:build"
+            "browserTarget": "portafolio-masterJS:build"
           }
         },
         "test": {
