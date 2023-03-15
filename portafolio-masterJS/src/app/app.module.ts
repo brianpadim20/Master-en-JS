@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 import { AppComponent } from './app.component';
@@ -9,6 +11,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CreateComponent } from './components/create/create.component';
 import { ErrorComponent } from './components/error/error.component';
+import { TypingEffectComponent } from './components/typing-effect/typing-effect.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,16 @@ import { ErrorComponent } from './components/error/error.component';
     ProjectsComponent,
     ContactComponent,
     CreateComponent,
-    ErrorComponent
+    ErrorComponent,
+    TypingEffectComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     routing
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
   ],
   bootstrap: [AppComponent]
 })

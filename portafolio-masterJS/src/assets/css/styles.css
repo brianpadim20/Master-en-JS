@@ -1,0 +1,131 @@
+/*Paleta de colores:*/
+.color1 {color: #282e20;}
+.color2 {color: #1f6e64;}
+.color3 {color: #ff4942;}
+.color4 {color: #ffea3c;}
+.color5 {color: #fffbc7;}
+
+/*Importar fuentes:*/
+@font-face {
+    font-family: "YanoneKaffeesatz-Light";
+    src: url("fonts/YanoneKaffeesatz-Light.ttf");
+
+}@font-face{
+    font-family: "TitilliumWeb-Light";
+    src: url("fonts/TitilliumWeb-Light.ttf");
+
+}@font-face{
+    font-family: "FingerPaint-Regular";
+    src: url("fonts/FingerPaint-Regular.ttf");
+    
+}
+
+/*Ajustes generales*/
+
+*{ 
+    /*Controlar los margenes interiores y exteriores de los elementos del proyecto*/
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    
+}div{
+    display: block;
+
+}body{
+    font-family: "YanoneKaffeesatz-Light", Arial, Helvetica;
+    font-size: 20px;
+    background: #ff4942 ;
+
+}html{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+
+}.personalInfo{
+    /*position: fixed;*/
+    top:0;
+    display: block;/*Establece personalinfo como un bloque*/
+    width: 20%;/*Establece el ancho de personalinfo*/
+    margin-left: 10%;
+    margin-right: 3%;
+    background: #282e20;
+    float:left;
+
+}.personalInfo .profilepic{
+    width: 100%; /*La imagen ocupara el 100% del disponible de personalinfo*/
+    height: auto; /*Altura ajustable para mantener relación respecto a la imagen*/
+    margin-bottom: 10px;/*Añade un espacio entre la imagen y el menú*/
+
+}.personalInfo .menu{
+    list-style-type: none; /*Quitar el estilo de biñeta*/
+    margin: 0; /* Quita el margen predeterminado */
+    padding: 0; /* Quita el relleno predeterminado */
+    margin-left: 7%;
+
+}.personalInfo .menu li{
+    margin-bottom: 10px; /* Añade un espacio entre los elementos del menú */
+    border-bottom: solid 0.5px #ff4942;
+
+}.personalInfo .menu li a {
+    text-decoration: none; /* Quita el subrayado del texto del enlace */
+    color: #fffbc7; /* Establece el color del texto del enlace */
+
+
+}.personalInfo .menu li a:hover{
+    color: #ffea3c;
+
+}.personalInfo .menu li i {
+    color: #fffbc7;
+    font-size: 20px;
+    float: right;
+    margin-right: 7%;
+    vertical-align: middle;
+
+}.personalInfo .menu li i:hover {
+    color: #ffea3c;
+
+}.personalInfo .redes{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}.personalInfo .redes li{
+    margin-top: 4%;
+    margin-bottom: 4%;
+    
+}.personalInfo .redes li i{
+    color: #fffbc7;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 30px;
+
+}.personalInfo .redes i:hover{
+    color: #ffea3c;
+
+}.presentacion{
+    margin-top: 2%;
+    float: left;
+    background: #fffbc7;
+    width: 55%;
+    height: 350px;
+    
+}.presentacion h3{
+    margin-top: 13%;
+    margin-left: 3%;
+    color: #ff4942;
+
+}.presentacion h1{
+    margin-top: 4%;
+    margin-left: 6%;
+
+}.presentacion h2{
+    margin-top: 4%;
+    margin-left: 4%;
+    color: #1f6e64;
+    
+}
