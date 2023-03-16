@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'portafolio-masterJS'`, () => {
+  it(`should have as title 'portafolio'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('portafolio-masterJS');
+    expect(app.title).toEqual('portafolio');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('portafolio-masterJS app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('portafolio app is running!');
   });
 });

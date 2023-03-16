@@ -1,0 +1,108 @@
+/*Importar fuentes*/
+@font-face {
+    font-family: "FingerPaint-Regular";
+    src: url("fonts/FingerPaint-Regular.ttf");
+
+}@font-face {
+    font-family: "TitilliumWeb-Light";
+    src: url("fonts/TitilliumWeb-Light.ttf");
+
+}@font-face {
+    font-family: "YanoneKaffeesatz-Light";
+    src: url("fonts/YanoneKaffeesatz-Light.ttf");
+
+    
+}
+
+/*Estilos generales*/
+*{
+    margin: 0px;
+    padding: 0px;
+
+}body{ 
+    font-family: "YanoneKaffeesatz-Light", Arial, Helvetica; 
+    font-size: 20px;
+    background: url("./img/pattern.jpg");/*Imagen a poner de fondo, guardada en la carpeta css/img */
+    background-attachment: fixed; /*Para que el fondo se quede quieto, y no de la impresión que también se mueve 
+    hacia abajo*/
+
+}.clearfix{
+    float: none;
+    clear:both /*Para limpiar lo flotado entre los diferentes elementos*/
+}
+
+/*Barra de navegación (header)*/
+header{
+    display: block;/*Para que actúe como un bloque*/
+    width: 100%; /*Para que ocupe el ancho de la pantalla*/
+    height: 90px; /*Altura*/
+    background: rgba(53, 103, 164, 0.8);
+    position: fixed; /*Agranda el 100% de la página, y cuando haga scroll hacia abajo, se quedará fijada labarra
+    de navegación en la parte de arriba*/
+    text-transform: uppercase; /*Para que todo sea en mayúscula*/
+
+}header ul{
+    display: block;
+    width: 40%;
+    height: inherit; /*Heredado del padre*/
+    margin: 0px auto;
+    margin-top: -4px; /*Para que el menú quede ajustado luego de modificar el logo*/
+
+}header ul li{
+    display: inline-block; /*Para que se ponga un elemento al lado del otro*/
+    margin: 0px auto;
+    text-align: center;
+    line-height: 88px;
+
+}header a{
+    display: block;/*Para que actúe como bloque, no como elemento en línea*/
+    padding-right: 20px;/*Para separar cada elemento del otro*/
+    padding-left: 20px;
+    height: inherit;/*Altura heredada del padre que serían 90px*/
+    text-decoration: none;
+    color: white;
+    transition: all 300ms;/*para que haga una transición cada vez que haga hover en cada elemento */
+
+}header a:hover,
+.activated{ 
+    background: rgba(0, 0, 0, 0.8);
+    /*Activated hace referencia al routerLinkActive que se ve en el app.component.html
+    Esto es para que cada link que se encuentre activado quede marcado con color negro*/
+}
+
+/*Logo*/
+#logo{
+    font-family: FingerPaint-Regular;
+    font-size: 30px;
+
+}#logo a{
+    transition: color 500ms, transform 500ms;
+}
+
+#logo a:hover{
+    background: transparent; /*Para que no haya hoover cuando se seleccione el logo*/
+    color: black;
+    transform: scale(1.50,1.50);/*Escala el tamaño, no lo modifica como tal, aumenta el tamaño y cambia el colo*/
+
+}
+
+/*Contenedor principal*/
+#content{
+    min-height: 500px;/*Tamaño mínimo de 700px*/
+    padding-top: 120px;
+    width: 75%;
+    margin: 0 auto; /*Para que se centre el elemento*/
+    box-shadow: 0px 0px 40px black;/*Sobra de la caja del contenedor*/
+    border-left: 1px solid #b7b7b7;
+    border-right: 1px solid #b7b7b7;
+    background: rgba(255, 255, 255, 0.7);
+
+}
+
+/*Pie de página (Footer)*/
+footer{
+    width: 75%;
+    margin: 0px auto;
+    padding-top: 15px;
+    color:rgba(0, 0, 0, 0.5);
+}
