@@ -362,7 +362,173 @@ En el HTML:
 
 ---
 
-# Maquetación de "crear proyecto"
+# Componente "crear proyecto"
 
-Se va a crear un formulario que permitirá guardar nuevos proyectos en la aplicación
+Se va a crear un formulario que permitirá guardar nuevos proyectos en la aplicación, usando el API que se debe arrancar para hacer peticiones AJAX y hacer una petición por post para guardar un nuevo proyecto en la base de datos
 
+Pasos:
+
+- Abrir mongodb 
+- Abrir la carpeta donde está la APIRest (el backend)
+    - Poner su ruta en la consola sobre la cual se está trabajando (en este caso, git bash)
+    - Ejecutar el backend
+    Así se tiene la API funcionando 
+- Una vez esté corriendo la API, se procede a programar el Angular:
+- Dentro de la carpeta app crear una carpeta para los modelos y otra para los servicios (models y services)
+    - Crear el modelos (representan a un objeto o un documento de la base de datos) y será una entidad; se está utilizando la entidad de proyectos... Un modelo representa a un único proyecto en específico:
+        - En la carpeta de models, crear un archivo llamado project.ts y aplicar el código:
+---
+    //Crear la clase de exportación
+
+    export class Project{
+
+    //Definir el modelo
+        constructor(
+            public _id: string,
+            public nombre: string,
+            public description: string,
+            public category: string,
+            public year: number,
+            public langs: string,
+            public image: string
+
+        ){}
+
+    }
+
+---
+
+- En la carpeta de servicios, crear un archivo de configuración global llamado global.ts, allí se tendrá una configuración que se usará en varios archivos; aplicar el siguiente código:
+
+---
+    export var Global = {
+        url:'localhost:3700/api/'
+
+    };
+
+---
+- Una vez creada la variable global, se procede a crear el servicio, en la carpeta de services, crear un nuevo archivo llamado project.service.ts donde se importarán todos los módulos para crear un servicio, se podrá ver en el siguiente ejemplo de código:
+
+---
+    import { Injectable } from '@angular/core';
+    import { HttpClient, HttpHeaders } from '@angular/common/http';
+    import { Observable } from 'rxjs';
+    import { Project } from '../models/project';
+    import { Global } from './global';
+
+    @Injectable()
+
+    export class ProjectService{
+        //Propiedad para guardar la url de la api
+        public url: string;
+
+        constructor(
+            private _http:HttpClient //cargo el httpclient como propiedad privada
+        ){
+            //Valor a la url dado en la variable del archivo global
+            this.url = Global.url;
+
+        }testService(){
+            return 'Probando el servicio de Angular'
+        }
+
+---
+Ir al archivo app.module.ts e importar los módulos tanto de http como de los formularios y cargarlo en los imports del mismo archivo
+---
+//Importación de los módulos http y módulos de formularios (para el componente "create")
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'; //2 way data binding y formularios
+
+---
+
+Ya se pueden cerrar los archivos que se tenían abiertos.
+
+## Maquetación de "create"
+
+Lo primero que se debe hacer es importar el modelo y el servicio para poder estar usandolo en create.component.ts y cargar los servicios dentro de la propiedad providers en el decorador "@component"
+
+---
+    import { Component, OnInit } from '@angular/core';
+
+    //Importo los modelos creados
+    import { Project } from 'src/app/models/project';
+
+    //Importo los servicios creados
+    import { ProjectService } from 'src/app/Services/project.service';
+
+    @Component({
+    selector: 'app-create',
+    templateUrl: './create.component.html',
+    styleUrls: ['./create.component.css'],
+    //Cargo los servicios dentro de la propiedad providers en el decorador
+    providers:[ProjectService]
+    })
+    export class CreateComponent {
+
+    }
+
+---
+
+El siguiente paso es crear las propiedades necesarias, como se ve en el código
+
+---
+    export class CreateComponent {
+    public title: string;
+    public project: Project
+
+    constructor(
+        private _projectService: ProjectService //propiedad del servicio
+    ){
+        this.title="Crear yecto";
+        this.project = new Project('','','','',2023,'','')
+    }
+
+    ngOnInit(){}
+
+    }
+
+
+---
+
+## Creación del formulario:
+- Lo primero es mostrar el título por interpolación (las dobles llaves {{}})
+- Meter el formulario dentro de un div contenedor
+    - Tener en cuenta que es un formulario de Angular, entonces, se borra action y se pone un nombre con #
+    - poner el evento ngsubmit se recoge lo que el formulario reciba
+    - Crear un método que se llame onsubmit para ponerlo en el ngsubmit pasando el projectform como parámetro
+    - Recordar que en los imputs o textareas se asigna un nombre con #, igualar a ngModel y luego poner  [(ngModel)]=objeto a modificar.variable que se le va a modificar
+    - Esta parte se verá acontinuación en el siguiente código:
+
+---
+<div class="container">  
+    <h2>{{title}}</h2>
+    <form #projectForm="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label for="name">Nombre</label>
+            <input type="text" name="name" #name="ngModel"[(ngModel)]="project.name">
+        </p>
+        <p>
+            <label for="description">Descripción</label>
+            <textarea name="descritpion" #description="ngModel"[(ngModel)]="project.description"></textarea>
+        </p>
+        <p>
+            <label for="category">Categoría</label>
+            <input type="text" name="category" #category="ngModel"[(ngModel)]="project.category">
+        </p>
+        <p>
+            <label for="year">Año de lanzamiento</label>
+            <input type="number" name="year" #year="ngModel"[(ngModel)]="project.year">
+        </p>
+        <p>
+            <label for="langs">Lenguajes de programación utilizados</label>
+            <input type="text" name="langs" #langs="ngModel"[(ngModel)]="project.langs">
+        </p>
+        <p>
+            <label for="image">Imagen del proyecto</label>
+            <input type="file" name="image" placeholder="Subir imagen">
+        </p>
+        <input type="submit" value="Enviar">
+    </form>    
+</div>
+
+---
