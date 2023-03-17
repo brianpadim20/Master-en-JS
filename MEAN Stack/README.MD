@@ -188,8 +188,9 @@ pasos:
 
 - Crear los middlewares (configuración necesaria):
 
-    app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
 ---
+   
+    app.use(bodyParser.urlencoded({extended:false})); //configuración necesaria para bodyParser
 
     app.use(bodyParser.json());//cualquier tipo de petición se convierte a JSON
     
