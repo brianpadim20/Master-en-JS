@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
+  public title: string;
+  public subtitle: string;
+  public email: string;
+
+  constructor (){
+    this.title="Brian Patiño";
+    this.subtitle="Desarrollador full stack";
+    this.email="brianpadim@hotmail.com";
+
+  }
 
 }

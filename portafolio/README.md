@@ -231,6 +231,23 @@ En body se puede elegir el font-family, font-size y el color de fondo
 
 ---
 
+**Contenedor principal:**
+---
+    /*Contenedor principal*/
+    #content{
+        min-height: 500px;/*Tamaño mínimo de 700px*/
+        padding-top: 120px;
+        width: 75%;
+        margin: 0 auto; /*Para que se centre el elemento*/
+        box-shadow: 0px 0px 40px black;/*Sobra de la caja del contenedor*/
+        border-left: 1px solid #b7b7b7;
+        border-right: 1px solid #b7b7b7;
+        background: rgba(255, 255, 255, 0.7);
+
+    }
+
+---
+
 **Logo:**
 
 ---
@@ -250,3 +267,102 @@ En body se puede elegir el font-family, font-size y el color de fondo
     }
 
 ---
+
+# Maquetación de la página "sobre mi" o "about"
+
+Ir al HTML del componente about y se va a modificar junto con el componente.ts
+
+En el componente.ts: 
+- importar ngOnInit
+- Debajo de la clase de exportación agregar 3 variables de tipo string: title, subtitle, email y darle valores en el constructor
+
+---
+    public title: string;
+    public subtitle: string;
+    public email: string
+
+    constructor(){
+        this.title="Brian Patiño";
+        this.subtitle="Desarrollador full stack";
+        this.email="brianpadim@hotmail.com";
+
+    }
+
+---
+
+En el HTML:
+- Agregar un div con el id "title", dentro de este div agregar en h1 y h2 los atributos creados en el componente.ts de title y de subtitle respectivamente
+
+--- 
+    <div id="title">
+        
+        <h1>{{title}}</h1>
+        <h2 id="subtitle">{{subtitle}}</h2>
+        <p>{{email}}</p>
+
+    </div>
+
+---
+
+- Agregar una etiqueta de tipo article con la clase "about", allí se pondrá un párrafo con la descripción "sobre mi"
+
+---
+<article class="about">
+    <h2>Sobre mi</h2>
+    <p>
+        Soy estudiante de ingeniería informática, actualmente estoy en séptimo semestre, con materias de octavo. En total son 8 semestres de materias más prácticas. Cuento con conocimiento en JavaScript, CSS, HTML, Angular, TypeScript, NodeJS y también en sistemas de control de versiones, como lo son Git y GitHub. Así mismo, estoy relacionado con metodologías de desarrollo ágil, y cuento con conocimiento en plataformas como Azure DevOps. También tengo conocimientos en bases de datos SQL y noSQL En el momento estoy en búsqueda de experiencia laboral en el área de la informática, dado que ya tengo experiencia en otras áreas. Me caracterizo por ser una persona responsable y comprometida en mis actividades tanto académicas, como laborales. Me gusta ayudar a mis compañeros en todo lo que sea posible, respetando las ideas de las personas en mi entorno
+    </p>    
+</article>
+
+---
+
+## Estilos de los elementos para la maquetación de la página "about":
+- Ir al archivo styles.css que está en assets
+- aplicar los siguientes estilos:
+
+---
+    /*Sobre mi*/
+
+    #title{
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 70px;
+        margin-top: 20px;
+
+    }#title h1{
+        font-family: FingerPaint-Regular;
+        font-size: 60px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+
+    }#title h2{
+        font-size: 25px;
+        color: gray;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        
+    }article.about{
+        width: 70%;
+        margin: 0px auto;
+        margin-bottom: 20px;
+        font-size: 23px;
+
+    }.about h2{
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+
+    }.about p{
+        padding-top: 20px;
+        padding-bottom: 30px;
+        text-align: justify;
+
+    }
+
+---
+
+# Maquetación de "crear proyecto"
+
+Se va a crear un formulario que permitirá guardar nuevos proyectos en la aplicación
+
