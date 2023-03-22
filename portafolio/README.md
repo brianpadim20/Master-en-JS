@@ -904,6 +904,98 @@ En project service.ts crear el método correspondiente para sacar de la base de 
 Luego ir al componente Projects.ts e importar el servicio, el modelo, etc y cargar el servicio en el array de providers del componente y en el constructor; lo demás se verá explicado en el código acontinuación:
 
 ---
+    import { Component, OnInit } from '@angular/core';
+    //Importar el modelo
+    import { Project } from 'src/app/models/project';
+    //Importar los servicios
+    import { ProjectService } from 'src/app/Services/project.service';
+    //Importar la url de la API
+    import { Global } from 'src/app/Services/global';
 
+    @Component({
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.css'],
+    //Agregar el servicio importado en el array de providers
+    providers:[ProjectService]
+    })
+    export class ProjectsComponent {
+    //Propiedad para guardar los proyectos en una lista
+    public projects: Project[];
+    //Propiedad para tener acceso a la url de la API en el backend
+    public url: string;
+    constructor(
+        private _projectService: ProjectService
+    ){
+        this.projects=[];
+        this.url = Global.url;
+
+    }ngOnInit(){
+        /*getProjects se ejecuta en onInit, porque apenas se seleccione este componente debe mostrar la 
+        lista de proyetos*/
+        this.getProjects();
+
+    }getProjects(){
+
+        /*Se usa el project service; con el servicio creado de get projects y se subscribe al observable
+        y recoger la respuesta que devuelve el API*/
+        this._projectService.getProjects().subscribe({
+        next:(response)=>{
+            if(response.projects){
+            this.projects=response.projects
+            }
+        },
+        error:(err)=>{console.log(err)}
+        
+        });
+
+    }
+
+    }
+
+---
+
+## Implementación de imagenes en las listas de proyectos y maquetación CSS
+
+Para implementar la imagen solo se pone la etiqueta img, como parámetros se pasa la URL que se tiene en el componente.ts y un *ngIf para que se muestre solo si existe una imagen
+
+---
+<div class="container">
+    <h2>Proyectos</h2>
+    <ul>
+        <li *ngFor="let project of projects" class = "project">
+            <img src="{{url+'get-image/'+project.image}}" *ngIf="project.image">
+            <!--En src utilizar la URL que hay en el componente-->
+            <h3>{{project.name}}</h3>
+            <p>{{project.langs}}</p>
+        </li>
+    </ul>
+</div>
+
+---
+
+Los estilos quedan de la siguiente manera: para que queden en cuadrícula y con líneas de a 3 proyectos:
+
+---
+    .project{
+    list-style-type: none;
+    display: block;
+    float: left;
+    width: 26%;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+
+    /*Máscara para la imagen; recorta lo que sobresalga de el*/
+    }.project.image{
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+
+    }.project img {
+        width: 80%;
+
+    }
 
 ---
