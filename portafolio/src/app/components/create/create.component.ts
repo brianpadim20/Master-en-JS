@@ -15,19 +15,37 @@ import { ProjectService } from 'src/app/Services/project.service';
 })
 export class CreateComponent {
   public title: string;
-  public project: Project
+  public project: Project;
+  public status:string;
 
   constructor(
     private _projectService: ProjectService //propiedad del servicio
   ){
     this.title="Crear proyecto";
-    this.project = new Project('','','','',2023,'','')//4 cambpos vacíos, 2023, 2 campos vacíos
+    this.project = new Project('','','','',2023,'','');
+    this.status="";
   }
 
   ngOnInit(){}
 
   onSubmit(){
-    
+    console.log(this.project);
+    this._projectService.saveProject(this.project).subscribe(
+      response=>{
+        console.log(response);
+        if (response.project){
+          this.status="sucess";
+
+        }else{
+          this.status="failed"
+        }
+
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+    );
     
   }
 

@@ -532,3 +532,145 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
 </div>
 
 ---
+
+## Estilos del formulario
+
+.container{
+    padding: 50px;
+    padding-top: 10px;
+
+}.container h2{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: block;
+
+/*Estilos formulario: Todos los formularios lucirán iguales*/
+
+}form{
+    width: 80%;
+
+}form label{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+}form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form textarea{
+    width: 40%;
+    padding: 5px;
+
+}form button,
+form input[type="submit"]{
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+    margin-top: 15px;
+    color: white;
+    background: rgba(53, 103, 164, 1);
+    border: 1px solid rgba(13, 67, 133, 1);
+    cursor: pointer
+    
+}form button:hover,
+form input[type="submit"]:hover{
+    background: rgba(53, 103, 164, 0.8);
+    border: 1px solid rgba(13, 67, 133, 1);
+    cursor: pointer
+    
+}form input[disabled]{
+    opacity: 0.4;
+    cursor: not-allowed;
+
+}.formError{
+    padding: 3px;
+    background: red;
+    color: white;
+    font-size: 13px;
+    margin-left: 5px;
+
+}.message{
+    padding: 5px;
+    border: 1px solid #eee;
+    width: 50%;
+
+}.sucess{
+    background: green;
+    color: white;
+
+}.message a{
+    color: white;
+
+}.filed{
+    background: red;
+    color: white;
+
+}
+
+## Validación del formulario
+
+En el formulario se le pone required a los campos de:
+- Nombre
+- Descripción
+- Categoría
+- Lenguajes de programación
+
+Luego se ponen los mensajes de validación con la etiqueta span; en cada uno de los campos que tiene required, poner lo siguiente: 
+
+---
+<span class="formError" *ngIf="campo a validar.touched && !campo a validar.valid">
+    El  campo ** es obligatorio
+</span>
+
+---
+## Validación del formulario, para que permita guardar información en el backend de la base de datos
+
+En los servicios project.service crear un nuevo método que se llame saveProject(project: Project) para guardar nuevos elementos en la base de datos con el siguiente código (irá explicado)
+
+---
+saveProject(project:Project): Observable<any>{ //un objeto del tipo Projecto (modelo) devuelve un osbervable tipo any
+        //Parametros a enviar (datos del objeto), se necesita que sea un JSON para que la API pueda cogerlo
+        let params = JSON.stringify(project);
+
+        //Cabeceras (como se enviará la información), application/json es el formato en que viajará la información
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        //Petición post, para dar de alta a un nuevo dato a nivel de backend
+        return this._http.post(this.url+'save-project', params, {headers:headers});
+
+    }
+
+---
+
+En la parte del componente, en la función creada anteriormente (onSubmit), pasar el siguiente código (en comentarios estará explicado que hace cada parte)
+---
+    onSubmit(){
+        console.log(this.project);
+
+        /*_projectService fue importado con los servicios .saveProject es el servicio de guardado que se creó en el paso anterior; this.project es el modelo creado anteriormente que se usará para guardar esta información .subscribe para indicarle que permite recoger lo que devuelva el API Rest y el observable para recoger los resultados*/
+        this._projectService.saveProject(this.project).subscribe(
+        response=>{
+            console.log(response);
+            if (response.project){
+            this.status="sucess";
+
+            }else{
+            this.status="failed"
+            }
+
+        },
+        error=>{
+            console.log(<any>error);
+
+        }
+        )
+        
+    }
+
+---
+
+Siguiendo esos pasos y estos códigos, se va a guardar información en la base de datos
+
+## Subir imagenes de los proyectos
