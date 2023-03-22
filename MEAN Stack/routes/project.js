@@ -41,6 +41,9 @@ router.delete('/project/:id', projectController.deleteProject);
 //Subir imagenes (con el middleware configurado)
 router.post('/upload-image/:id', multipartMiddleware, projectController.uploadImage);
 
+//Obtener imagen desde la API
+router.get('/get-image/:image', projectController.getImageFile);
+
 
 //Exportar la ruta; así se puede usar la variable router, con toda la configuración de rutas fuera de aquí
 module.exports = router;

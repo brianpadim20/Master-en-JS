@@ -888,3 +888,22 @@ El código del componente finalmentequedará así:
 ---
 
 # Sección de proyectos
+
+En project service.ts crear el método correspondiente para sacar de la base de datos y consumir de la API todos los proyectos, entonces, se debe sacar un objeto JSON con todos los objetos de la base de datos, esto se verá en el código a continuación
+
+---
+    erProjects():Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.get(this.url+'projects', {headers:headers});
+
+    }
+
+---
+
+Luego ir al componente Projects.ts e importar el servicio, el modelo, etc y cargar el servicio en el array de providers del componente y en el constructor; lo demás se verá explicado en el código acontinuación:
+
+---
+
+
+---

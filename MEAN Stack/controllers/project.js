@@ -5,6 +5,9 @@ var Project = require('../models/project');
 
 //Importar la librería fs (para eliminar imagenes en caso que no cumplan con la condición
 var fs = require('fs');
+
+//importar el objeto path (Módulo de nodeJS que permite cargar rutas físicas del sistema de archivos)
+var path = require('path')
 /**
  * la función recibe una request y una response (req, res), req es para recibir los datos que
  * se envíen por post y res es para retornar una respuestastatus 200 (bien recibido) enviando 
@@ -147,6 +150,34 @@ var controller = {
             return res.status(200).send({message:failName});
         
         }
+
+    },
+
+    //Método para obtener imagen desde la API
+    getImageFile: function(req,res){
+        //Nombre del archivo, que se le va a pasar por la URL
+        var file = req.params.image;
+        var path_file = './uploads/'+file;
+
+        fs.stat(path_file,(err, stats)=>{
+            if (err){
+                return res.status(200).send({
+                    message:"No existe la imagen..."
+
+                });
+
+            }if (stats.isFile()){
+                return res.sendFile(path.resolve(path_file));
+
+            }else{
+                return res.status(200).send({
+                    message:"No es un archivo..."
+                
+                });
+
+            }
+
+        });
 
     }
 

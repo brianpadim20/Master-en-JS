@@ -615,3 +615,39 @@ Permite acceso cruzado entre dominios y evita fallos a la hora de trabajar la pa
     });
 
 - Siempre se ejecuta esto antes de cada petición, va a configurar las cabeceras y pasará a la ejecución de las rutas y el método o la acción correspondiente, así se permite el acceso de un dominio a otro y no habrá problema para desarrollar la aplicación en el frontend
+
+## Método para devolver una imagen desde el backend
+
+En el controlador de project, agregar este método:
+
+---
+getImageFile: function(req,res){
+        //Nombre del archivo, que se le va a pasar por la URL
+        var file = req.params.image;
+        var path_file = './uploads/'+file;
+
+        fs.stat(path_file,(err, stats)=>{
+            if (err){
+                return res.status(200).send({
+                    message:"No existe la imagen..."
+
+                });
+
+            }if (stats.isFile()){
+                return res.sendFile(path.resolve(path_file));
+
+            }else{
+                return res.status(200).send({
+                    message:"No es un archivo..."
+                
+                });
+
+            }
+
+        });
+
+    }
+
+---
+
+Crear la ruta para este método
