@@ -674,3 +674,217 @@ En la parte del componente, en la función creada anteriormente (onSubmit), pasa
 Siguiendo esos pasos y estos códigos, se va a guardar información en la base de datos
 
 ## Subir imagenes de los proyectos
+
+Lo primero que se hará será crear un nuevo servicio en Angular, para crear un método que permita subir archivos.
+
+En la carpeta de services, crear un nuevo archivo que se llame upload.service.ts; en este nuevo archivo aplicar el código acontinuación, en comentarios está explicado cada fragmento.
+
+---
+    import { Injectable } from "@angular/core";
+    import { Global } from "./global";
+
+    @Injectable()
+
+    export class UploadService{
+        public url: string;
+
+        constructor(){
+            this.url = Global.url;
+
+        }
+        //Permite hacer petición AJAX clásica en la cual adjunta un archivo para subir
+        makeFileRequest(url:string, params: Array<string>, files: Array<File>, name: string){
+            return new Promise(function(resolve, reject){
+                /*Define una petición AJAX para subir archivos, para eso se necesita simular un formulario clásico
+                así que se crea la siguiente variable */
+                var formData:any = new FormData(); //Permite crear una especie de formulario en un objeto
+
+                var xhr = new XMLHttpRequest;/*xhr es un sinónimo de AJAX y contiene ese objeto XMLHttpRequest,
+                que es el clásico objeto de peticiones asíncronas que siempre ha tenido JS */
+
+                //Recorrer el array de archivos que puede estar llegando
+
+                for (var i = 0; i<files.length; i++){
+                    formData.append(name, files[i], files[i].name);/*Recorre todos los ficheros que vayan llegando 
+                    y adjuntarlos al formulario con el nombre y luego añadir el archivo y recoger su nombre; es decir
+                    que adjunta los archivos*/
+
+                }
+                //Hacer la petición AJAX cuando haya algún cambio:
+                xhr.onreadystatechange = function(){
+                    if (xhr.readyState == 4){//==4 son valores que se pasan así y ya
+                        if(xhr.status == 200){
+                            resolve(JSON.parse(xhr.response));
+
+                        }else{
+                            reject(xhr.response);
+
+                        }
+
+                    }
+
+                };
+                
+                xhr.open('POST', url, true);
+                xhr.send(formData);
+
+            });
+
+        }
+
+    }
+
+---
+
+Utilizar este servicio en el create.component.ts
+
+Importar el servicio, cargarlo en los providers y cargar la propiedad en la clase (en el constructor), así el código quedaría similar al guiente:
+
+---
+import { Component, OnInit } from '@angular/core';
+
+//Importo los modelos creados
+import { Project } from 'src/app/models/project';
+
+//Importo los servicios creados
+import { ProjectService } from 'src/app/Services/project.service';
+import { UploadService } from 'src/app/Services/upload.service';
+
+@Component({
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css'],
+  //Cargo los servicios dentro de la propiedad providers en el decorador
+  providers:[ProjectService, UploadService]
+})
+export class CreateComponent {
+  public title: string;
+  public project: Project;
+  public status:string;
+
+  constructor(
+    private _projectService: ProjectService, //propiedad del servicio
+    private _uploadService: UploadService
+  ){
+    this.title="Crear proyecto";
+    this.project = new Project('','','','',2023,'','');
+    this.status="";
+  }
+
+  ngOnInit(){}
+
+  onSubmit(){
+    console.log(this.project);
+    this._projectService.saveProject(this.project).subscribe(
+      response=>{
+        console.log(response);
+        if (response.project){
+          this.status="sucess";
+
+        }else{
+          this.status="failed"
+        }
+
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+    );
+    
+  }
+
+}
+
+---
+
+Ya se puede usar el servicio de subida de archivos, ahora toca modificar el formulario, para que en la parte de la imagen se use el evento change, hace que cuando se haga algún cambio en un inputo, lanza otro método que se tenga en el componente.
+
+Crear el método fileChangeEvent en el componente.ts
+
+Crear una propiedad (variable) donde están las variables llamada filesToUpload:Array<File>, en el código acontinuación se ven las modificaciones pertinentes para hacer al código y poder subir las imagenes.
+
+El código del componente finalmentequedará así: 
+
+---
+    import { Component, OnInit } from '@angular/core';
+
+    //Importo los modelos creados
+    import { Project } from 'src/app/models/project';
+
+    //Importo los servicios creados
+    import { ProjectService } from 'src/app/Services/project.service';
+    import { UploadService } from 'src/app/Services/upload.service';
+
+    //Importar la URL desde el archivo global para subir imagenes
+    import { Global } from 'src/app/Services/global';
+
+    @Component({
+    selector: 'app-create',
+    templateUrl: './create.component.html',
+    styleUrls: ['./create.component.css'],
+    //Cargo los servicios dentro de la propiedad providers en el decorador
+    providers:[ProjectService, UploadService]
+    })
+    export class CreateComponent {
+    public title: string;
+    public project: Project;
+    public status:string;
+    public filesToUpload:Array<File>
+
+    constructor(
+        private _projectService: ProjectService, //propiedad del servicio
+        private _uploadService: UploadService
+    ){
+        this.title="Crear proyecto";
+        this.project = new Project('','','','',2023,'','');
+        this.status="";
+        this.filesToUpload=[];
+    }
+
+    ngOnInit(){}
+
+    onSubmit(){
+        //Guardar los datos básicos
+        console.log(this.project);
+        this._projectService.saveProject(this.project).subscribe(
+        response=>{
+            console.log(response);
+            if (response.project){
+            
+
+            //Subir la imagen:
+            
+            /*Se le pasa como parámetros: la url de la API, el complemento de la URL de la api para subir imagen,
+            el id del projecto (que aparece en la response de cuando se guarda), elemento opcional, el archivo
+            a cargar llamando al método files to upload, y finalmente el método llamando imagen del la API tiene
+            un nombre en el filePath, poner ese nombre, en este caso es image*/
+
+            this. _uploadService.makeFileRequest(Global.url+"upload-image/"+
+            response.project._id, [], this.filesToUpload, 'image').then((result:any)=>{
+                this.status="sucess";
+                console.log (result)
+            });
+
+            }else{
+            this.status="failed"
+            }
+
+        },
+        error=>{
+            console.log(<any>error);
+
+        }
+        );
+        
+    }fileChangeEvent(fileInput:any){
+        console.log(fileInput);
+        this.filesToUpload = <Array<File>>fileInput.target.files;
+
+    }
+
+    }
+
+---
+
+# Sección de proyectos
