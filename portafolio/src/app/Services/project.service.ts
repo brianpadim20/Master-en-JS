@@ -30,6 +30,14 @@ export class ProjectService{
 
         return this._http.get(this.url+'projects', {headers:headers});
 
+    }//Crear el método getProject, se pasa como parámetro un id para buscar en la base de datos
+    getProject(id:any):Observable<any>{
+        /*A la variable headers se le establece un tipo de contenido y se le manda como un objeto JSON */
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        
+        //Se hace una petición por get, se le pasa la url de la api y al segmento de la ruta que es project
+        return this._http.get(this.url+ 'project/'+id,{headers:headers});
+
     }
 
 }

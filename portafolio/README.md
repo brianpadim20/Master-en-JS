@@ -375,7 +375,7 @@ Pasos:
     Así se tiene la API funcionando 
 - Una vez esté corriendo la API, se procede a programar el Angular:
 - Dentro de la carpeta app crear una carpeta para los modelos y otra para los servicios (models y services)
-    - Crear el modelos (representan a un objeto o un documento de la base de datos) y será una entidad; se está utilizando la entidad de proyectos... Un modelo representa a un único proyecto en específico:
+    - Crear el modelo (representa a un objeto o un documento de la base de datos) y será una entidad; se está utilizando la entidad de proyectos... Un modelo representa a un único proyecto en específico:
         - En la carpeta de models, crear un archivo llamado project.ts y aplicar el código:
 ---
     //Crear la clase de exportación
@@ -433,13 +433,15 @@ Pasos:
         }
 
 ---
-Ir al archivo app.module.ts e importar los módulos tanto de http como de los formularios y cargarlo en los imports del mismo archivo
+Ir al archivo app.module.ts e importar los módulos tanto de http como de los formularios y cargarlo en los imports del mismo archivo y agregarlos también al ngModule en los imports
 ---
 //Importación de los módulos http y módulos de formularios (para el componente "create")
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; //2 way data binding y formularios
 
 ---
+
 
 Ya se pueden cerrar los archivos que se tenían abiertos.
 
@@ -500,36 +502,36 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
     - Esta parte se verá acontinuación en el siguiente código:
 
 ---
-<div class="container">  
-    <h2>{{title}}</h2>
-    <form #projectForm="ngForm" (ngSubmit)="onSubmit()">
-        <p>
-            <label for="name">Nombre</label>
-            <input type="text" name="name" #name="ngModel"[(ngModel)]="project.name">
-        </p>
-        <p>
-            <label for="description">Descripción</label>
-            <textarea name="descritpion" #description="ngModel"[(ngModel)]="project.description"></textarea>
-        </p>
-        <p>
-            <label for="category">Categoría</label>
-            <input type="text" name="category" #category="ngModel"[(ngModel)]="project.category">
-        </p>
-        <p>
-            <label for="year">Año de lanzamiento</label>
-            <input type="number" name="year" #year="ngModel"[(ngModel)]="project.year">
-        </p>
-        <p>
-            <label for="langs">Lenguajes de programación utilizados</label>
-            <input type="text" name="langs" #langs="ngModel"[(ngModel)]="project.langs">
-        </p>
-        <p>
-            <label for="image">Imagen del proyecto</label>
-            <input type="file" name="image" placeholder="Subir imagen">
-        </p>
-        <input type="submit" value="Enviar">
-    </form>    
-</div>
+    <div class="container">  
+        <h2>{{title}}</h2>
+        <form #projectForm="ngForm" (ngSubmit)="onSubmit()">
+            <p>
+                <label for="name">Nombre</label>
+                <input type="text" name="name" #name="ngModel"[(ngModel)]="project.name">
+            </p>
+            <p>
+                <label for="description">Descripción</label>
+                <textarea name="descritpion" #description="ngModel"[(ngModel)]="project.description"></textarea>
+            </p>
+            <p>
+                <label for="category">Categoría</label>
+                <input type="text" name="category" #category="ngModel"[(ngModel)]="project.category">
+            </p>
+            <p>
+                <label for="year">Año de lanzamiento</label>
+                <input type="number" name="year" #year="ngModel"[(ngModel)]="project.year">
+            </p>
+            <p>
+                <label for="langs">Lenguajes de programación utilizados</label>
+                <input type="text" name="langs" #langs="ngModel"[(ngModel)]="project.langs">
+            </p>
+            <p>
+                <label for="image">Imagen del proyecto</label>
+                <input type="file" name="image" placeholder="Subir imagen">
+            </p>
+            <input type="submit" value="Enviar">
+        </form>    
+    </div>
 
 ---
 
@@ -996,6 +998,176 @@ Los estilos quedan de la siguiente manera: para que queden en cuadrícula y con 
     }.project img {
         width: 80%;
 
+    }
+
+---
+
+## Detalle de cada proyecto en el listado de proyectos
+
+- Crear un componente llamado detail
+- Crear una ruta para este componente
+
+**Crear el link a los detalles:**
+Hacer que el contenido en general donde se listan los proyectos sea un enlace. El código HTML quedaría de la siguiente manera:
+---
+    <div class="container">
+    <h2>Proyectos</h2>
+        <ul>
+            <li *ngFor="let project of projects" class="project">
+                <a [routerLink]="['/proyecto', project._id]">
+                    <div class="image">
+                        <img src="{{url+'get-image/'+project.image}}" *ngIf="project.image">
+                    <!--En src utilizar la URL que hay en el componente-->
+                    </div>            
+                    <h3>{{project.name}}</h3>
+                    <p>{{project.category}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+---
+
+**Estilos:**
+---
+.project a{
+    text-decoration: none;
+    color: black;
+
+}
+
+---
+
+**Para mostrar detalles del proyecto:**
+
+- Crear un nuevo método en los servicios para sacar un único proyecto
+---
+    getProject(id:number):Observable<any>{
+        /*A la variable headers se le establece un tipo de contenido y se le manda como un objeto JSON */
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        
+        //Se hace una petición por get, se le pasa la url de la api y al segmento de la ruta que es project
+        return this._http.get(this.url+ 'project/'+id,{headers:headers});
+
+    }
+
+---
+**En el componente para subir archivos:**
+
+En create.component.ts agregar el siguiente método:
+- public save_project:any; (el any es para no definirlo en el constructor);
+- Eliminar el console.log y poner this.save_project = result.project;
+
+En create.component.html hacer el siguiente cambio:
+---
+<div class="message success" *ngIf="status=='sucess'">
+        El proyecto se ha creado correctamente, se puede ver 
+        <a [routerLink]="['/proyecto', save_project._id]">aquí</a>
+    </div>
+
+---
+
+**En el componente detail:**
+
+Cargar los servicios, modelos y archivo global y cargar el servicio en los providers y definir la propiedad en el constructor y tomar este código como modelo:
+
+---
+    import { Component, OnInit } from '@angular/core';
+    //Importo los modelos creados
+    import { Project } from 'src/app/models/project';
+    import { Global } from 'src/app/Services/global';
+
+    //Importo los servicios creados
+    import { ProjectService } from 'src/app/Services/project.service';
+    import { UploadService } from 'src/app/Services/upload.service';
+
+    //Componentes del router
+    import { Router, ActivatedRoute, Params } from '@angular/router';
+
+    @Component({
+    selector: 'app-detail',
+    templateUrl: './detail.component.html',
+    styleUrls: ['./detail.component.css'],
+    providers:[ProjectService]
+    })
+    export class DetailComponent {
+    public url:string;
+    public project:Project;
+
+    constructor(
+        private _projectService:ProjectService,
+        //Componentes del router:
+        private _router:Router,
+        private _route:ActivatedRoute
+    ){
+        this.url = Global.url;
+        this.project=new Project("","","","",0,"","");
+    }
+
+    ngOnInit(){
+        //Recoger los parámetros que llegan por la url (subscribe)
+        this._route.params.subscribe(params=>{
+        let id = params['id'];
+
+        //Llamo al método getProject y le paso el id por parámetro
+        this.getProject(id);
+        })
+    }/*Se invoca al método creado getProject en los servicos que hace una petició AJAX al backend
+    Para esto se recoge el id por la URL que llega, para esto se importan los compónentes del router
+    para recoger el id por la url que llega*/
+    getProject(id:any){
+    this._projectService.getProject(id).subscribe({
+        next: (response)=>{
+        this.project = response.project;
+        
+        },
+        error:(err)=>{
+        console.log(err);
+        }
+
+    });
+
+    }
+
+    }
+
+---
+
+**Ahora en el detail.component.html:**
+
+Aplicar el código:
+
+---
+    <div class="container">
+        <h1>{{project.name}}</h1>
+        <!-- Poner la imagen: -->
+        <div class="image">
+            <img src="{{url+'get-image/'+project.image}}" *ngIf="project.image">
+        <!--En src utilizar la URL que hay en el componente-->
+
+        </div>
+            <div class="data">
+            <h2>{{project.description}}</h2>
+
+            <p><strong>Categoría:</strong>{{project.category}}</p>
+
+            <p><strong>Lenguajes utilizados:</strong> {{project.langs}}</p>
+        </div>
+    </div>
+
+---
+
+Y los estilos: 
+
+---
+    .container .image{
+    float: left;
+    /*width: 49%;*/
+
+    }.container .data{
+        float: left;
+        width: 49%;
+        margin-left: 25px;
     }
 
 ---

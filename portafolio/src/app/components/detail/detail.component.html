@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>{{project.name}}</h1>
+    <!-- Poner la imagen: -->
+    <div class="image">
+        <img src="{{url+'get-image/'+project.image}}" *ngIf="project.image">
+    <!--En src utilizar la URL que hay en el componente-->
+
+    </div>
+        <div class="data">
+        <h2>{{project.description}}</h2>
+
+        <p><strong>Categoría:</strong>{{project.category}}</p>
+        <br>
+        <p><strong>Lenguajes utilizados:</strong> {{project.langs}}</p>
+        
+        <!-- Para poder editar el proyecto: -->
+        <p>
+            <a href="#" class="button-edit">Editar</a>
+            <a href="#" class="button-delete">Borrar</a>
+        </p>
+
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { CreateComponent } from './components/create/create.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 //Creación de las rutas
 
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
     {path:'sobre-mi', component:AboutComponent}, 
     {path:'proyectos', component:ProjectsComponent}, 
     {path:'crear-proyecto', component:CreateComponent}, 
-    {path:'contacto', component:ContactComponent}, 
+    {path:'contacto', component:ContactComponent},
+    {path:'proyecto/:id', component:DetailComponent},
     {path: '**', component:ErrorComponent}
 
 ];

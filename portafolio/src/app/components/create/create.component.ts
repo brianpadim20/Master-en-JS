@@ -20,6 +20,7 @@ import { Global } from 'src/app/Services/global';
 export class CreateComponent {
   public title: string;
   public project: Project;
+  public save_project:any;
   public status:string;
   public filesToUpload:Array<File>
 
@@ -31,6 +32,7 @@ export class CreateComponent {
     this.project = new Project('','','','',2023,'','');
     this.status="";
     this.filesToUpload=[];
+    
   }
 
   ngOnInit(){}
@@ -54,7 +56,7 @@ export class CreateComponent {
           this. _uploadService.makeFileRequest(Global.url+"upload-image/"+
           response.project._id, [], this.filesToUpload, 'image').then((result:any)=>{
             this.status="sucess";
-            console.log (result)
+            this.save_project = result.project;
           });
 
         }else{

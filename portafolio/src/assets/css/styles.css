@@ -157,6 +157,16 @@ footer{
     margin-bottom: 15px;
     display: block;
 
+}.container .image{
+    float: left;
+    /*width: 49%;*/
+    margin-top: 15px;
+
+}.container .data{
+    float: left;
+    width: 49%;
+    margin-left: 25px;
+    margin-top: 15px;
 }
 
 /*Estilos formulario: Todos los formularios lucirán iguales*/
@@ -178,7 +188,9 @@ form textarea{
     padding: 5px;
 
 }form button,
-form input[type="submit"]{
+form input[type="submit"],
+.button-edit,
+.button-delete{
     font-size: 18px;
     padding: 10px;
     display: block;
@@ -188,6 +200,21 @@ form input[type="submit"]{
     border: 1px solid rgba(13, 67, 133, 1);
     cursor: pointer
     
+}.button-edit,
+.button-delete{
+    width: 40%;
+    text-align: center;
+    text-decoration: none;
+    float: left;
+    margin-right: 10px;
+    border: 1px solid black;
+
+}.button-edit:hover{
+    background: green;
+
+}.button-delete:hover{
+    background: red;
+
 }form button:hover,
 form input[type="submit"]:hover{
     background: rgba(53, 103, 164, 0.8);
@@ -212,7 +239,7 @@ form input[type="submit"]:hover{
 
 }.sucess{
     background: green;
-    color: white;
+    color: black;
 
 }.message a{
     color: white;
@@ -242,5 +269,13 @@ form input[type="submit"]:hover{
 
 }.project img {
     width: 80%;
+
+}
+
+/*Listado de proyectos*/
+
+.project a{
+    text-decoration: none;
+    color: black;
 
 }
