@@ -551,7 +551,7 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
     
     }
 
-/*Estilos formulario: Todos los formularios lucirán iguales*/
+    /*Estilos formulario: Todos los formularios lucirán iguales*/
 
     form{
         width: 80%;
