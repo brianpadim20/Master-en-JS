@@ -536,7 +536,7 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
 ---
 
 ## Estilos del formulario
-
+---
 .container{
     padding: 50px;
     padding-top: 10px;
@@ -549,68 +549,69 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
 
 /*Estilos formulario: Todos los formularios lucirán iguales*/
 
-}form{
-    width: 80%;
+    form{
+        width: 80%;
 
-}form label{
-    display: block;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    }form label{
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
 
-}form input[type="text"],
-form input[type="number"],
-form input[type="email"],
-form textarea{
-    width: 40%;
-    padding: 5px;
+    }form input[type="text"],
+    form input[type="number"],
+    form input[type="email"],
+    form textarea{
+        width: 40%;
+        padding: 5px;
 
-}form button,
-form input[type="submit"]{
-    font-size: 18px;
-    padding: 10px;
-    display: block;
-    margin-top: 15px;
-    color: white;
-    background: rgba(53, 103, 164, 1);
-    border: 1px solid rgba(13, 67, 133, 1);
-    cursor: pointer
-    
-}form button:hover,
-form input[type="submit"]:hover{
-    background: rgba(53, 103, 164, 0.8);
-    border: 1px solid rgba(13, 67, 133, 1);
-    cursor: pointer
-    
-}form input[disabled]{
-    opacity: 0.4;
-    cursor: not-allowed;
+    }form button,
+    form input[type="submit"]{
+        font-size: 18px;
+        padding: 10px;
+        display: block;
+        margin-top: 15px;
+        color: white;
+        background: rgba(53, 103, 164, 1);
+        border: 1px solid rgba(13, 67, 133, 1);
+        cursor: pointer
+        
+    }form button:hover,
+    form input[type="submit"]:hover{
+        background: rgba(53, 103, 164, 0.8);
+        border: 1px solid rgba(13, 67, 133, 1);
+        cursor: pointer
+        
+    }form input[disabled]{
+        opacity: 0.4;
+        cursor: not-allowed;
 
-}.formError{
-    padding: 3px;
-    background: red;
-    color: white;
-    font-size: 13px;
-    margin-left: 5px;
+    }.formError{
+        padding: 3px;
+        background: red;
+        color: white;
+        font-size: 13px;
+        margin-left: 5px;
 
-}.message{
-    padding: 5px;
-    border: 1px solid #eee;
-    width: 50%;
+    }.message{
+        padding: 5px;
+        border: 1px solid #eee;
+        width: 50%;
 
-}.sucess{
-    background: green;
-    color: white;
+    }.sucess{
+        background: green;
+        color: white;
 
-}.message a{
-    color: white;
+    }.message a{
+        color: white;
 
-}.filed{
-    background: red;
-    color: white;
+    }.filed{
+        background: red;
+        color: white;
 
-}
+    }
 
+---
 ## Validación del formulario
 
 En el formulario se le pone required a los campos de:
