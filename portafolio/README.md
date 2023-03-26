@@ -538,15 +538,18 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
 ## Estilos del formulario
 ---
 
-.container{
-    padding: 50px;
-    padding-top: 10px;
+    /*Estilos del contenedor*/
+    .container{
+        padding: 50px;
+        padding-top: 10px;
 
-}.container h2{
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    display: block;
+    }.container h2{
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        display: block;
+    
+    }
 
 /*Estilos formulario: Todos los formularios lucirán iguales*/
 
