@@ -537,6 +537,7 @@ El siguiente paso es crear las propiedades necesarias, como se ve en el código
 
 ## Estilos del formulario
 ---
+
 .container{
     padding: 50px;
     padding-top: 10px;
