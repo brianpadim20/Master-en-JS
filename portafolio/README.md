@@ -637,17 +637,17 @@ Luego se ponen los mensajes de validación con la etiqueta span; en cada uno de 
 En los servicios project.service crear un nuevo método que se llame saveProject(project: Project) para guardar nuevos elementos en la base de datos con el siguiente código (irá explicado)
 
 ---
-saveProject(project:Project): Observable<any>{ //un objeto del tipo Projecto (modelo) devuelve un osbervable tipo any
-        //Parametros a enviar (datos del objeto), se necesita que sea un JSON para que la API pueda cogerlo
-        let params = JSON.stringify(project);
+  saveProject(project:Project): Observable<any>{ //un objeto del tipo Projecto (modelo) devuelve un osbervable tipo any
+    //Parametros a enviar (datos del objeto), se necesita que sea un JSON para que la API pueda cogerlo
+    let params = JSON.stringify(project);
 
-        //Cabeceras (como se enviará la información), application/json es el formato en que viajará la información
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    //Cabeceras (como se enviará la información), application/json es el formato en que viajará la información
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        //Petición post, para dar de alta a un nuevo dato a nivel de backend
-        return this._http.post(this.url+'save-project', params, {headers:headers});
+    //Petición post, para dar de alta a un nuevo dato a nivel de backend
+    return this._http.post(this.url+'save-project', params, {headers:headers});
 
-    }
+  }
 
 ---
 
